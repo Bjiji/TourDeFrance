@@ -1,0 +1,43 @@
+<h1>Listing stages</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Start</th>
+    <th>Finish</th>
+    <th>Stagenb</th>
+    <th>Substagenb</th>
+    <th>Stage type</th>
+    <th>Year</th>
+    <th>Runners cnt</th>
+    <th>Finishers cnt</th>
+    <th>Distance</th>
+    <th>Label</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @stages.each do |stage| %>
+  <tr>
+    <td><%= stage.date %></td>
+    <td><%= stage.start %></td>
+    <td><%= stage.finish %></td>
+    <td><%= stage.stageNb %></td>
+    <td><%= stage.subStageNb %></td>
+    <td><%= stage.stage_type %></td>
+    <td><%= stage.year %></td>
+    <td><%= stage.runners_cnt %></td>
+    <td><%= stage.finishers_cnt %></td>
+    <td><%= stage.distance %></td>
+    <td><%= stage.label %></td>
+    <td><%= link_to 'Show', stage %></td>
+    <td><%= link_to 'Edit', edit_stage_path(stage) %></td>
+    <td><%= link_to 'Destroy', stage, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Stage', new_stage_path %>

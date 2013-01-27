@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  year: MyString
+  distance: 1
+  averageSpeed: 1.5
+  winnerPrize: 
+  poolPrize: 1
+  description: MyString
+
+two:
+  name: MyString
+  year: MyString
+  distance: 1
+  averageSpeed: 1.5
+  winnerPrize: 
+  poolPrize: 1
+  description: MyString

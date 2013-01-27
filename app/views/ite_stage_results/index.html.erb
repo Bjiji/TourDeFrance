@@ -1,0 +1,33 @@
+<h1>Listing ite_stage_results</h1>
+
+<table>
+  <tr>
+    <th>Pos</th>
+    <th>Dns</th>
+    <th>Dnf</th>
+    <th>Dnq</th>
+    <th>Time</th>
+    <th>Diff time</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ite_stage_results.each do |ite_stage_result| %>
+  <tr>
+    <td><%= ite_stage_result.pos %></td>
+    <td><%= ite_stage_result.dns %></td>
+    <td><%= ite_stage_result.dnf %></td>
+    <td><%= ite_stage_result.dnq %></td>
+    <td><%= ite_stage_result.time_sec %></td>
+    <td><%= ite_stage_result.diff_time_sec %></td>
+    <td><%= link_to 'Show', ite_stage_result %></td>
+    <td><%= link_to 'Edit', edit_ite_stage_result_path(ite_stage_result) %></td>
+    <td><%= link_to 'Destroy', ite_stage_result, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ite stage result', new_ite_stage_result_path %>

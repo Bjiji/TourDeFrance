@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cyclist:</b>
+  <%= link_to @race_runner.cyclist.firstname + " " + @race_runner.cyclist.lastname , cyclist_path(@race_runner.cyclist) %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%= @race_runner.number %>
+</p>
+
+<p>
+  <b>Nationality:</b>
+  <%= @race_runner.nationality %>
+</p>
+
+<p>
+  <b>Team:</b>
+  <%= @race_runner.team %>
+</p>
+
+
+<%= link_to 'Edit', edit_race_runner_path(@race_runner) %> |
+<%= link_to 'Back', race_runners_path %>

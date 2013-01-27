@@ -1,0 +1,45 @@
+<script>
+    $(document).ready(function() {
+        $('#cyclists').dataTable();
+    } );
+</script>
+<h1>Listing cyclists</h1>
+
+<%= search_form_for @q do |f| %>
+    <%= f.label :lastname_cont %>
+    <%= f.text_field :lastname_cont %>
+    <%= f.label :nationality_cont %>
+    <%= f.select :nationality_cont, Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(*) desc) sub'), {:include_blank => true} %>
+    <%= f.submit %>
+<% end %>
+
+<table class="display" id="cyclists">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Dob</th>
+    <th>Pob</th>
+    <th>Nationality</th>
+    <th>Tag</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+<% @cyclists.each do |cyclist| %>
+  <tr>
+    <td><%= link_to cyclist.display_name, cyclist %></td>
+    <td><%= cyclist.dob %></td>
+    <td><%= cyclist.pob %></td>
+    <td><%= cyclist.nationality %></td>
+    <td><%= cyclist.tag %></td>
+    <td><%= link_to 'Edit', edit_cyclist_path(cyclist) %></td>
+    <td><%= link_to 'Destroy', cyclist, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Cyclist', new_cyclist_path %>

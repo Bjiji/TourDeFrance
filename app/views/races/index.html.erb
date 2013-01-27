@@ -1,0 +1,45 @@
+<script>
+$(document).ready(function() {
+ $('#races').dataTable();
+} );
+</script>
+
+<h1>Les tours de France</h1>
+
+<table class="display" id="races">
+  <thead>
+  <tr>
+    <th>Année</th>
+    <th>Distance</th>
+    <th>Vitesse</th>
+    <th>Vainqueur</th>
+    <th>Participants</th>
+    <th>Prime au vainqueur</th>
+    <th>Total des primes</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+<tbody>
+<% @races.each do |race| %>
+  <tr>
+    <td><%= race.year %></td>
+    <td><%= race.distance %></td>
+    <td><%= race.averageSpeed %></td>
+    <td><%= if (race.cyclist != nil) then link_to race.cyclist.firstname + ' ' + race.cyclist.lastname, cyclist_path(race.cyclist) end  %></td>
+    <td><%= if (true) then link_to race.cyclists.count, cyclists_path(:race => race) else 0 end %></td>
+    <td><%= race.winnerPrize %></td>
+    <td><%= race.poolPrize %></td>
+    <td><%= race.description %></td>
+    <td><%= link_to 'Voir', race %></td>
+    <td><%= link_to 'Editer', edit_race_path(race) %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Race', new_race_path %>

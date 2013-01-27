@@ -1,0 +1,27 @@
+<h1>Listing race_runners</h1>
+
+<table>
+  <tr>
+    <th>Number</th>
+    <th>Nationality</th>
+    <th>Team</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @race_runners.each do |race_runner| %>
+  <tr>
+    <td><%= race_runner.number %></td>
+    <td><%= race_runner.nationality %></td>
+    <td><%= race_runner.team %></td>
+    <td><%= link_to 'Show', race_runner %></td>
+    <td><%= link_to 'Edit', edit_race_runner_path(race_runner) %></td>
+    <td><%= link_to 'Destroy', race_runner, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Race runner', new_race_runner_path %>

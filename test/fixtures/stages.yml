@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  date: MyString
+  start: MyString
+  finish: MyString
+  stageNb: MyString
+  subStageNb: MyString
+  stage_type: MyString
+  year: MyString
+  runners_cnt: MyString
+  finisher_cnt: MyString
+  distance: MyString
+  label: MyString
+
+two:
+  date: MyString
+  start: MyString
+  finish: MyString
+  stageNb: MyString
+  subStageNb: MyString
+  stage_type: MyString
+  year: MyString
+  runners_cnt: MyString
+  finisher_cnt: MyString
+  distance: MyString
+  label: MyString

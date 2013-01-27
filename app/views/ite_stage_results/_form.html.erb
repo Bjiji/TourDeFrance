@@ -1,0 +1,41 @@
+<%= form_for(@ite_stage_result) do |f| %>
+  <% if @ite_stage_result.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ite_stage_result.errors.count, "error") %> prohibited this ite_stage_result from being saved:</h2>
+
+      <ul>
+      <% @ite_stage_result.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pos %><br />
+    <%= f.number_field :pos %>
+  </div>
+  <div class="field">
+    <%= f.label :dns %><br />
+    <%= f.check_box :dns %>
+  </div>
+  <div class="field">
+    <%= f.label :dnf %><br />
+    <%= f.check_box :dnf %>
+  </div>
+  <div class="field">
+    <%= f.label :dnq %><br />
+    <%= f.check_box :dnq %>
+  </div>
+  <div class="field">
+    <%= f.label :time_sec %><br />
+    <%= f.text_field :time_sec %>
+  </div>
+  <div class="field">
+    <%= f.label :diff_time_sec %><br />
+    <%= f.text_field :diff_time_sec %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

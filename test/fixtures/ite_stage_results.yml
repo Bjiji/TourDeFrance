@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  pos: 1
+  dns: false
+  dnf: false
+  dnq: false
+  time_sec: 20
+  diff_time_sec: 21
+
+two:
+  pos: 1
+  dns: false
+  dnf: false
+  dnq: false
+  time_sec: 20
+  diff_time_sec: 21

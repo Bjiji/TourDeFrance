@@ -1,0 +1,61 @@
+<%= form_for(@stage) do |f| %>
+  <% if @stage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stage.errors.count, "error") %> prohibited this stage from being saved:</h2>
+
+      <ul>
+      <% @stage.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.text_field :date %>
+  </div>
+  <div class="field">
+    <%= f.label :start %><br />
+    <%= f.text_field :start %>
+  </div>
+  <div class="field">
+    <%= f.label :finish %><br />
+    <%= f.text_field :finish %>
+  </div>
+  <div class="field">
+    <%= f.label :stageNb %><br />
+    <%= f.text_field :stageNb %>
+  </div>
+  <div class="field">
+    <%= f.label :subStageNb %><br />
+    <%= f.text_field :subStageNb %>
+  </div>
+  <div class="field">
+    <%= f.label :stage_type %><br />
+    <%= f.text_field :stage_type %>
+  </div>
+  <div class="field">
+    <%= f.label :year %><br />
+    <%= f.text_field :year %>
+  </div>
+  <div class="field">
+    <%= f.label :runners_cnt %><br />
+    <%= f.text_field :runners_cnt %>
+  </div>
+  <div class="field">
+    <%= f.label :finishers_cnt %><br />
+    <%= f.text_field :finishers_cnt %>
+  </div>
+  <div class="field">
+    <%= f.label :distance %><br />
+    <%= f.text_field :distance %>
+  </div>
+  <div class="field">
+    <%= f.label :label %><br />
+    <%= f.text_field :label %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

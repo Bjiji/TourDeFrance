@@ -1,0 +1,51 @@
+<%= form_for(@race) do |f| %>
+  <% if @race.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@race.errors.count, "error") %> prohibited this race from being saved:</h2>
+
+      <ul>
+      <% @race.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :year %><br />
+    <%= f.text_field :year %>
+  </div>
+  <div class="field">
+    <%= f.label :distance %><br />
+    <%= f.number_field :distance %>
+  </div>
+  <div class="field">
+    <%= f.label :averageSpeed %><br />
+    <%= f.text_field :averageSpeed %>
+  </div>
+  <div class="field">
+    <%= f.label :winnerPrize %><br />
+    <%= f.text_field :winnerPrize %>
+  </div>
+  <div class="field">
+    <%= f.label :poolPrize %><br />
+    <%= f.number_field :poolPrize %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+
+    <div class="field">
+      <%= f.label :cyclist %><br />
+      <% cyclist_array =Cyclist.joins(:race_runners).where(:race_runners => {:race_id => @race.id}).map { |c| [c.lastname, c.id] } %>
+      <%= f.select :cyclist_id, cyclist_array, {:include_blank => true} %>
+    </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
