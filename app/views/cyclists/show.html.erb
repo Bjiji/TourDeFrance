@@ -36,7 +36,7 @@
 
 <ul>
   <%  @runs.each do |run| %>
-    <li><%= link_to run.race.year, race_path(run.race) %>: dossard <%= run.number %>, <%= run.team %> (<%= run.nationality %>)</li>
+    <li><%= link_to run.race.year, race_path(run.race) %>: dossard <%= run.number %>, <%= link_to run.team.name, run.team %> (<%= run.nationality %>)</li>
   <% end  %>
 </ul>
 </p>

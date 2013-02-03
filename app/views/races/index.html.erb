@@ -1,6 +1,22 @@
 <script>
 $(document).ready(function() {
- $('#races').dataTable();
+ $('#races').dataTable({
+     "sPaginationType": "full_numbers",
+     "iDisplayLength": 50,
+     "aaSorting": [[ 0, "desc" ]],
+     "aoColumns" : [
+         {"asSorting": [ "desc", "asc" ], "bSortable": true, "bSearchable": true },
+         {"bSortable": true, "bSearchable": false },
+         {"bSortable": true, "bSearchable": false },
+         {"bSortable": true, "bSearchable": true },
+         {"bSortable": true, "bSearchable": true, "sType": "num-html"},
+         {"bSortable": false, "bSearchable": false },
+         {"bSortable": false, "bSearchable": false },
+         {"bSortable": false, "bSearchable": false },
+         {"bSortable": false, "bSearchable": false }
+     ]
+
+ });
 } );
 </script>
 
@@ -16,7 +32,6 @@ $(document).ready(function() {
     <th>Participants</th>
     <th>Prime au vainqueur</th>
     <th>Total des primes</th>
-    <th>Description</th>
     <th></th>
     <th></th>
   </tr>
@@ -32,7 +47,6 @@ $(document).ready(function() {
     <td><%= if (true) then link_to race.cyclists.count, cyclists_path(:race => race) else 0 end %></td>
     <td><%= race.winnerPrize %></td>
     <td><%= race.poolPrize %></td>
-    <td><%= race.description %></td>
     <td><%= link_to 'Voir', race %></td>
     <td><%= link_to 'Editer', edit_race_path(race) %></td>
   </tr>

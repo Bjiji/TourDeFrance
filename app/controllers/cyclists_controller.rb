@@ -3,12 +3,13 @@ class CyclistsController < ApplicationController
   # GET /cyclists.json
   def index
     if (params[:search] == nil) then
-      @q = Cyclist.search(params[:q])
-      @cyclists = Cyclist.joins(:race_runners).where(:race_runners => { :year => 2011})
+      #@search = Cyclist.search(params[:search])
+      @cyclists = Cyclist.joins(:race_runners).where(:race_runners => { :year => params[:year]})
     else
-      @q = Cyclist.search(params[:q])
-      @cyclists = @q.result(:distinct => true)
+      #@search = Cyclist.search(params[:search])
+      @cyclists = @search.result(:distinct => true)
     end
+    @search=""
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @cyclists }

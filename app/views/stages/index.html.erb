@@ -1,41 +1,40 @@
+<script>
+    $(document).ready(function() {
+        $('#stages').dataTable( {
+            "sPaginationType": "full_numbers",
+            "iDisplayLength": 50
+        });
+    } );
+</script>
 <h1>Listing stages</h1>
 
-<table>
+<table class="display" id="stages">
+  <thead>
   <tr>
+    <th>Année</th>
+    <th>Etape</th>
     <th>Date</th>
-    <th>Start</th>
-    <th>Finish</th>
-    <th>Stagenb</th>
-    <th>Substagenb</th>
-    <th>Stage type</th>
-    <th>Year</th>
-    <th>Runners cnt</th>
-    <th>Finishers cnt</th>
+    <th>Départ</th>
+    <th>Arrivée</th>
     <th>Distance</th>
-    <th>Label</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Type</th>
+    <th>Coureurs</th>
   </tr>
-
+</thead>
+<tbody>
 <% @stages.each do |stage| %>
   <tr>
-    <td><%= stage.date %></td>
+    <td><%= link_to stage.year, stage.race %></td>
+    <td><%= link_to stage.stage_num, stage %></td>
+    <td><%= link_to stage.date, stage %></td>
     <td><%= stage.start %></td>
     <td><%= stage.finish %></td>
-    <td><%= stage.stageNb %></td>
-    <td><%= stage.subStageNb %></td>
-    <td><%= stage.stage_type %></td>
-    <td><%= stage.year %></td>
-    <td><%= stage.runners_cnt %></td>
-    <td><%= stage.finishers_cnt %></td>
     <td><%= stage.distance %></td>
-    <td><%= stage.label %></td>
-    <td><%= link_to 'Show', stage %></td>
-    <td><%= link_to 'Edit', edit_stage_path(stage) %></td>
-    <td><%= link_to 'Destroy', stage, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+    <td><%= stage.stage_type %></td>
+    <td><%= stage.runners_cnt.to_s + ' (' + stage.finishers_cnt.to_s + ')'%></td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />

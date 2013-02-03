@@ -1,16 +1,19 @@
 <script>
     $(document).ready(function() {
-        $('#cyclists').dataTable();
+        $('#cyclists').dataTable( {
+            "sPaginationType": "full_numbers",
+            "iDisplayLength": 50
+        });
     } );
 </script>
 <h1>Listing cyclists</h1>
 
-<%= search_form_for @q do |f| %>
-    <%= f.label :lastname_cont %>
-    <%= f.text_field :lastname_cont %>
-    <%= f.label :nationality_cont %>
-    <%= f.select :nationality_cont, Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(*) desc) sub'), {:include_blank => true} %>
-    <%= f.submit %>
+<%= form_for @search do |f| %>
+    <%= f.label :firstname %>
+    <%= f.text_field :firstname %>
+    <%= f.label :nationality %>
+    <%= f.select :nationality, Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(*) desc) sub'), {:include_blank => true} %>
+    <%= f.submit "search" %>
 <% end %>
 
 <table class="display" id="cyclists">
@@ -40,6 +43,7 @@
 </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Cyclist', new_cyclist_path %>
+<br/>
+<p>
+<%= link_to '+', new_cyclist_path %>
+</p>
