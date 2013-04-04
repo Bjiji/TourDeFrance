@@ -6,8 +6,10 @@
         });
     } );
 </script>
-<h1>Listing stages</h1>
-
+<h1>Les étapes</h1>
+<div id="search">
+  <%= render :partial => 'stages/search' %>
+</div>
 <table class="display" id="stages">
   <thead>
   <tr>
@@ -31,7 +33,7 @@
     <td><%= stage.finish %></td>
     <td><%= stage.distance %></td>
     <td><%= stage.stage_type %></td>
-    <td><%= stage.runners_cnt.to_s + ' (' + stage.finishers_cnt.to_s + ')'%></td>
+    <td><%= if (stage.winner == nil) then '?' else link_to stage.winner.display_name, cyclist_path(stage.winner.id) end %></td>
   </tr>
 <% end %>
 </tbody>

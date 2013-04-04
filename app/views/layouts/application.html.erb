@@ -14,15 +14,15 @@
 </td>
 </tr>
 <tr>
-<td bgcolor="#BBBBEE" align="left" valign="top" id="menu" width="170">
+<td bgcolor="#BBBBEE" align="left" valign="top" id="menu" width="130">
   <b>Menu</b>
   <h1>&nbsp;</h1>
   <ul>
-    <li><%= link_to "les tours de France", races_url%></li>
-    <li><%= link_to 'les coureurs', cyclists_path(:year => c_year)%></li>
-    <li><%= link_to 'les équipes', teams_path(:year => c_year)%></li>
-    <li><%= link_to 'les étapes', stages_path(:year => c_year)%></li>
-    <li><%= link_to 'les statistiques', "none"%></li>
+    <li><%= link_to "éditions", races_url%></li>
+    <li><%= link_to 'coureurs', cyclists_path(:year => c_year)%></li>
+    <li><%= link_to 'équipes', teams_path(:year => c_year)%></li>
+    <li><%= link_to 'étapes', stages_path(:year => c_year)%></li>
+    <li><%= link_to 'statistiques', "none"%></li>
   </ul>
 </td>
 <td id="content"><%= yield %></td>

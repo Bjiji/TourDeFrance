@@ -1,0 +1,18 @@
+<%= form_tag stages_path, :action => 'index', :method => 'get' do %>
+<table border=1 bgcolor="#CCCCEE" width="100%">
+<tr><td><table width="100%">
+  <tr>
+    <td>Vainqueur : </td><td><%= text_field_tag :winner, params[:winner] %></td>
+    <td>Départ : </td><td><%= text_field_tag :start, params[:start] %></td>
+  </tr>
+  <tr>
+ <td>Type : </td><td><%= select_tag :s_type, options_for_select(Stage.connection.select_values('select distinct stage_type from Stages'), params[:s_type]), {:include_blank => true} %></td>
+ <td>Arrivée : </td><td><%= text_field_tag :finish, params[:finish] %></td>
+ </tr>
+ <tr>
+    <td>Année: </td><td><%=  text_field_tag :year, params[:year] %></td><td>&nbsp;</td>
+    <td><%= submit_tag "recherche", :name => nil %></td>
+ </tr>
+</table></td></tr>
+</table>
+<% end %>

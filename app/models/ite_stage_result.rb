@@ -3,6 +3,7 @@
   belongs_to :stage
   belongs_to :race_runner
 
+
   def display_time
     if (time_sec == nil || time_sec == 0) then
       str_time_sec  = " - "

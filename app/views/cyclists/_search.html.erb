@@ -1,0 +1,18 @@
+<%= form_tag cyclists_path, :action => 'index', :method => 'get' do %>
+<table border=1 bgcolor="#CCCCEE" width="100%">
+<tr><td><table width="100%">
+  <tr>
+    <td>Nom : </td><td><%= text_field_tag :lastname, params[:lastname], :id => 'lasttname_field' %></td>
+    <td>Equipe : </td><td><%= text_field_tag :team, params[:team] %></td>
+  </tr>
+  <tr>
+ <td>Prénom : </td><td><%= text_field_tag :firstname, params[:firstname], :id => 'firstname_field' %></td>
+ <td>Nationalité : </td><td><%= select_tag :nationality, options_for_select(Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(*) desc) sub'), params[:nationality]), {:include_blank => true} %></td>
+ </tr>
+ <tr>
+    <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    <td><%= submit_tag "recherche", :name => nil %></td>
+ </tr>
+</table></td></tr>
+</table>
+<% end %>

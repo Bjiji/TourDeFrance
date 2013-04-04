@@ -10,9 +10,20 @@
   <%= @race.year %>
 </p>
 <p>
-  <b>Winner:</b>
-  <%= if (@race.cyclist != nil) then link_to @race.cyclist.firstname + ' ' + @race.cyclist.lastname, cyclist_path(@race.cyclist) end  %>
+  <b>Vainqueur du maillot jaune:</b>
+  <%= if (@race.winner != nil) then link_to @race.winner.display_name, cyclist_path(@race.winner) end %>
 </p>
+<p>
+  <b>Vainqueur du maillot à pois:</b>
+<%= if (@race.climber != nil) then link_to @race.climber.display_name, cyclist_path(@race.climber) end  %>
+</p>
+<p>
+  <b>Vainqueur du maillot vert:</b>
+<%= if (@race.sprinter != nil) then link_to @race.sprinter.display_name, cyclist_path(@race.sprinter) end  %>
+</p>
+<p>
+  <b>Partants:</b>
+<%= if (true) then link_to @race.cyclists.count, cyclists_path(:race => @race) else 0 end %>
 <p>
   <b>Distance:</b>
   <%= @race.distance %>

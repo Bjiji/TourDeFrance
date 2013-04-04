@@ -3,11 +3,9 @@ class CyclistsController < ApplicationController
   # GET /cyclists.json
   def index
     if (params[:search] == nil) then
-      #@search = Cyclist.search(params[:search])
-      @cyclists = Cyclist.joins(:race_runners).where(:race_runners => { :year => params[:year]})
+      @cyclists = Cyclist.search(params)
     else
-      #@search = Cyclist.search(params[:search])
-      @cyclists = @search.result(:distinct => true)
+      @cyclists = Cyclist.search(params)
     end
     @search=""
     respond_to do |format|
@@ -88,5 +86,9 @@ class CyclistsController < ApplicationController
       format.html { redirect_to cyclists_url }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    @cyclists = Cyclist.search(params)
   end
 end

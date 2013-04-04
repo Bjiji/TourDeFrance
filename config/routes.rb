@@ -1,5 +1,7 @@
 TourDeFrance::Application.routes.draw do
 
+  resources :ig_race_results
+
   resources :teams
 
   resources :stages

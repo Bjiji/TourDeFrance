@@ -6,16 +6,10 @@
         });
     } );
 </script>
-<h1>Listing cyclists</h1>
-
-<%= form_for @search do |f| %>
-    <%= f.label :firstname %>
-    <%= f.text_field :firstname %>
-    <%= f.label :nationality %>
-    <%= f.select :nationality, Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(*) desc) sub'), {:include_blank => true} %>
-    <%= f.submit "search" %>
-<% end %>
-
+<h1>Coureurs</h1>
+<div id="search">
+  <%= render :partial => 'cyclists/search' %>
+</div>
 <table class="display" id="cyclists">
   <thead>
   <tr>

@@ -16,7 +16,6 @@ group :assets do
   gem 'jquery-ui-rails'
 end
 
-gem 'ransack'
 gem 'will_paginate'
 
 # Gems used only for assets and not required
