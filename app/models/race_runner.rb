@@ -4,4 +4,5 @@ class RaceRunner < ActiveRecord::Base
   belongs_to :cyclist
   belongs_to :team
   has_many :ite_stage_results
+  has_many :ig_race_results
 end

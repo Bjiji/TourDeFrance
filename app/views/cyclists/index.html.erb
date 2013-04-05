@@ -1,7 +1,7 @@
 <script>
     $(document).ready(function() {
         $('#cyclists').dataTable( {
-            "sPaginationType": "full_numbers",
+            "sDom": "<ifprtfp>",
             "iDisplayLength": 50
         });
     } );
@@ -29,9 +29,9 @@
     <td><%= cyclist.dob %></td>
     <td><%= cyclist.pob %></td>
     <td><%= cyclist.nationality %></td>
-    <td><%= cyclist.tag %></td>
+    <td><%= cyclist.race_started %></td>
     <td><%= link_to 'Edit', edit_cyclist_path(cyclist) %></td>
-    <td><%= link_to 'Destroy', cyclist, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+    <td><%= link_to 'Del', cyclist, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </tbody>

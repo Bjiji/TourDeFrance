@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
   <title>TourDeFrance</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -8,13 +8,14 @@
 </head>
 <body>
 <% c_year = 2012 %>
-<table cellpadding="10" id="main_table">
-<tr><td id="header" colspan=2>
-  <img src="/assets/logo.png">
+<table cellpadding="10" cellspacing="0" id="main_table">
+<tr><td id="header" colspan=2 bgcolor="#33AA33">
+  <h2>Les carnets du Tour</h2>
+  &nbsp;<i>Tout les résultats, toutes les infos...</i>
 </td>
 </tr>
 <tr>
-<td bgcolor="#BBBBEE" align="left" valign="top" id="menu" width="130">
+<td bgcolor="#C0C0E0" align="left" valign="top" id="menu" width="115">
   <b>Menu</b>
   <h1>&nbsp;</h1>
   <ul>
@@ -22,7 +23,7 @@
     <li><%= link_to 'coureurs', cyclists_path(:year => c_year)%></li>
     <li><%= link_to 'équipes', teams_path(:year => c_year)%></li>
     <li><%= link_to 'étapes', stages_path(:year => c_year)%></li>
-    <li><%= link_to 'statistiques', "none"%></li>
+    <li><%= link_to 'stats', "none"%></li>
   </ul>
 </td>
 <td id="content"><%= yield %></td>

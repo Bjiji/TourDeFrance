@@ -2,8 +2,8 @@ class CyclistsController < ApplicationController
   # GET /cyclists
   # GET /cyclists.json
   def index
-    if (params[:search] == nil) then
-      @cyclists = Cyclist.search(params)
+    if (params[:year] != nil) then
+      @cyclists = Cyclist.joins(:races).where(:races => {:year => params[:year]})
     else
       @cyclists = Cyclist.search(params)
     end
