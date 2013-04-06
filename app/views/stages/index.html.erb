@@ -18,9 +18,9 @@
     <th>Date</th>
     <th>Départ</th>
     <th>Arrivée</th>
-    <th>Distance</th>
     <th>Type</th>
-    <th>Coureurs</th>
+    <th>Vainqueur</th>
+    <th>Leader</th>
   </tr>
 </thead>
 <tbody>
@@ -31,9 +31,9 @@
     <td><%= link_to stage.date, stage %></td>
     <td><%= stage.start %></td>
     <td><%= stage.finish %></td>
-    <td><%= stage.distance %></td>
     <td><%= stage.stage_type %></td>
     <td><%= if (stage.winner == nil) then '?' else link_to stage.winner.display_name, cyclist_path(stage.winner.id) end %></td>
+    <td><%= if (stage.leader == nil) then '?' else link_to stage.leader.display_name, cyclist_path(stage.leader.id) end %></td>
   </tr>
 <% end %>
 </tbody>

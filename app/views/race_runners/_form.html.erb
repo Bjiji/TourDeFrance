@@ -1,29 +1,48 @@
 <%= form_for(@race_runner) do |f| %>
-  <% if @race_runner.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@race_runner.errors.count, "error") %> prohibited this race_runner from being saved:</h2>
+    <% if @race_runner.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@race_runner.errors.count, "error") %> prohibited this race_runner from being saved:</h2>
 
-      <ul>
-      <% @race_runner.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @race_runner.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :cyclist %><br />
+      <% c_array = Cyclist.order('lastname').all.map { |c| [c.display_name, c.id] } %>
+      <%= f.select :cyclist_id, c_array, {:include_blank => true} %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :number %><br />
-    <%= f.number_field :number %>
-  </div>
-  <div class="field">
-    <%= f.label :nationality %><br />
-    <%= f.text_field :nationality %>
-  </div>
-  <div class="field">
-    <%= f.label :team %><br />
-    <%= f.text_field :team %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :number %><br />
+      <%= f.number_field :number %>
+    </div>
+    <div class="field">
+      <%= f.label :nationality %><br />
+      <%= f.text_field :nationality %>
+    </div>
+
+    <div class="field">
+      <%= f.label :team %><br />
+      <% t_array = Team.order('name').all.map { |t| [t.name, t.id] } %>
+      <%= f.select :team_id, t_array, {:include_blank => true} %>
+    </div><div class="field">
+
+      <%= f.label :year %><br />
+      <%= f.text_field :year %>
+    </div>
+
+    <div class="field">
+      <%= f.label :race %><br />
+      <% race_array = Race.order('year').all.map { |r| [r.year, r.id] } %>
+      <%= f.select :race_id, race_array, {:include_blank => true} %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

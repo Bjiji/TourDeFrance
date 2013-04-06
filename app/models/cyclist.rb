@@ -4,14 +4,21 @@ class Cyclist < ActiveRecord::Base
   has_many :teams, :through => :race_runners
   has_many :races ,:through => :race_runners
   has_many :ite_stage_results, :through => :race_runners
-  has_many :ig_race_results, :through => :race_runners
 
   def display_name
     display_name = lastname.upcase + " " + firstname
   end
 
-  def race_started
-    race_started = races.count
+  def race_starts
+    races_starts = races.count
+  end
+
+  def race_victories
+    race_victories = Cyclist.count_by_sql("select count(1) from ig_race_results join race_runners rr on rr.id = leader where cyclist_id = " + self.id.to_s)
+  end
+
+  def stage_victories
+    stage_victories = Cyclist.count_by_sql("select count(1) from ig_stage_results join race_runners rr on rr.id = stage_winner where rr.cyclist_id = " + self.id.to_s)
   end
 
   def self.search(search)
@@ -38,6 +45,23 @@ class Cyclist < ActiveRecord::Base
       team = ''
     end
     team_condition = "%" + team + "%"
+
+    year = search[:year]
+    if (year == nil)
+      year = ''
+    end
+    year_condition = "%" + year + "%"
+    y_operator = "LIKE "
+    if (search[:year_operator] == "equals") then
+      y_operator = " LIKE "
+      year_condition = "%" + year + "%"
+    elsif (search[:year_operator] == "before") then
+      y_operator = " < "
+      year_condition = year
+    elsif (search[:year_operator] == "since") then
+      y_operator = " > "
+      year_condition = year
+    end
 
 
     #Cyclist.joins(:teams).all(:select => 'distinct cyclists.*', :conditions => ['teams.name LIKE ? AND cyclists.nationality LIKE ? AND cyclists.lastname LIKE ? AND cyclists.firstname LIKE ?', team_condition, nat_condition, lastname_condition, firstname_condition])
@@ -72,7 +96,8 @@ class Cyclist < ActiveRecord::Base
     teams.name LIKE '" + team_condition + "' AND
     c.nationality LIKE '" + nat_condition + "' AND
     c.lastname LIKE '" + lastname_condition + "' AND
-    c.firstname LIKE '" + firstname_condition + "')
+    c.firstname LIKE '" + firstname_condition + "') AND
+    r.year " +  y_operator + " '" + year_condition + "'
     group by c.id"
     need_having_clause = true
     if (!search[:wjaune_cnt].blank? && search[:wjaune_cnt].to_i > 0)

@@ -4,6 +4,10 @@
   <b>Cyclist:</b>
   <%= link_to @race_runner.cyclist.firstname + " " + @race_runner.cyclist.lastname , cyclist_path(@race_runner.cyclist) %>
 </p>
+<p>
+  <b>Race:</b>
+  <%= link_to @race_runner.race.year, race_path(@race_runner.race) %>
+</p>
 
 <p>
   <b>Number:</b>

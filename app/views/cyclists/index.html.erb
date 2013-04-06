@@ -14,10 +14,10 @@
   <thead>
   <tr>
     <th>Name</th>
-    <th>Dob</th>
-    <th>Pob</th>
     <th>Nationality</th>
-    <th>Tag</th>
+    <th>Partic.</th>
+    <th>M.Jaune</th>
+    <th>Etapes</th>
     <th></th>
     <th></th>
   </tr>
@@ -26,10 +26,10 @@
 <% @cyclists.each do |cyclist| %>
   <tr>
     <td><%= link_to cyclist.display_name, cyclist %></td>
-    <td><%= cyclist.dob %></td>
-    <td><%= cyclist.pob %></td>
     <td><%= cyclist.nationality %></td>
-    <td><%= cyclist.race_started %></td>
+    <td><%= cyclist.race_starts %></td>
+    <td><%= cyclist.race_victories %></td>
+    <td><%= cyclist.stage_victories %></td>
     <td><%= link_to 'Edit', edit_cyclist_path(cyclist) %></td>
     <td><%= link_to 'Del', cyclist, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
   </tr>
