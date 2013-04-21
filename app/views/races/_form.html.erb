@@ -37,14 +37,9 @@
   </div>
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
   </div>
 
-    <div class="field">
-      <%= f.label :cyclist %><br />
-      <% cyclist_array =Cyclist.joins(:race_runners).where(:race_runners => {:race_id => @race.id}).map { |c| [c.display_name, c.id] } %>
-      <%= f.select :cyclist_id, cyclist_array, {:include_blank => true} %>
-    </div>
   <div class="actions">
     <%= f.submit %>
   </div>

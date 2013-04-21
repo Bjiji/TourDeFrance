@@ -1,8 +1,19 @@
 <script>
     $(document).ready(function() {
         $('#cyclists').dataTable( {
-            "sDom": "<ifprtfp>",
-            "iDisplayLength": 50
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50,
+            "aaSorting": [[ 0, "desc" ]],
+            "aoColumns" : [
+                {"asSorting": [ "desc", "asc" ], "bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true, "sType": "num-html"},
+                {"bSortable": false, "bSearchable": false },
+                {"bSortable": false, "bSearchable": false }
+            ]
         });
     } );
 </script>
@@ -25,7 +36,7 @@
   <tbody>
 <% @cyclists.each do |cyclist| %>
   <tr>
-    <td><%= link_to cyclist.display_name, cyclist %></td>
+    <td><%= link_to cyclist.display_fullname, cyclist %></td>
     <td><%= cyclist.nationality %></td>
     <td><%= cyclist.race_starts %></td>
     <td><%= cyclist.race_victories %></td>

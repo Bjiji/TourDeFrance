@@ -19,13 +19,25 @@ pre {
 }
 
 a {
-  color: #000;
+  color: #009;
+  text-decoration:  none;
   &:visited {
-    color: #666;
+    color: #009;
   }
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: #900;
+  }
+  a:link    {
+    color: #009;
+  }
+  a:visited {
+    color: #090;
+  }
+  a:hover   {
+    color: #009;
+  }
+  a:active  {
+    color: #009;
   }
 }
 

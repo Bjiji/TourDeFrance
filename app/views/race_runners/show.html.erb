@@ -1,27 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Cyclist:</b>
+  <b>Cycliste:</b>
   <%= link_to @race_runner.cyclist.firstname + " " + @race_runner.cyclist.lastname , cyclist_path(@race_runner.cyclist) %>
 </p>
 <p>
-  <b>Race:</b>
-  <%= if (!@race_runner.race.blank?) then link_to @race_runner.race.year, race_path(@race_runner.race) end %>
+  <b>Course:</b>
+  <%= if (!@race_runner.race.blank?) then link_to @race_runner.race.name, race_path(@race_runner.race) end %>
 </p>
 
 <p>
-  <b>Number:</b>
+  <b>Dossard:</b>
   <%= @race_runner.number %>
 </p>
 
 <p>
-  <b>Nationality:</b>
+  <b>Nationlaité:</b>
   <%= @race_runner.nationality %>
 </p>
 
 <p>
-  <b>Team:</b>
-  <%= @race_runner.team %>
+  <b>Equipe:</b>
+  <%= link_to @race_runner.team.name, team_path(@race_runner.team)%>
 </p>
 
 

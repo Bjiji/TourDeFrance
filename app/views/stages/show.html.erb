@@ -77,13 +77,10 @@
   <table cellspacing=5>
     <tr>
       <td>
-      <b>Vainqueur d'étape:</b> <%= if (@stage.ig_stage_result.stage_winner != nil) then link_to @stage.ig_stage_result.stage_winner.display_fullname, cyclist_path(@stage.ig_stage_result.stage_winner) end %>
-      </td></tr><tr><td>
-
         <table>
         <tr>
-          <td>&nbsp;
-          </td>
+          <td><b>Vainqueur</b>&nbsp;</td>
+          <td><%= if (@stage.ig_stage_result.stage_winner != nil) then link_to @stage.ig_stage_result.stage_winner.display_fullname, cyclist_path(@stage.ig_stage_result.stage_winner) end %></td>
         </tr><tr>
         <tr>
         <td align=center><img src="/assets/maillot_jaune_40.png"/></td>

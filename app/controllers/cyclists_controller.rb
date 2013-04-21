@@ -20,7 +20,7 @@ class CyclistsController < ApplicationController
   def show
     @cyclist = Cyclist.find(params[:id])
     @runs = RaceRunner.joins(:cyclist).where(:cyclists => {:id => params[:id]})
-    @r_victories = Race.joins(:cyclist).where(:cyclists => {:id => params[:id]})
+    @r_victories = IgRaceResult.joins(:leader).where(:leader_id => params[:id])
     @s_victories = IteStageResult.joins(:race_runner).where(:pos => 1, :race_runners => { :cyclist_id => params[:id]})
 #    @race = Race.where(:cyclist)
     respond_to do |format|

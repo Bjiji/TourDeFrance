@@ -25,11 +25,11 @@ class Cyclist < ActiveRecord::Base
   end
 
   def race_victories
-    race_victories = Cyclist.count_by_sql("select count(1) from ig_race_results join race_runners rr on rr.id = leader where cyclist_id = " + self.id.to_s)
+    race_victories = Cyclist.count_by_sql("select count(1) from ig_race_results join race_runners rr on rr.id = leader_id where cyclist_id = " + self.id.to_s)
   end
 
   def stage_victories
-    stage_victories = Cyclist.count_by_sql("select count(1) from ig_stage_results join race_runners rr on rr.id = stage_winner where rr.cyclist_id = " + self.id.to_s)
+    stage_victories = Cyclist.count_by_sql("select count(1) from ig_stage_results join race_runners rr on rr.id = stage_winner_id where rr.cyclist_id = " + self.id.to_s)
   end
 
   def self.normalize
@@ -41,7 +41,6 @@ class Cyclist < ActiveRecord::Base
   end
 
   def self.search(search)
-    normalize()
     lastname = search[:lastname]
     if (lastname == nil)
       lastname = ''
@@ -92,25 +91,25 @@ class Cyclist < ActiveRecord::Base
     inner join race_runners r on r.cyclist_id = c.id
     left JOIN teams ON teams.id = r.team_id "
     if (!search[:wjaune_cnt].blank? && search[:wjaune_cnt].to_i > 0)
-      query = query + " \nleft join ig_race_results ir_jaune on ir_jaune.leader = r.id "
+      query = query + " \nleft join ig_race_results ir_jaune on ir_jaune.leader_id = r.id "
     end
     if (!search[:wsprinter_cnt].blank? && search[:wsprinter_cnt].to_i > 0)
-      query = query + " \nleft join ig_race_results ir_sprinter on ir_sprinter.sprinter = r.id "
+      query = query + " \nleft join ig_race_results ir_sprinter on ir_sprinter.sprinter_id = r.id "
     end
     if (!search[:wclimber_cnt].blank? && search[:wclimber_cnt].to_i > 0)
-      query = query + " \nleft join ig_race_results ir_climber on ir_climber.climber = r.id "
+      query = query + " \nleft join ig_race_results ir_climber on ir_climber.climber_id = r.id "
     end
     if (!search[:pjaune_cnt].blank? && search[:pjaune_cnt].to_i > 0)
-      query = query + " \nleft join ig_stage_results is_jaune on is_jaune.leader = r.id "
+      query = query + " \nleft join ig_stage_results is_jaune on is_jaune.leader_id = r.id "
     end
     if (!search[:psprinter_cnt].blank? && search[:psprinter_cnt].to_i > 0)
-      query = query + " left join ig_stage_results is_sprinter on is_sprinter.sprinter = r.id "
+      query = query + " left join ig_stage_results is_sprinter on is_sprinter.sprinter_id = r.id "
     end
     if (!search[:pclimber_cnt].blank? && search[:pclimber_cnt].to_i > 0)
-      query = query + " \nleft join ig_stage_results is_climber on is_climber.climber = r.id "
+      query = query + " \nleft join ig_stage_results is_climber on is_climber.climber_id = r.id "
     end
     if (!search[:wstage_cnt].blank? && search[:wstage_cnt].to_i > 0)
-      query = query + " \nleft join ig_stage_results is_stage on is_stage.stage_winner = r.id "
+      query = query + " \nleft join ig_stage_results is_stage on is_stage.stage_winner_id = r.id "
     end
     query = query + " WHERE (
     teams.name LIKE '" + team_condition + "' AND

@@ -1,0 +1,41 @@
+<script>
+    $(document).ready(function() {
+        $('#runners').dataTable( {
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50,
+            "aoColumns" : [
+                {"bSortable": true, "bSearchable": true, "sType": "num-html" },
+                {"bSortable": true , "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": false},
+                {"bSortable": false, "bSearchable": false}
+            ]
+        });
+    } );
+</script>
+<table class="display" id="runners">
+<thead>
+  <tr>
+    <th>Année</th>
+    <th>Doss.</th>
+    <th>Coureur</th>
+    <th>Equipe</th>
+    <th>Nat.</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+<% @race_runners.each do |race_runner| %>
+  <tr>
+    <td><%= link_to race_runner.race.year, race_runner.race %></td>
+    <td><%= race_runner.number %></td>
+    <td><%= link_to race_runner.cyclist.display_fullname, race_runner.cyclist %></td>
+    <td><%= link_to race_runner.team.name, race_runner.team %></td>
+    <td><%= race_runner.nationality %></td>
+    <td><%= link_to 'Edit', edit_race_runner_path(race_runner) %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>

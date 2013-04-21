@@ -2,5 +2,6 @@
 
 <%= render 'form' %>
 
+<%= link_to 'Destroy', @race_runner, :method => :delete, :data => { :confirm => 'Are you sure?' } %>
 <%= link_to 'Show', @race_runner %> |
 <%= link_to 'Back', race_runners_path %>

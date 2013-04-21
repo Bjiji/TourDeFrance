@@ -1,6 +1,10 @@
 <script>
     $(document).ready(function() {
-        $('#cyclist_stage_result').dataTable();
+        $('#cyclist_stage_result').dataTable({
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50}
+        );
     } );
 </script>
 

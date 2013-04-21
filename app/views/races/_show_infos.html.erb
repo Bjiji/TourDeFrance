@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+<table border=0>
+  <tr>
+    <td width=280 valign="top">
+<div><h2><%= "Infos"%></h2>
+<table border=0>
+
+  <tr>
+    <td><b>Distance</b></td>
+    <td><%= @race.distance %></td>
+  </tr>
+  <tr>
+    <td><b>Moyenne</b></td>
+    <td><%= @race.averageSpeed %></td>
+  <tr>
+    <td><b>Prime au vainqueur</b></td>
+    <td><%= @race.winnerPrize %></td>
+  </tr>
+  <tr>
+  <tr>
+    <td><b>Prime totale</b></td>
+    <td><%= @race.poolPrize %></td>
+  </tr>
+  </tr>
+    <td><b>Description</b></td>
+    <td><%= @race.description %></td>
+  </tr>
+
+  <tr>
+</table>
+</div>
+    </td>
+    <td  valign="top">
+      <div><h2>Palmarès</h2>
+      <table border=0>
+        <tr>
+          <td align=center><img src="/assets/maillot_jaune_40.png"/></td>
+          <td>
+            <%= if (@race.ig_race_result.leader != nil) then link_to @race.ig_race_result.leader.display_fullname, cyclist_path(@race.ig_race_result.leader) end %>
+          </td>
+        </tr><tr>
+        <td align=center><img src="/assets/maillot_vert_40.png"/></td>
+        <td>
+          <%= if (@race.ig_race_result.sprinter != nil) then link_to @race.ig_race_result.sprinter.display_fullname, cyclist_path(@race.ig_race_result.sprinter) end %>
+        </td>
+      </tr><tr>
+        <td align=center><img src="/assets/maillot_pois_40.png"/></td>
+        <td>
+          <%= if (@race.ig_race_result.climber != nil) then link_to @race.ig_race_result.climber.display_fullname, cyclist_path(@race.ig_race_result.climber) end %>
+        </td>
+      </tr>
+        <tr>
+          <td></td><td></td>
+        </tr>
+      </table>
+      </div>
+    </td>
+  </tr>
+</table>
+<b>Etapes  (<%= @race.stages.count.to_s %>)</b>
+<ul>
+  <%  @stages.each do |stage| %>
+      <li><%= link_to stage.display_label, stage_path(stage) %></li>
+  <% end  %>
+</ul>
+</p>
+<b>Classement Général</b>
+<%= link_to 'Edit', edit_race_path(@race) %> |
+<%= link_to 'Back', races_path %>

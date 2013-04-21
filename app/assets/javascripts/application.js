@@ -15,3 +15,12 @@
     //= require jquery.dataTables
     //= require datatables.num-html
     //= require_tree .
+
+
+
+
+$(function() {
+    $( "#tabs" ).tabs();
+    });
+
+

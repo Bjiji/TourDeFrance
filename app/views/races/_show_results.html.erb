@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+<table border=0>
+  <tr><td>
+      <div><h2>Palmarès</h2>
+      <table border=0>
+        <tr>
+          <td align=center><img src="/assets/maillot_jaune_40.png"/></td>
+          <td>
+            <%= if (@race.ig_race_result.leader != nil) then link_to @race.ig_race_result.leader.display_fullname, cyclist_path(@race.ig_race_result.leader) end %>
+          </td>
+        </tr><tr>
+        <td align=center><img src="/assets/maillot_vert_40.png"/></td>
+        <td>
+          <%= if (@race.ig_race_result.sprinter != nil) then link_to @race.ig_race_result.sprinter.display_fullname, cyclist_path(@race.ig_race_result.sprinter) end %>
+        </td>
+      </tr><tr>
+        <td align=center><img src="/assets/maillot_pois_40.png"/></td>
+        <td>
+          <%= if (@race.ig_race_result.climber != nil) then link_to @race.ig_race_result.climber.display_fullname, cyclist_path(@race.ig_race_result.climber) end %>
+        </td>
+      </tr>
+        <tr>
+          <td></td><td></td>
+        </tr>
+      </table>
+      </div>
+    </td>
+  </tr>
+</table>
