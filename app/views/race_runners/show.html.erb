@@ -6,7 +6,7 @@
 </p>
 <p>
   <b>Race:</b>
-  <%= link_to @race_runner.race.year, race_path(@race_runner.race) %>
+  <%= if (!@race_runner.race.blank?) then link_to @race_runner.race.year, race_path(@race_runner.race) end %>
 </p>
 
 <p>

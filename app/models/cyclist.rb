@@ -5,8 +5,19 @@ class Cyclist < ActiveRecord::Base
   has_many :races ,:through => :race_runners
   has_many :ite_stage_results, :through => :race_runners
 
+  def lastname_c
+    lastname_c = if (lastname.blank?) then '?' else (lastname) end
+  end
+  def firstname_c
+    firstname_c = if (firstname.blank?) then '?' else (firstname) end
+  end
+
   def display_name
-    display_name = lastname.upcase + " " + firstname
+    display_name = "" + lastname_c + " " + firstname_c.byteslice(0) + "."
+  end
+
+  def display_fullname
+    display_name = "" + lastname_c + " " + firstname_c
   end
 
   def race_starts
@@ -21,7 +32,16 @@ class Cyclist < ActiveRecord::Base
     stage_victories = Cyclist.count_by_sql("select count(1) from ig_stage_results join race_runners rr on rr.id = stage_winner where rr.cyclist_id = " + self.id.to_s)
   end
 
+  def self.normalize
+    @cyclists = Cyclist.all
+    @cyclists.each do |cyclist|
+      cyclist.lastname = cyclist.lastname.split(' ').each{|word| word.capitalize!}.join(' ')
+      cyclist.save
+    end
+  end
+
   def self.search(search)
+    normalize()
     lastname = search[:lastname]
     if (lastname == nil)
       lastname = ''
@@ -56,10 +76,10 @@ class Cyclist < ActiveRecord::Base
       y_operator = " LIKE "
       year_condition = "%" + year + "%"
     elsif (search[:year_operator] == "before") then
-      y_operator = " < "
+      y_operator = " <= "
       year_condition = year
     elsif (search[:year_operator] == "since") then
-      y_operator = " > "
+      y_operator = " >= "
       year_condition = year
     end
 
@@ -102,37 +122,37 @@ class Cyclist < ActiveRecord::Base
     need_having_clause = true
     if (!search[:wjaune_cnt].blank? && search[:wjaune_cnt].to_i > 0)
       if (need_having_clause) then query = query + " HAVING " else query = query + " AND " end
-      query = query + " \n count(distinct ir_jaune.id) > " + search[:wjaune_cnt]
+      query = query + " \n count(distinct ir_jaune.id) >= " + search[:wjaune_cnt]
       need_having_clause = false
     end
     if (!search[:wsprinter_cnt].blank? && search[:wsprinter_cnt].to_i > 0)
       if (need_having_clause) then query = query + " HAVING " else query = query + " AND " end
-      query = query + " \n count(distinct ir_sprinter.id) > " + search[:wsprinter_cnt]
+      query = query + " \n count(distinct ir_sprinter.id) >= " + search[:wsprinter_cnt]
       need_having_clause = false
     end
     if (!search[:wclimber_cnt].blank? && search[:wclimber_cnt].to_i > 0)
       if (need_having_clause) then query = query + " HAVING " else query = query + " AND " end
-      query = query + " \n count(distinct ir_climber.id) > " + search[:wclimber_cnt]
+      query = query + " \n count(distinct ir_climber.id) >= " + search[:wclimber_cnt]
       need_having_clause = false
     end
     if (!search[:pjaune_cnt].blank? && search[:pjaune_cnt].to_i > 0)
       if (need_having_clause) then query = query + " HAVING " else query = query + " AND " end
-      query = query + " \n count(distinct is_jaune.id) > " + search[:pjaune_cnt]
+      query = query + " \n count(distinct is_jaune.id) >= " + search[:pjaune_cnt]
       need_having_clause = false
     end
     if (!search[:psprinter_cnt].blank? && search[:psprinter_cnt].to_i > 0)
       if (need_having_clause) then query = query + " HAVING " else query = query + " AND " end
-      query = query + " \n count(distinct is_sprinter.id) > " + search[:psprinter_cnt]
+      query = query + " \n count(distinct is_sprinter.id) >= " + search[:psprinter_cnt]
       need_having_clause = false
     end
     if (!search[:pclimber_cnt].blank? && search[:pclimber_cnt].to_i > 0)
       if (need_having_clause) then query = query + " HAVING " else query = query + " AND " end
-      query = query + " \n count(distinct is_climber.id) > " + search[:pclimber_cnt]
+      query = query + " \n count(distinct is_climber.id) >= " + search[:pclimber_cnt]
       need_having_clause = false
     end
     if (!search[:wstage_cnt].blank? && search[:wstage_cnt].to_i > 0)
       if (need_having_clause) then query = query + " HAVING " else query = query + " AND " end
-      query = query + " \n count(distinct is_stage.id) > " + search[:wstage_cnt]
+      query = query + " \n count(distinct is_stage.id) >= " + search[:wstage_cnt]
       need_having_clause = false
     end
     Cyclist.find_by_sql(query)

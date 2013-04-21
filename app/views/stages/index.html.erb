@@ -2,7 +2,18 @@
     $(document).ready(function() {
         $('#stages').dataTable( {
             "sPaginationType": "full_numbers",
-            "iDisplayLength": 50
+            "iDisplayLength": 50,
+            "aaSorting": [[ 0, "desc" ]],
+            "aoColumns" : [
+                {"asSorting": [ "desc", "asc" ], "bSortable": true, "bSearchable": true , "sType": "num-html"},
+                {"bSortable": true, "bSearchable": false , "sType": "num-html"},
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true }
+            ]
         });
     } );
 </script>

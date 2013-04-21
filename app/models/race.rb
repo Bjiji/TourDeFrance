@@ -1,9 +1,10 @@
 class Race < ActiveRecord::Base
-  attr_accessible :averageSpeed, :description, :distance, :name, :poolPrize, :winnerPrize, :year, :cyclist, :cyclist_id
+  attr_accessible :averageSpeed, :description, :distance, :name, :poolPrize, :winnerPrize, :year, :cyclist, :leader_id
   belongs_to :cyclist
   has_many :race_runners
+  has_many :stages
   has_many :cyclists ,:through => :race_runners
-  has_one :ig_race_results
+  has_one :ig_race_result
 
   def winner
     result =  IgRaceResult.where(:race_id => self).first

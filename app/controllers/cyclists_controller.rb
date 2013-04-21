@@ -89,6 +89,10 @@ class CyclistsController < ApplicationController
     end
   end
 
+  def normalizeName
+    Cyclist.normalize()
+  end
+
   def search
     @cyclists = Cyclist.search(params)
   end
