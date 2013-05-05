@@ -1,5 +1,5 @@
 class Stage < ActiveRecord::Base
-  attr_accessible :date, :distance, :finish, :finishers_cnt, :label, :runners_cnt, :stageNb, :stage_type, :start, :subStageNb, :year
+  attr_accessible :date, :distance, :ordinal, :finish, :finishers_cnt, :label, :runners_cnt, :stageNb, :stage_type, :start, :subStageNb, :year
   belongs_to :race
   has_many :ite_stage_results
   has_one :ig_stage_result
@@ -35,12 +35,13 @@ class Stage < ActiveRecord::Base
   end
 
   def self.search(search)
+    team = search[:team]  || ""
     lastname = search[:lastname]  || ""
     lastname_condition = "%" + lastname + "%"
     firstname = search[:firstname]  || ""
     firstname_condition = "%" + firstname + "%"
     nationality = search[:nationality]  || ""
-    nationality_condition = "%" + nationality + "%"
+    nationality_condition = nationality
     start_city_condition = "%"
     end_city_condition = "%"
     city = "%" + (search[:city] || "") + "%"
@@ -79,45 +80,47 @@ class Stage < ActiveRecord::Base
     query = "SELECT distinct stages.*
       FROM stages
       LEFT JOIN ig_stage_results ON ig_stage_results.stage_id = stages.id
-      LEFT JOIN race_runners runner ON runner.year = stages.year
+      LEFT JOIN ite_stage_results isr ON isr.stage_id = stages.id
+      LEFT JOIN race_runners runner ON isr.race_runner_id = runner.id and runner.year = stages.year
+      LEFT JOIN teams team on team.id = runner.team_id
       LEFT JOIN cyclists cyclist ON cyclist.id = runner.cyclist_id
-      LEFT JOIN ite_stage_results isr ON isr.stage_id = stages.id AND runner.id = isr.race_runner_id
       WHERE stages.year " +  y_operator + " '" + year_condition + "'
       AND stages.stage_type LIKE '" + type_condition + "'
       AND (stages.start LIKE '" + start_city_condition + "' OR stages.finish LIKE '" + end_city_condition + "')
       AND cyclist.lastname LIKE '" + lastname_condition + "'
-      AND cyclist.firstname LIKE '" + firstname_condition + "'
-      AND cyclist.nationality LIKE '" + nationality_condition + "'"
-    if search[:c_finish_leader] == "yes" then query = query + " AND ig_stage_results.leader_id=runner.id "
-    elsif search[:c_finish_leader] == "no" then query = query + " AND ig_stage_results.leader_id!=runner.id "
+      AND cyclist.firstname LIKE '" + firstname_condition + "' "
+      if (!search[:nationality].blank?) then query = query + " AND runner.nationality = '" + nationality_condition + "'" end
+        if search[:c_finish_leader] == "yes" then query = query + " AND ig_stage_results.leader_id=runner.id "
+    elsif search[:c_finish_leader] == "no" then query = query + " AND (ig_stage_results.leader_id is null OR ig_stage_results.leader_id!=runner.id) "
     end
-    if search[:c_start_leader] == "yes" then query = query + " AND ig_stage_results.previous_leader_id=runner.id "
-    elsif search[:c_start_leader] == "no" then query = query + " AND ig_stage_results.previous_leader!=runner.id "
+    if search[:c_start_leader] == "yes" then query = query + " AND ig_stage_results.previous_leader=runner.id "
+    elsif search[:c_start_leader] == "no" then query = query + " AND (ig_stage_results.previous_leader is null OR ig_stage_results.previous_leader!=runner.id) "
     end
     if search[:c_finish_climber] == "yes" then query = query + " AND ig_stage_results.climber_id=runner.id "
-    elsif search[:c_finish_climber] == "no" then query = query + " AND ig_stage_results.climber_id!=runner.id "
+    elsif search[:c_finish_climber] == "no" then query = query + " AND (ig_stage_results.climber_id is null OR ig_stage_results.climber_id!=runner.id) "
     end
     if search[:c_start_climber] == "yes" then query = query + " AND ig_stage_results.previous_climber=runner.id "
-    elsif search[:c_start_climber] == "no" then query = query + " AND ig_stage_results.previous_climber!=runner.id "
+    elsif search[:c_start_climber] == "no" then query = query + " AND  (ig_stage_results.previous_climber is null OR ig_stage_results.previous_climber!=runner.id) "
     end
     if search[:c_finish_sprinter] == "yes" then query = query + " AND ig_stage_results.sprinter_id=runner.id "
-    elsif search[:c_finish_sprinter] == "no" then query = query + " AND ig_stage_results.sprinter_id!=runner.id "
+    elsif search[:c_finish_sprinter] == "no" then query = query + " AND (ig_stage_results.sprinter_id is null OR ig_stage_results.sprinter_id!=runner.id) "
     end
     if search[:c_start_sprinter] == "yes" then query = query + " AND ig_stage_results.previous_sprinter=runner.id "
-    elsif search[:c_start_sprinter] == "no" then query = query + " AND ig_stage_results.previous_sprinter!=runner.id "
+    elsif search[:c_start_sprinter] == "no" then query = query + " AND (ig_stage_results.previous_sprinter is null OR ig_stage_results.previous_sprinter!=runner.id) "
     end
     if search[:c_stage_pos] == "winner" then query = query + " AND ig_stage_results.stage_winner_id=runner.id "
-    elsif search[:c_stage_pos] == "nowinner" then query = query + " AND ig_stage_results.stage_winner_id!=runner.id "
-    elsif search[:c_stage_pos] == "podium" then query = query + " AND isr.pos <= 3 "
+    elsif search[:c_stage_pos] == "nowinneram.b" then query = query + " AND (ig_stage_results.stage_winner_id is null OR ig_stage_results.stage_winner_id!=runner.id) "
+    elsif search[:c_stage_pos] == "topthree" then query = query + " AND isr.pos <= 3 "
     elsif search[:c_stage_pos] == "topten" then query = query + " AND isr.pos <= 10 "
-    elsif search[:c_stage_pos] == "finish" then query = query + " AND (!isr.dns && !isr.dnf && !isr.dnq) "
-    elsif search[:c_stage_pos] == "nofinish" then query = query + " AND (isr.dns || isr.dnf || isr.dnq) "
-    elsif search[:c_stage_pos] == "dns" then query = query + " AND (isr.dns) "
+    elsif search[:c_stage_pos] == "finish" then query = query + " AND (isr.pos > 0) "
+    elsif search[:c_stage_pos] == "nofinish" then query = query + " AND (isr.pos > 0) "
+    elsif (!(search[:c_stage_pos].blank?) && search[:c_stage_pos].start_with?("dnf")) then query = query + " AND (isr.stage_status = '" + search[:c_stage_pos][3..-1] + "') "
     elsif search[:c_stage_pos] == "dnq" then query = query + " AND (isr.dnq) "
     elsif search[:c_stage_pos] == "dnf" then query = query + " AND (isr.dnf) "
-
     end
-#AND ig_stage_results.stage_winner=runner.id
+    if(!(team == nil) && !team.blank?) then query = query + " AND team.name LIKE '%" + team + "%'" end
+    if(search[:first_time]) then query = query + " AND not exists(select 1 from race_runners r2 where r2.cyclist_id = runner.cyclist_id and r2.year < runner.year)" end
+    #AND ig_stage_results.stage_winner=runner.id
 #AND ig_stage_results.leader=runner.id
 #AND ig_stage_results.climber=runner.id
 #AND ig_stage_results.sprinter=runner.id

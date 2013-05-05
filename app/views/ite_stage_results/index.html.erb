@@ -1,31 +1,63 @@
-<h1>Listing ite_stage_results</h1>
-
-<table>
+<script>
+    $(document).ready(function() {
+        $('#ite_results').dataTable( {
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50,
+            "aaSorting": [[ 0, "desc" ]],
+            "aoColumns" : [
+                {"asSorting": [ "desc", "asc" ], "bSortable": true, "bSearchable": true , "sType": "num-html"},
+                {"bSortable": true, "bSearchable": false , "sType": "num-html"},
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true }
+            ]
+        });
+    } );
+</script>
+<h1>Les résultats individuels d'étapes</h1>
+<div id="search">
+  <%= render :partial => 'ite_stage_results/search' %>
+</div>
+<table class="display" id="ite_results">
+  <thead>
   <tr>
-    <th>Pos</th>
-    <th>Dns</th>
-    <th>Dnf</th>
-    <th>Dnq</th>
-    <th>Time</th>
-    <th>Diff time</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Année</th>
+    <th title="Numéro d'étape">Et.</th>
+    <th>Départ</th>
+    <th>Arrivée</th>
+    <th>Type</th>
+    <th title="Position du coureur à l'arrivée de l'étape">Pos.</th>
+    <th title="Temps réalisé par le coureur">Tps</th>
+    <th>Coureur</th>
+    <th>Equipe</th>
+    <th>Nationalité</th>
+    <th title="Divers infomations liés à ce résultat">Misc.</th>
   </tr>
-
-<% @ite_stage_results.each do |ite_stage_result| %>
-  <tr>
-    <td><%= ite_stage_result.pos %></td>
-    <td><%= ite_stage_result.dns %></td>
-    <td><%= ite_stage_result.dnf %></td>
-    <td><%= ite_stage_result.dnq %></td>
-    <td><%= ite_stage_result.time_sec %></td>
-    <td><%= ite_stage_result.diff_time_sec %></td>
-    <td><%= link_to 'Show', ite_stage_result %></td>
-    <td><%= link_to 'Edit', edit_ite_stage_result_path(ite_stage_result) %></td>
-    <td><%= link_to 'Destroy', ite_stage_result, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @ite_stage_results.each do |ite_stage_result| %>
+      <tr>
+        <td><%= link_to ite_stage_result.stage.year, ite_stage_result.stage.race %></td>
+        <td><%= link_to ite_stage_result.stage.stage_num, ite_stage_result.stage %></td>
+        <td><%= ite_stage_result.stage.start %></td>
+        <td><%= ite_stage_result.stage.finish %></td>
+        <td><%= ite_stage_result.stage.stage_type %></td>
+        <td><%= link_to ite_stage_result.pos, ite_stage_result%></td>
+        <td><%= ite_stage_result.display_time %></td>
+        <td><%= link_to ite_stage_result.race_runner.display_fullname, ite_stage_result.race_runner %></td>
+        <td><%= link_to ite_stage_result.race_runner.team.name, ite_stage_result.race_runner.team %></td>
+        <td><%= ite_stage_result.race_runner.nationality %></td>
+        <td><%= ite_stage_result.stage_status %><%= if (!ite_stage_result.stage_tag.blank?) then " (" +ite_stage_result.stage_tag + ")" end %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
 
 <br />

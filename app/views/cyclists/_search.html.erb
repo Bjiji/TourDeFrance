@@ -2,14 +2,17 @@
 <table cellspacing="0" border=1 bgcolor="#CCCCEE" width="100%">
 <tr><td><table border=0 width="100%">
   <tr>
-    <td>Nom</td><td><%= text_field_tag :lastname, params[:lastname], :id => 'lasttname_field' %></td><td>Prénom</td><td><%= text_field_tag :firstname, params[:firstname], :id => 'firstname_field' %></td><td>Nat.</td><td><%= select_tag :nationality, options_for_select(Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(1) desc) sub'), params[:nationality]), {:include_blank => true} %></td>
-
+    <td>Nom</td><td><%= text_field_tag :lastname, params[:lastname], :id => 'lasttname_field' %></td><td>Prénom</td><td><%= text_field_tag :firstname, params[:firstname], :id => 'firstname_field' %></td>
   </tr>
   <tr>
     <td>Equipe</td><td><%= text_field_tag :team, params[:team] %></td>
-    <td>Année</td><td>participation <%= select_tag :year_operator, options_for_select([['en', 'equals'], ['depuis', 'since'], ['avant', 'before']],  params[:year_operator]), {:include_blank => false} %><%=number_field_tag( :year, params[:year], :size => 4, :min => 1900, :max => 2100) %></td><td>&nbsp;</td>
+    <td>Nationalité</td><td><%= select_tag :nationality, options_for_select(Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(1) desc) sub'), params[:nationality]), {:include_blank => true} %></td>
  </tr>
   <tr>
+    <td>Participation</td><td><%= select_tag :year_operator, options_for_select([['en', 'equals'], ['depuis', 'since'], ['avant', 'before']],  params[:year_operator]), {:include_blank => false} %><%=number_field_tag( :year, params[:year], :size => 4, :min => 1900, :max => 2100) %></td>
+    <td>Victoire </td><td><%= number_field_tag(:wstage_cnt, params[:wstage_cnt], :size => 2, :min => 0, :max => 99) %> étape(s) minimum</td>
+    </tr>
+    <tr>
        <td><img src="/assets/maillot_jaune_40.png"/></td>
        <td>
          <table>
@@ -45,9 +48,10 @@
             </tr>
           </table>
         </td>
+        <td>Lors de sa première participation</td><td><%= check_box_tag(:first_time, params[:first_time],  params[:first_time]) %></td>
   </tr>
   <tr>
-   <td>Victoire </td><td>d'au moins <%= number_field_tag(:wstage_cnt, params[:wstage_cnt], :size => 2, :min => 0, :max => 99) %> étape(s) </td>
+
    <td><%= submit_tag "recherche", :name => nil %></td>
    <td>&nbsp;</td>
 

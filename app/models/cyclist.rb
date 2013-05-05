@@ -57,7 +57,7 @@ class Cyclist < ActiveRecord::Base
     if (nationality == nil)
       nationality = ''
     end
-    nat_condition = "%" + nationality + "%"
+    nat_condition = nationality
 
     team = search[:team]
     if (team == nil)
@@ -112,12 +112,13 @@ class Cyclist < ActiveRecord::Base
       query = query + " \nleft join ig_stage_results is_stage on is_stage.stage_winner_id = r.id "
     end
     query = query + " WHERE (
-    teams.name LIKE '" + team_condition + "' AND
-    c.nationality LIKE '" + nat_condition + "' AND
-    c.lastname LIKE '" + lastname_condition + "' AND
+    teams.name LIKE '" + team_condition + "' AND "
+    if (!search[:nationality].blank?) then query = query + " c.nationality = '" + nationality + "' AND " end
+    query = query + " c.lastname LIKE '" + lastname_condition + "' AND
     c.firstname LIKE '" + firstname_condition + "') AND
-    r.year " +  y_operator + " '" + year_condition + "'
-    group by c.id"
+    r.year " +  y_operator + " '" + year_condition + "' "
+    if(search[:first_time]) then query = query + " AND not exists(select 1 from race_runners r2 where r2.cyclist_id = r.cyclist_id and r2.year < r.year)  " end
+    query = query + " group by c.id"
     need_having_clause = true
     if (!search[:wjaune_cnt].blank? && search[:wjaune_cnt].to_i > 0)
       if (need_having_clause) then query = query + " HAVING " else query = query + " AND " end

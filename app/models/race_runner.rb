@@ -18,4 +18,5 @@ end
     else display_fullname = cyclist.display_fullname
     end
   end
+
 end

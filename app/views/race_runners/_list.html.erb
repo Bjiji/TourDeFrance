@@ -6,10 +6,10 @@
             "iDisplayLength": 50,
             "aoColumns" : [
                 {"bSortable": true, "bSearchable": true, "sType": "num-html" },
-                {"bSortable": true , "bSearchable": true},
+                {"bSortable": true , "bSearchable": true, "sType": "num-html"},
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
-                {"bSortable": true, "bSearchable": false},
+                {"bSortable": true, "bSearchable": true},
                 {"bSortable": false, "bSearchable": false}
             ]
         });
@@ -30,7 +30,7 @@
 <% @race_runners.each do |race_runner| %>
   <tr>
     <td><%= link_to race_runner.race.year, race_runner.race %></td>
-    <td><%= race_runner.number %></td>
+    <td><%= link_to race_runner.number, race_runner_path(race_runner) %></td>
     <td><%= link_to race_runner.cyclist.display_fullname, race_runner.cyclist %></td>
     <td><%= link_to race_runner.team.name, race_runner.team %></td>
     <td><%= race_runner.nationality %></td>

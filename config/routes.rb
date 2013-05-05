@@ -1,6 +1,14 @@
 TourDeFrance::Application.routes.draw do
 
+  resources :stat_miscs
+
+  resources :stat_countries
+
+  resources :stat_stage_diffs
+
   resources :mountain_stage_results
+
+  resources :stat_stage_diffs
 
   resources :ig_stage_results
 

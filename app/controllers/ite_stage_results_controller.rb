@@ -2,7 +2,11 @@ class IteStageResultsController < ApplicationController
   # GET /ite_stage_results
   # GET /ite_stage_results.json
   def index
-    @ite_stage_results = IteStageResult.where(:id => 1)
+    if (params[:no_search] != 'true') then
+      @ite_stage_results = IteStageResult.search(params)
+    else
+      @ite_stage_results = []
+    end
 
     respond_to do |format|
       format.html # index.html.erb

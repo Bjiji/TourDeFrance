@@ -8,11 +8,29 @@
 </p>
 <p>
   <b>Dossard:</b>
-  <%= link_to @ite_stage_result.race_runner.number, race_runner_path(@ite_stage_result.race_runner) %>
+  <%= link_to("" + "("  + @ite_stage_result.race_runner.number.to_s + ") " + @ite_stage_result.race_runner.display_fullname, race_runner_path(@ite_stage_result.race_runner)) %>
 </p>
 <p>
   <b>Pos:</b>
   <%= @ite_stage_result.pos %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= if (@ite_stage_result.time_sec.blank?) then '-' else ChronicDuration.output(@ite_stage_result.time_sec) end %>
+</p>
+
+<p>
+  <b>Diff time:</b>
+  <%= if (@ite_stage_result.diff_time_sec.blank?) then '-' else ChronicDuration.output(@ite_stage_result.diff_time_sec) end %>
+</p>
+<p>
+  <b>Status de course:</b>
+  <%= @ite_stage_result.stage_status %>
+</p>
+<p>
+  <b>Evénements:</b>
+  <%= @ite_stage_result.stage_tag %>
 </p>
 
 <p>
@@ -28,16 +46,6 @@
 <p>
   <b>Dnq:</b>
   <%= @ite_stage_result.dnq %>
-</p>
-
-<p>
-  <b>Time:</b>
-  <%= ChronicDuration.output(@ite_stage_result.time_sec) %>
-</p>
-
-<p>
-  <b>Diff time:</b>
-  <%= ChronicDuration.output(@ite_stage_result.diff_time_sec) %>
 </p>
 
 

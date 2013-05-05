@@ -1,4 +1,5 @@
-<%= form_tag stages_path, :action => 'index', :method => 'get' do %>
+<%= form_tag stat_stage_diffs_path, :action => 'index', :method => 'get' do %>
+
     <table border=1 bgcolor="#CCCCEE" width="100%">
       <tr><td><table width="100%">
         <tr>
@@ -21,17 +22,14 @@
               <tr>
                 <td>Nom</td><td><%= text_field_tag :lastname, params[:lastname] %></td>
                 <td>Prénom</td><td><%= text_field_tag :firstname, params[:firstname] %></td>
-                <td>Nat.</td><td><%= select_tag :nationality, options_for_select(RaceRunner.connection.select_values('select sub.n from (select count(1) cnt, nationality n from race_runners group by nationality order by count(1) desc) sub'), params[:nationality]), {:include_blank => true} %></td>
+                <td>Nat.</td><td><%= select_tag :nationality, options_for_select(Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(1) desc) sub'), params[:nationality]), {:include_blank => true} %></td>
                 <td>Equipe</td><td><%= text_field_tag :team, params[:team] %></td>
               </tr>
               <tr>
                 <td>Etape</td>
                 <td>
-                  <% selected = params[:c_stage_pos] %>
-                  <% @tmp = IteStageResult.connection.select_values('select distinct(stage_status) from ite_stage_results where not(stage_status is null)')
-                     @stage_status = @tmp.map{|u| ['- ' + u, 'dnf'+u]}
-                  %>
-                  <%= select_tag :c_stage_pos, options_for_select([['Partant', 'run'], ['Termine', 'finish'], ['- Vainqueur', 'winner'], ['- Podium', 'topthree'], ['- Dans les 10 premiers', 'topten'], ['- Non vainqueur', 'nowinner'], ['Ne termine pas', 'nofinish']] + @stage_status, params[:c_stage_pos]),  {:include_blank => false} %>
+                  <% selected = if (params[:c_stage_pos].blank?) then 'winner' else params[:c_stage_pos] end %>
+                  <%= select_tag :c_stage_pos, options_for_select([['Partant', 'run'], ['Termine', 'finish'], ['- Vainqueur', 'winner'], ['- Podium', 'topthree'], ['- Dans les 10 premiers', 'topten'], ['- Non vainqueur', 'nowinner'], ['Ne termine pas', 'nofinish'], ['- Abandonne', 'dnf'], ['- Non partant', 'dns'], ['- Disqualifié', 'dnq']], selected), {:include_blank => false} %>
                 </td>
                 <td><img src="/assets/maillot_jaune_40.png"/></td>
                 <td>
@@ -66,7 +64,6 @@
                     </tr>
                   </table>
                 </td>
-                <td>pour son premier tour</td><td><%= check_box_tag(:first_time, params[:first_time],  params[:first_time]) %></td>
               </tr>
             </table>
           </FIELDSET>

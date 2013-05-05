@@ -2,7 +2,11 @@ class StagesController < ApplicationController
   # GET /stages
   # GET /stages.json
   def index
-    @stages = Stage.search(params)
+    if (params[:no_search] != 'true') then
+      @stages = Stage.search(params)
+    else
+      @stages = []
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +18,8 @@ class StagesController < ApplicationController
   # GET /stages/1.json
   def show
     @stage = Stage.find(params[:id])
+    @previous_stage = Stage.where(:race_id => @stage.race.id, :ordinal => @stage.ordinal - 1).first()
+    @next_stage = Stage.where(:race_id => @stage.race.id, :ordinal => @stage.ordinal + 1).first()
     @ite_stage_results_h = IteStageResult.where(:stage_id => params[:id])
     respond_to do |format|
       format.html # show.html.erb

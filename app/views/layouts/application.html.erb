@@ -11,30 +11,37 @@
 </head>
 <body>
 <% c_year = 2012 %>
-<table cellpadding="10" cellspacing="0" id="main_table">
-<tr><td id="header" colspan=2 bgcolor="#33AA33">
-  <h2>Les carnets du Tour</h2>
-  &nbsp;<i>Tout les résultats, toutes les infos...</i>
+<table border=1 cellpadding="10" cellspacing="0" id="main_table">
+<tr><td id="header" colspan=2>
+  <img src="/assets/les%20carnets%20du%20Tour.png"/>
 </td>
 </tr>
 <tr>
 <td bgcolor="#C0C0E0" align="left" valign="top" id="menu" width="115">
   <b>Menu</b>
   <h1>&nbsp;</h1>
-  <ul>
+  <h3>Résultats</h3>
+  <ul title="Résultats">
     <li><%= link_to "éditions", races_url%></li>
-    <li><%= link_to 'coureurs', cyclists_path(:year => c_year)%></li>
+    <li><%= link_to 'coureurs', cyclists_path(:no_search => "true")%></li>
     <li><%= link_to 'équipes', teams_path(:year => c_year)%></li>
-    <li><%= link_to 'étapes', stages_path(:year => c_year)%></li>
-    <li><%= link_to 'cols', mountain_stage_results_path(:year => c_year)%></li>
-    <li><%= link_to 'stats', "none"%></li>
+    <li><%= link_to 'étapes', stages_path(:no_search => "true")%></li>
+    <li><%= link_to 'résultats', ite_stage_results_path(:no_search => "true")%></li>
+    <li><%= link_to 'cols', mountain_stage_results_path(:no_search => "true")%></li>
   </ul>
+  <h3>Statistiques</h3>
+  <ul title="Statistiques">
+    <li><%= link_to "écarts", stat_stage_diffs_url(:no_search => "true") %></li>
+    <li><%= link_to 'nationalité', stat_countries_url(:nationality1 => 'France') %></li>
+    <li><%= link_to 'stats', stat_miscs_url(:year => "1947")%></li>
+  </ul>
+
 </td>
 <td id="content"><%= yield %></td>
 </tr>
 <tr>
 <td id="footer" colspan=2>
-  <center><small><i>Cypale© 2013</i></small></center>
+  <center><small><i>Cipale© 2013</i></small></center>
 </td>
 </tr>
 
