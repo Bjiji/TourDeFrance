@@ -1,5 +1,5 @@
 class Stage < ActiveRecord::Base
-  attr_accessible :date, :distance, :ordinal, :finish, :finishers_cnt, :label, :runners_cnt, :stageNb, :stage_type, :start, :subStageNb, :year
+  attr_accessible :race_id, :date, :info, :distance, :ordinal, :finish, :finishers_cnt, :label, :runners_cnt, :stageNb, :stage_type, :start, :subStageNb, :year
   belongs_to :race
   has_many :ite_stage_results
   has_one :ig_stage_result
@@ -26,12 +26,42 @@ class Stage < ActiveRecord::Base
     display_label = stage_name + ' ' + start + ' / ' + finish
   end
 
+
+  def team_winner
+    winner = nil
+    if (ig_stage_result != nil) then
+      winner = ig_stage_result.team_winner
+    end
+  end
+
+
   def winner
     winner = Cyclist.find_by_sql("select c.* from ig_stage_results isr join race_runners rr on rr.id = isr.stage_winner_id join cyclists c on c.id = rr.cyclist_id where isr.stage_id = " + self.id.to_s).first
   end
 
+  def time
+    sql = 'SELECT distinct time_sec
+ FROM ite_stage_results ite
+ WHERE ite.stage_id =' + id.to_s + ' AND ite.pos = 1
+ limit 1;'
+      #sql = Stage::sanitize_sql_array(sql_array)
+      time_res = Stage.connection.select_all(sql)
+      time = 0
+      if (time_res != nil && time_res.size > 0) then
+        time = time_res[0]['time_sec']
+      end
+  end
+
   def leader
     winner = Cyclist.find_by_sql("select c.* from ig_stage_results isr join race_runners rr on rr.id = isr.leader_id join cyclists c on c.id = rr.cyclist_id where isr.stage_id = " + self.id.to_s).first
+  end
+
+  def self.missingResults()
+    query = "SELECT distinct stages.*
+      FROM stages
+      LEFT JOIN ig_stage_results ig ON ig.stage_id = stages.id
+      WHERE ig.stage_winner_id is null"
+      Stage.find_by_sql(query)
   end
 
   def self.search(search)
@@ -86,9 +116,9 @@ class Stage < ActiveRecord::Base
       LEFT JOIN cyclists cyclist ON cyclist.id = runner.cyclist_id
       WHERE stages.year " +  y_operator + " '" + year_condition + "'
       AND stages.stage_type LIKE '" + type_condition + "'
-      AND (stages.start LIKE '" + start_city_condition + "' OR stages.finish LIKE '" + end_city_condition + "')
-      AND cyclist.lastname LIKE '" + lastname_condition + "'
-      AND cyclist.firstname LIKE '" + firstname_condition + "' "
+      AND (stages.start LIKE '" + start_city_condition + "' OR stages.finish LIKE '" + end_city_condition + "') "
+      if (!search[:lastname].blank?) then " AND cyclist.lastname LIKE '" + lastname_condition + "'" end
+      if (!search[:firstname].blank?) then " AND cyclist.firstname LIKE '" + firstname_condition + "' " end
       if (!search[:nationality].blank?) then query = query + " AND runner.nationality = '" + nationality_condition + "'" end
         if search[:c_finish_leader] == "yes" then query = query + " AND ig_stage_results.leader_id=runner.id "
     elsif search[:c_finish_leader] == "no" then query = query + " AND (ig_stage_results.leader_id is null OR ig_stage_results.leader_id!=runner.id) "

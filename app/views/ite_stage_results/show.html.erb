@@ -8,7 +8,7 @@
 </p>
 <p>
   <b>Dossard:</b>
-  <%= link_to("" + "("  + @ite_stage_result.race_runner.number.to_s + ") " + @ite_stage_result.race_runner.display_fullname, race_runner_path(@ite_stage_result.race_runner)) %>
+  <%= if (!@ite_stage_result.race_runner.blank?) then link_to("" + "("  + @ite_stage_result.race_runner.number.to_s + ") " + @ite_stage_result.race_runner.display_fullname, race_runner_path(@ite_stage_result.race_runner)) end %>
 </p>
 <p>
   <b>Pos:</b>
@@ -48,6 +48,15 @@
   <%= @ite_stage_result.dnq %>
 </p>
 
+<p>
+  <i>confidence:</i>
+  <%= @ite_stage_result._confidence %>
+</p>
+
+<p>
+  <i>auto_name:</i>
+  <%= @ite_stage_result.runner_s %>
+</p>
 
 <%= link_to 'Edit', edit_ite_stage_result_path(@ite_stage_result) %> |
 <%= link_to 'Back', ite_stage_results_path %>

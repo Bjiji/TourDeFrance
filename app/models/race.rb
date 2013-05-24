@@ -40,4 +40,11 @@ class Race < ActiveRecord::Base
     end
   end
 
+  def nationalities
+    sql = 'SELECT distinct nationality
+ FROM race_runners rr
+ WHERE rr.race_id =' + id.to_s + ';'
+    nationalities = Stage.connection.select_all(sql)
+  end
+
 end

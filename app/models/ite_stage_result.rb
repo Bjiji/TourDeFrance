@@ -1,7 +1,8 @@
  class IteStageResult < ActiveRecord::Base
-  attr_accessible :diff_time_sec, :dnf, :dnq, :dns, :pos, :time_sec, :stage_status, :stage_tag, :race_runner_id
+  attr_accessible :runner_s, :diff_time_sec, :dnf, :dnq, :dns, :pos, :time_sec, :stage_status, :stage_tag, :race_runner_id, :_confidence
   belongs_to :stage
   belongs_to :race_runner
+  belongs_to :team
 
 
   def display_time
@@ -20,22 +21,13 @@
   end
 
   def display_tag
-    res = ''
-    if (dns == 1)  then
-      res = 'non partant'
-    end
-    if (dnf == 1) then
-      res = res + 'non classe'
-    end
-    if (dnq == 1)  then
-      res = res + 'disqualifie'
-    end
-    display_tag = res
+    display_tag = stage_status
 
   end
 
 
   def self.search(search)
+    missing_result = search[:missing_result]
     team = search[:team]  || ""
     lastname = search[:lastname]  || ""
     lastname_condition = "%" + lastname + "%"
@@ -87,9 +79,9 @@
       LEFT JOIN cyclists cyclist ON cyclist.id = runner.cyclist_id
       WHERE stages.year " +  y_operator + " '" + year_condition + "'
       AND stages.stage_type LIKE '" + type_condition + "'
-      AND (stages.start LIKE '" + start_city_condition + "' OR stages.finish LIKE '" + end_city_condition + "')
-      AND cyclist.lastname LIKE '" + lastname_condition + "'
-      AND cyclist.firstname LIKE '" + firstname_condition + "' "
+      AND (stages.start LIKE '" + start_city_condition + "' OR stages.finish LIKE '" + end_city_condition + "') "
+      if (!search[:lastname].blank?) then query = query + " AND cyclist.lastname LIKE '" + lastname_condition + "'" end
+      if (!search[:firstname].blank?) then " AND cyclist.firstname LIKE '" + firstname_condition + "' " end
     if (!search[:nationality].blank?) then query = query + " AND runner.nationality = '" + nationality_condition + "'" end
     if search[:c_finish_leader] == "yes" then query = query + " AND ig_stage_results.leader_id=runner.id "
     elsif search[:c_finish_leader] == "no" then query = query + " AND (ig_stage_results.leader_id is null OR ig_stage_results.leader_id!=runner.id) "
@@ -121,7 +113,7 @@
     end
     if(!(team == nil) && !team.blank?) then query = query + " AND team.name LIKE '%" + team + "%'" end
     if(search[:first_time]) then query = query + " AND not exists(select 1 from race_runners r2 where r2.cyclist_id = runner.cyclist_id and r2.year < runner.year)" end
-    query = query + " order by stages.year desc, stages.ordinal desc, isr.pos asc limit 500"
+    query = query + " order by stages.year desc, stages.ordinal desc, isr.pos asc limit 1000"
 #AND ig_stage_results.stage_winner=runner.id
 #AND ig_stage_results.leader=runner.id
 #AND ig_stage_results.climber=runner.id

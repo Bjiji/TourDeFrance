@@ -1,0 +1,56 @@
+<b>Participations:</b>
+
+<ul>
+  <%  @runs.each do |run| %>
+    <li><%= if (!run.race.blank?) then link_to run.race.year, race_path(run.race) end %>:   <%= if(!run.number.blank?) then link_to 'dossard ' + run.number.to_s, race_runner_path(run) end %>, <%= if (!run.team.blank?) then link_to run.team.name, run.team end %> (<%= run.nationality %>) </li>
+  <% end  %>
+</ul>
+
+<b>Victoires:</b>
+<ul>
+  <%  @r_victories.each do |r| %>
+      <li><%= link_to r.race.name + ' (' + r.race.winnerPrize + ')', race_path(r.race) %></li>
+  <% end  %>
+</ul>
+
+<b>Maillot vert:</b>
+<ul>
+  <%  @rs_victories.each do |r| %>
+      <li><%= link_to r.race.name + ' (' + r.race.winnerPrize + ')', race_path(r.race) %></li>
+  <% end  %>
+</ul>
+
+<b>Maillot à pois:</b>
+<ul>
+  <%  @rc_victories.each do |r| %>
+      <li><%= link_to r.race.name + ' (' + r.race.winnerPrize + ')', race_path(r.race) %></li>
+  <% end  %>
+</ul>
+
+<b>Porteur maillot jaune</b>
+<ul>
+  <%  @y_jersey.each do |r| %>
+      <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
+  <% end  %>
+</ul>
+
+<b>Porteur maillot vert</b>
+<ul>
+  <%  @s_jersey.each do |r| %>
+      <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
+  <% end  %>
+</ul>
+
+<b>Porteur maillot à pois</b>
+<ul>
+  <%  @c_jersey.each do |r| %>
+      <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
+  <% end  %>
+</ul>
+
+<b>Victoire d'étapes:</b>
+<ul>
+  <%  @s_victories.each do |ite_stage_result| %>
+      <li><%= link_to ite_stage_result.stage.display_label , ite_stage_result_path(ite_stage_result) %></li>
+  <% end  %>
+</ul>

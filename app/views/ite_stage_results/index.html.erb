@@ -49,12 +49,19 @@
         <td><%= ite_stage_result.stage.start %></td>
         <td><%= ite_stage_result.stage.finish %></td>
         <td><%= ite_stage_result.stage.stage_type %></td>
-        <td><%= link_to ite_stage_result.pos, ite_stage_result%></td>
+        <td><%= link_to(if (ite_stage_result.pos.blank?) then 'NaN' else ite_stage_result.pos end, ite_stage_result)%></td>
         <td><%= ite_stage_result.display_time %></td>
-        <td><%= link_to ite_stage_result.race_runner.display_fullname, ite_stage_result.race_runner %></td>
-        <td><%= link_to ite_stage_result.race_runner.team.name, ite_stage_result.race_runner.team %></td>
-        <td><%= ite_stage_result.race_runner.nationality %></td>
-        <td><%= ite_stage_result.stage_status %><%= if (!ite_stage_result.stage_tag.blank?) then " (" +ite_stage_result.stage_tag + ")" end %></td>
+        <td><%= if (ite_stage_result.race_runner.blank?) then
+                  if (ite_stage_result.team.blank?) then
+                    ite_stage_result.runner_s
+                  else
+                    link_to ite_stage_result.team.name, team_path(ite_stage_result.team)
+                  end
+                else link_to ite_stage_result.race_runner.display_fullname, cyclist_path(ite_stage_result.race_runner.cyclist)
+                end %></td>
+        <td><%= if (!ite_stage_result.race_runner.blank?) then link_to ite_stage_result.race_runner.team.name, ite_stage_result.race_runner.team end %></td>
+        <td><%= if (!ite_stage_result.race_runner.blank?) then ite_stage_result.race_runner.nationality end %></td>
+        <td><%= ite_stage_result.stage_status %></td>
       </tr>
   <% end %>
   </tbody>

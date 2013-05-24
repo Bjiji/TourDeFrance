@@ -1,103 +1,27 @@
-<script>
-    $(document).ready(function() {
-        $('#cyclist_stage_result').dataTable({
-            "sDom": "<'wrapper'i>, <fprtfp>",
-            "bJQueryUI": true,
-            "iDisplayLength": 50}
-        );
-    } );
-</script>
+<%= @cyclist.firstname %> <b><%= @cyclist.lastname %></b>
+<table  width="1000">
+  <tr width="100%">
+    <td width="100%">
+      <div id="tabs" width="100%">
+        <ul>
+          <li><a href="#tabs-1">Infos</a></li>
+          <li><a href="#tabs-2">Palmarès</a></li>
+          <li><a href="#tabs-3">Résultats d'étapes</a></li>
+        </ul>
+        <div id="tabs-1" style="width:1000px;">
+          <%= render :partial => 'cyclists/info' %>
+        </div>
+        <div id="tabs-2" style="width:1000px;">
+          <%= render :partial => 'cyclists/record' %>
+        </div>
+        <div id="tabs-3" style="width:1000px">
+          <%= render :partial => 'cyclists/result' %>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
 
-<p id="notice" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
-
-<p>
-  <%= @cyclist.firstname %> <b><%= @cyclist.lastname %></b>
-</p>
-
-<p>
-  <b>Date de naissance:</b>
-  <%= @cyclist.dob %>
-</p>
-<p>
-  <b>Lieu de naissance:</b>
-  <%= @cyclist.pob %>
-</p>
-
-<p>
-  <b>Nationalité:</b>
-  <%= @cyclist.nationality %>
-</p>
-<p>
-  <b>Tag:</b>
-  <%= @cyclist.tag %>
-</p>
-<p>
-  <b>Description:</b>
-  <%= @cyclist.description %>
-</p>
-<p>
-<b>Participations:</b>
-
-<ul>
-  <%  @runs.each do |run| %>
-    <li><%= if (!run.race.blank?) then link_to run.race.year, race_path(run.race) end %>:   <%= if(!run.number.blank?) then link_to 'dossard ' + run.number.to_s, race_runner_path(run) end %>, <%= if (!run.team.blank?) then link_to run.team.name, run.team end %> (<%= run.nationality %>) </li>
-  <% end  %>
-</ul>
-</p>
-
-<p>
-
-<b>Victoires:</b>
-<ul>
-  <%  @r_victories.each do |race| %>
-      <li><%= link_to race.name + ' (' + race.winnerPrize + ')', race_path(race) %></li>
-  <% end  %>
-</ul>
-
-</p>
-<b>Victoire d'étapes:</b>
-<ul>
-  <%  @s_victories.each do |ite_stage_result| %>
-      <li><%= link_to ite_stage_result.stage.display_label , ite_stage_result_path(ite_stage_result) %></li>
-  <% end  %>
-</ul>
-</p>
-<p>
-  <b>Résultats complets:</b>
-<ul>
-
-  <table class="display" id="cyclist_stage_result">
-    <thead>
-    <tr>
-      <th>Etape</th>
-      <th>Type</th>
-      <th>Départ</th>
-      <th>Arrivée</th>
-      <th>Pos</th>
-      <th>Temps</th>
-      <th>Général</th>
-      <th>Cumulé</th>
-      <th>Rem</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <%  @cyclist.ite_stage_results.each do |ite_stage_result| %>
-        <tr>
-          <td><%= link_to ite_stage_result.stage.stage_name, ite_stage_result_path(ite_stage_result) %></td>
-          <td><%= ite_stage_result.stage.stage_type %></td>
-          <td><%= ite_stage_result.stage.start %></td>
-          <td><%= ite_stage_result.stage.finish %></td>
-          <td><%= link_to(ite_stage_result.pos.to_s, ite_stage_result_path(ite_stage_result)) %></td>
-          <td><%= ite_stage_result.display_time %></td>
-          <td><%= " " %></td>
-          <td><%= " " %></td>
-          <td><%= ite_stage_result.display_tag %></td>
-        </tr>
-    <% end %>
-    </tbody>
-  </table>
-</ul>
 
 <%= link_to 'Edit', edit_cyclist_path(@cyclist) %> |
 <%= link_to 'Back', cyclists_path %>

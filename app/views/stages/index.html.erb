@@ -13,6 +13,8 @@
                 {"bSortable": true, "bSearchable": true },
                 {"bSortable": true, "bSearchable": true },
                 {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
                 {"bSortable": true, "bSearchable": true }
             ]
         });
@@ -30,6 +32,8 @@
     <th>Date</th>
     <th>Départ</th>
     <th>Arrivée</th>
+    <th>Dist.</th>
+    <th>Moy.</th>
     <th>Type</th>
     <th>Vainqueur</th>
     <th>Leader</th>
@@ -43,8 +47,23 @@
     <td><%= link_to stage.date, stage %></td>
     <td><%= stage.start %></td>
     <td><%= stage.finish %></td>
+    <td><%= stage.distance %></td>
+    </td><td>
+    <% st = stage.time %>
+    <%= if(st != nil && st > 0) then
+          sprintf "%.1f", (3600 * stage.distance / stage.time)
+        end %>
+  </td>
     <td><%= stage.stage_type %></td>
-    <td><%= if (stage.winner == nil) then '?' else link_to stage.winner.display_name, cyclist_path(stage.winner.id) end %></td>
+    <td><%= if (stage.winner == nil) then
+              if (stage.team_winner != nil) then
+                link_to stage.team_winner.name, team_path(stage.team_winner)
+              elsif ( stage.ig_stage_result != nil) then
+                 stage.ig_stage_result.stage_winner_s
+              else
+                "?"
+               end
+            else link_to stage.winner.display_name, cyclist_path(stage.winner.id) end %></td>
     <td><%= if (stage.leader == nil) then '?' else link_to stage.leader.display_name, cyclist_path(stage.leader.id) end %></td>
   </tr>
 <% end %>

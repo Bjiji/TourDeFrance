@@ -36,6 +36,11 @@
     <%= f.text_field :stage_type %>
   </div>
   <div class="field">
+      <%= f.label :race %><br />
+      <% race_array = Race.order('year').all.map { |r| [r.year, r.id] } %>
+      <%= f.select :race_id, race_array, {:include_blank => true} %>
+  </div>
+  <div class="field">
     <%= f.label :year %><br />
     <%= f.text_field :year %>
   </div>
@@ -55,7 +60,12 @@
     <%= f.label :label %><br />
     <%= f.text_field :label %>
   </div>
+    <div class="field">
+      <%= f.label :info %><br />
+      <%= f.text_area :info %>
+    </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

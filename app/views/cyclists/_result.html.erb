@@ -1,0 +1,55 @@
+<script>
+    $(document).ready(function() {
+        $('#cyclist_stage_result').dataTable({"sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50,
+            "aaSorting": [[ 0, "desc" ]],
+            "aoColumns" : [
+                {"bSortable": true, "bSearchable": true, "asSorting": [ "desc", "asc" ]},
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true, "sType": "num-html"  },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true }
+            ]
+        });
+    } );
+</script>
+<p>
+  <b>Résultats complets:</b>
+</p>
+  <table class="display" id="cyclist_stage_result">
+    <thead>
+    <tr>
+      <th>Etape</th>
+      <th>Type</th>
+      <th>Départ</th>
+      <th>Arrivée</th>
+      <th>Pos</th>
+      <th>Temps</th>
+      <th>Général</th>
+      <th>Cumulé</th>
+      <th>Rem</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <%  @cyclist.ite_stage_results.each do |ite_stage_result| %>
+        <tr>
+          <td><%= link_to ite_stage_result.stage.stage_name, ite_stage_result_path(ite_stage_result) %></td>
+          <td><%= ite_stage_result.stage.stage_type %></td>
+          <td><%= ite_stage_result.stage.start %></td>
+          <td><%= ite_stage_result.stage.finish %></td>
+          <td><%= link_to(ite_stage_result.pos.to_s, ite_stage_result_path(ite_stage_result)) %></td>
+          <td><%= ite_stage_result.display_time %></td>
+          <td><%= " " %></td>
+          <td><%= " " %></td>
+          <td><%= ite_stage_result.display_tag %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</ul>

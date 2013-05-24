@@ -19,8 +19,13 @@ class CyclistsController < ApplicationController
   def show
     @cyclist = Cyclist.find(params[:id])
     @runs = RaceRunner.joins(:cyclist).where(:cyclists => {:id => params[:id]})
-    @r_victories = IgRaceResult.joins(:leader).where(:leader_id => params[:id])
+    @r_victories = IgRaceResult.find_by_leader(params[:id])
+    @rc_victories = IgRaceResult.find_by_climber(params[:id])
+    @rs_victories = IgRaceResult.find_by_sprinter(params[:id])
     @s_victories = IteStageResult.joins(:race_runner).where(:pos => 1, :race_runners => { :cyclist_id => params[:id]})
+    @y_jersey = IgStageResult.joins(:leader).where(:race_runners => { :cyclist_id => params[:id]})
+    @c_jersey = IgStageResult.joins(:climber).where(:race_runners => { :cyclist_id => params[:id]})
+    @s_jersey = IgStageResult.joins(:sprinter).where(:race_runners => { :cyclist_id => params[:id]})
 #    @race = Race.where(:cyclist)
     respond_to do |format|
       format.html # show.html.erb
