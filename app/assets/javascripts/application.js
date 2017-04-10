@@ -11,13 +11,12 @@
 // GO AFTER THE REQUIRES BELOW.
 //
     //= require jquery
-    //= require highcharts
     //= require jquery_ujs
-    //= require jquery.dataTables
-    //= require datatables.num-html
-    //= require_tree .
-
-
+    //= require jquery-ui
+    //= require highcharts
+    //= require chartkick
+    //= require dataTables/jquery.dataTables
+    //= require dataTables/bootstrap/2/jquery.dataTables.bootstrap
 
 
 $(function() {

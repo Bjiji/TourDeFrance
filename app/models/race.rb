@@ -1,5 +1,5 @@
 class Race < ActiveRecord::Base
-  attr_accessible :averageSpeed, :description, :distance, :name, :poolPrize, :winnerPrize, :year
+  #attr_accessor :averageSpeed, :description, :distance, :name, :poolPrize, :winnerPrize, :year
   has_many :race_runners
   has_many :stages
   has_one :ig_race_result

@@ -10,12 +10,15 @@
  *
 
  *= require main
- *= require datatable_themeroller
  *= require_self
  *= require_tree .
  *= require demo_table
- *= require jquery-ui
  *= require scaffolds
+ *= require jquery-ui
+ *= require jquery-ui/core
+ *= require jquery-ui/redmond
+ *= require datatable_themeroller
+ *= require dataTables/bootstrap/2/jquery.dataTables.bootstrap
 
  */
 

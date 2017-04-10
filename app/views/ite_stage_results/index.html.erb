@@ -44,12 +44,12 @@
   <tbody>
   <% @ite_stage_results.each do |ite_stage_result| %>
       <tr>
-        <td><%= link_to ite_stage_result.stage.year, ite_stage_result.stage.race %></td>
-        <td><%= link_to ite_stage_result.stage.stage_num, ite_stage_result.stage %></td>
-        <td><%= ite_stage_result.stage.start %></td>
-        <td><%= ite_stage_result.stage.finish %></td>
-        <td><%= ite_stage_result.stage.stage_type %></td>
-        <td><%= link_to(if (ite_stage_result.pos.blank?) then 'NaN' else ite_stage_result.pos end, ite_stage_result)%></td>
+        <td><%= if (ite_stage_result.stage.blank?) then '?' else link_to ite_stage_result.stage.year, ite_stage_result.stage.race end %></td>
+        <td><%= if (ite_stage_result.stage.blank?) then '?' else link_to ite_stage_result.stage.stage_num, ite_stage_result.stage end %></td>
+        <td><%= if (ite_stage_result.stage.blank?) then '?' else  ite_stage_result.stage.start end %></td>
+        <td><%= if (ite_stage_result.stage.blank?) then '?' else ite_stage_result.stage.finish end %></td>
+        <td><%= if (ite_stage_result.stage.blank?) then '?' else  ite_stage_result.stage.stage_type end %></td>
+        <td><%= if (ite_stage_result.pos.blank?) then 'NaN' else link_to(ite_stage_result.pos, ite_stage_result) end %></td>
         <td><%= ite_stage_result.display_time %></td>
         <td><%= if (ite_stage_result.race_runner.blank?) then
                   if (ite_stage_result.team.blank?) then

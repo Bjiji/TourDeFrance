@@ -50,7 +50,7 @@
 
 <b>Victoire d'étapes:</b>
 <ul>
-  <%  @s_victories.each do |ite_stage_result| %>
-      <li><%= link_to ite_stage_result.stage.display_label , ite_stage_result_path(ite_stage_result) %></li>
+  <%  @s_victories.each do |ig_stage_result| %>
+      <li><%= link_to ig_stage_result.stage.display_label , stage_path(ig_stage_result.stage) %></li>
   <% end  %>
 </ul>
