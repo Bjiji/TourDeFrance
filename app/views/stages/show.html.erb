@@ -103,7 +103,7 @@
           <tr><td>
             <b>Remarques:</b>
           </td><td>
-            <%= @stage.info %>
+            <%= @stage.info.gsub(" : ", "<br>").gsub(" - ", "<br>").gsub("\n", "").html_safe %>
           </td></tr>
         </table>
       </div>

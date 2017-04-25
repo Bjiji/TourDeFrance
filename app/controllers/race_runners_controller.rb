@@ -60,7 +60,7 @@ class RaceRunnersController < ApplicationController
     @race_runner = RaceRunner.find(params[:id])
 
     respond_to do |format|
-      if @race_runner.update_attributes(params[:race_runner])
+      if @race_runner.update_attributes(params.required(:race_runner).permit!)
         format.html { redirect_to @race_runner, :notice => 'Race runner was successfully updated.' }
         format.json { head :no_content }
       else
@@ -81,4 +81,6 @@ class RaceRunnersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 end
