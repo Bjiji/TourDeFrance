@@ -103,7 +103,7 @@
           <tr><td>
             <b>Remarques:</b>
           </td><td>
-            <%= @stage.info.gsub(" : ", "<br>").gsub(" - ", "<br>").gsub("\n", "").html_safe %>
+            <%= if (@stage.info != nil) then @stage.info.gsub(" : ", "<br>").gsub(" - ", "<br>").gsub("\n", "").html_safe end %>
           </td></tr>
         </table>
       </div>
@@ -188,7 +188,7 @@
         <td><%= if (time_res.blank?) then result.stage_status else time_res end%></td>
         <td><%= time_diff %></td>
         <td><%= if (!result.race_runner.blank?) then link_to result.race_runner.number.to_s, race_runner_path(result.race_runner) end %></td>
-        <td><% if (@stage.ig_stage_result.previous_leader == result.race_runner) then %> <img src="/assets/maillot_jaune_20.png"/> <%end%><% if (@stage.ig_stage_result.previous_sprinter == result.race_runner) then %> <img src="/assets/maillot_vert_20.png"/> <%end%><% if (@stage.ig_stage_result.previous_climber == result.race_runner) then %> <img src="/assets/maillot_pois_20.png"/> <%end%></td>
+        <td><% if (@stage.ig_stage_result != nil) then if (@stage.ig_stage_result.previous_leader == result.race_runner) then %> <img src="/assets/maillot_jaune_20.png"/> <%end%><% if (@stage.ig_stage_result.previous_sprinter == result.race_runner) then %> <img src="/assets/maillot_vert_20.png"/> <%end%><% if (@stage.ig_stage_result.previous_climber == result.race_runner) then %> <img src="/assets/maillot_pois_20.png"/> <%end end%></td>
         <td><%= if (result.race_runner.blank?) then
                   if (result.team.blank?) then
                     result.runner_s

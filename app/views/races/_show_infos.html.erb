@@ -23,7 +23,7 @@
   </tr>
   </tr>
     <td><b>Description</b></td>
-    <td><%= @race.description.gsub("\n", "<br>").html_safe %></td>
+    <td><%= if (@race.description != nil) then @race.description.gsub("\n", "<br>").html_safe end %></td>
   </tr>
 
   <tr>

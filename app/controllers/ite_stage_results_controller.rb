@@ -63,7 +63,7 @@ class IteStageResultsController < ApplicationController
     @ite_stage_result = IteStageResult.find(params[:id])
 
     respond_to do |format|
-      if @ite_stage_result.update_attributes(params[:ite_stage_result])
+      if @ite_stage_result.update_attributes(params.required(:ite_stage_result).permit!)
         format.html { redirect_to @ite_stage_result, :notice => 'Ite stage result was successfully updated.' }
         format.json { head :no_content }
       else
