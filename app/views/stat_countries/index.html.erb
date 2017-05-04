@@ -1,0 +1,78 @@
+<h1>Statistiques par pays</h1>
+<%= form_tag stat_countries_path, :action => 'index', :method => 'get' do %>
+    <FIELDSET>
+      <LEGEND align=top>Pays</LEGEND>
+<table>
+  <tr>
+    <td>(1)</td><td><%= select_tag :nationality1, options_for_select(Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(1) desc) sub'), params[:nationality1]), {:include_blank => true} %></td>
+    <td>
+      <%= submit_tag "recherche", :name => nil %>
+    </td>
+    </tr>
+    <tr>
+    <td>(2)</td><td><%= select_tag :nationality2, options_for_select(Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(1) desc) sub'), params[:nationality2]), {:include_blank => true} %></td><td></td>
+  </tr>
+  <tr>
+
+  </tr>
+</table>
+      </FIELDSET>
+ <table>
+   <tr>
+    <td>
+      <h3><%= @stat_race_nat1['nationality'] %></h3>
+      <table>
+        <tr>
+          <td> Dossard </td><td><%= @stat_race_nat1['dossard'] %></td>
+        </tr>
+        <tr>
+          <td> Cycliste </td><td><%= @stat_race_nat1['cyclist'] %></td>
+        </tr>
+        <tr>
+          <td> Vainqueur </td><td><%= @stat_race_nat1['leader'] %></td>
+        </tr>
+        <tr>
+          <td> Sprinteur </td><td><%= @stat_race_nat1['sprinter'] %></td>
+        </tr>
+        <tr>
+          <td> Grimpeur </td><td><%= @stat_race_nat1['climber'] %></td>
+        </tr>
+      </table>
+    </td>
+    <td width=50>&nbsp;</td>
+    <td>
+      <% if (!@stat_race_nat2.blank?) then %>
+      <h3><%= @stat_race_nat2['nationality'] %></h3>
+      <table>
+        <tr>
+          <td> Dossard </td><td><%= @stat_race_nat2['dossard'] %></td>
+        </tr>
+        <tr>
+          <td> Cycliste </td><td><%= @stat_race_nat2['cyclist'] %></td>
+        </tr>
+        <tr>
+          <td> Vainqueur </td><td><%= @stat_race_nat2['leader'] %></td>
+        </tr>
+        <tr>
+          <td> Sprinteur </td><td><%= @stat_race_nat2['sprinter'] %></td>
+        </tr>
+        <tr>
+          <td> Grimpeur </td><td><%= @stat_race_nat1['climber'] %></td>
+        </tr>
+      </table>
+    <% end %>
+    </td>
+  </tr>
+</table>
+
+    <table width=800px>
+      <tr>
+
+        <td><div id="chart_cnt">  <%= high_chart("chart_cnt", @chart_cnt) %>  %></div></td>
+      </tr>
+      <tr>
+        <td><div id="chart_per"><%= high_chart("chart_per", @chart_per)  %></div></td>
+      </tr>
+      <tr>
+    </table>
+<% end %>

@@ -1,0 +1,2 @@
+module StatStageDiffsHelper
+end

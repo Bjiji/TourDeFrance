@@ -1,0 +1,49 @@
+<%= form_for(@ig_stage_result) do |f| %>
+  <% if @ig_stage_result.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ig_stage_result.errors.count, "error") %> prohibited this ig_stage_result from being saved:</h2>
+
+      <ul>
+      <% @ig_stage_result.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+
+  <% end
+   runners = RaceRunner.find_by_sql('select r.* from race_runners r join ite_stage_results ite on ite.race_runner_id = r.id where ite.stage_id = ' + @ig_stage_result.stage.id.to_s + ' and ite.pos = 1')
+   runner = nil
+     if ( runners != nil && runners.length > 0) then runner = runners[0] end
+  %>
+    <table>
+      <tr><td>Imported name: </td><td><%= @ig_stage_result.stage_winner_s %></td></tr>
+      <tr><td>first place: </td><td> <%= if (runner != nil) then runner.display_fullname end %></td></tr>
+      <tr><td>
+        <div class="field">
+        <%= f.label :stage_winner_id %><br />
+        <% c_array = RaceRunner.where(:year => @ig_stage_result.stage.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+        <%= f.select :stage_winner_id, c_array, {:include_blank => true} %>
+      </div></td></tr>
+    </table>
+
+    <div class="field">
+      <%= f.label :leader_id %><br />
+      <% c_array = RaceRunner.where(:year => @ig_stage_result.stage.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+      <%= f.select :leader_id, c_array, {:include_blank => true} %>
+    </div>
+    <div class="field">
+      <%= f.label :sprinter_id %><br />
+      <% c_array = RaceRunner.where(:year => @ig_stage_result.stage.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+      <%= f.select :sprinter_id, c_array, {:include_blank => true} %>
+    </div>
+    <div class="field">
+      <%= f.label :climber_id %><br />
+      <% c_array = RaceRunner.where(:year => @ig_stage_result.stage.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+      <%= f.select :climber_id, c_array, {:include_blank => true} %>
+    </div>
+  <div class="actions">
+
+    <%= f.submit %>
+
+  </div>
+<% end %>

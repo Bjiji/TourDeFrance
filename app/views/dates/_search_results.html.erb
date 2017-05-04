@@ -1,0 +1,5 @@
+<ul>
+  <% @cyclists.each do |cyclist| %>
+      <li><%= link_to cyclist.display_name, cyclist  %></li>
+  <% end %>
+</ul>

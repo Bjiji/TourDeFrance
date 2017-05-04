@@ -1,0 +1,2 @@
+module IgRaceResultsHelper
+end

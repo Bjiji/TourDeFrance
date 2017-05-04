@@ -1,0 +1,41 @@
+<%= form_for(@cyclist) do |f| %>
+  <% if @cyclist.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cyclist.errors.count, "error") %> prohibited this cyclist from being saved:</h2>
+
+      <ul>
+      <% @cyclist.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :firstname %><br />
+    <%= f.text_field :firstname %>
+  </div>
+  <div class="field">
+    <%= f.label :lastname %><br />
+    <%= f.text_field :lastname %>
+  </div>
+  <div class="field">
+    <%= f.label :dob %><br />
+    <%= f.date_select(:dob, options={ :start_year => 1860})  %>
+  </div>
+  <div class="field">
+    <%= f.label :pob %><br />
+    <%= f.text_field :pob %>
+  </div>
+  <div class="field">
+    <%= f.label :nationality %><br />
+    <%= f.select :nationality, Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(*) desc) sub'), {:include_blank => true} %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

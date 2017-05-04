@@ -1,0 +1,61 @@
+<%= form_tag cyclists_path, :action => 'index', :method => 'get' do %>
+<table cellspacing="0" border=1 bgcolor="#CCCCEE" width="100%">
+<tr><td><table border=0 width="100%">
+  <tr>
+    <td>Nom</td><td><%= text_field_tag :lastname, params[:lastname], :id => 'lasttname_field' %></td><td>Prénom</td><td><%= text_field_tag :firstname, params[:firstname], :id => 'firstname_field' %></td>
+  </tr>
+  <tr>
+    <td>Equipe</td><td><%= text_field_tag :team, params[:team] %></td>
+    <td>Nationalité</td><td><%= select_tag :nationality, options_for_select(Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(1) desc) sub'), params[:nationality]), {:include_blank => true} %></td>
+ </tr>
+  <tr>
+    <td>Participation</td><td><%= select_tag :year_operator, options_for_select([['en', 'equals'], ['depuis', 'since'], ['avant', 'before']],  params[:year_operator]), {:include_blank => false} %><%=number_field_tag( :year, params[:year], :size => 4, :min => 1900, :max => 2100) %></td>
+    <td>Victoire </td><td><%= number_field_tag(:wstage_cnt, params[:wstage_cnt], :size => 2, :min => 0, :max => 99) %> étape(s) minimum</td>
+    </tr>
+    <tr>
+       <td><img src="/assets/maillot_jaune_40.png"/></td>
+       <td>
+         <table>
+           <tr>
+            <td>vainqueur sur au moins</td> <td><%= number_field_tag(:wjaune_cnt, params[:wjaune_cnt], :size => 2, :min => 0, :max => 20) %> édition(s)</td>
+           </tr>
+           <tr>
+           <td>porteur sur au moins</td><td><%= number_field_tag(:pjaune_cnt, params[:pjaune_cnt], :size => 2, :min => 0, :max => 99) %> étape(s) </td>
+           </tr>
+         </table>
+        </td>
+        <td><img src="/assets/maillot_vert_40.png"/></td>
+        <td>
+          <table>
+            <tr>
+              <td>vainqueur sur au moins</td> <td><%= number_field_tag(:wsprinter_cnt, params[:wsprinter_cnt], :size => 2, :min => 0, :max => 20) %> édition(s)</td>
+            </tr>
+            <tr>
+              <td>porteur sur au moins</td><td><%= number_field_tag(:psprinter_cnt, params[:psprinter_cnt], :size => 2, :min => 0, :max => 99) %> étape(s) </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td><img src="/assets/maillot_pois_40.png"/></td>
+        <td>
+          <table>
+            <tr>
+              <td>vainqueur sur au moins</td> <td><%= number_field_tag(:wclimber_cnt, params[:wclimber_cnt], :size => 2, :min => 0, :max => 20) %> édition(s) </td>
+            </tr>
+            <tr>
+              <td>porteur sur au moins</td><td><%= number_field_tag(:pclimber_cnt, params[:pclimber_cnt], :size => 2, :min => 0, :max => 99) %> étape(s) </td>
+            </tr>
+          </table>
+        </td>
+        <td>Lors de sa première participation</td><td><%= check_box_tag(:first_time, params[:first_time],  params[:first_time]) %></td>
+  </tr>
+  <tr>
+
+   <td><%= submit_tag "recherche", :name => nil %></td>
+   <td>&nbsp;</td>
+
+ </tr>
+</table></td></tr>
+</table>
+<% end %>

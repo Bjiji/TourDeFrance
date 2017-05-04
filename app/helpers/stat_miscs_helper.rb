@@ -1,0 +1,2 @@
+module StatMiscsHelper
+end

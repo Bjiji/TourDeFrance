@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr>
+    <td><b>Nom:</b></td>
+    <td><%= @mountain_stage_result.name %></td>
+  </tr>
+  <tr>
+    <td><b>Altitude:</b></td>
+    <td><%= @mountain_stage_result.altitude %></td>
+  </tr>
+  <tr>
+    <td><b>Etape:</b></td>
+    <td><%= if (@mountain_stage_result.stage != nil) then link_to @mountain_stage_result.stage.display_label, stage_path(@mountain_stage_result.stage) end %></td>
+  </tr>
+  <tr>
+    <td><b>Catégorie:</b></td>
+    <td><%= @mountain_stage_result.category %></td>
+  </tr>
+  <tr>
+    <td><b>Passage en tête:</b></td>
+    <td><%= if (!@mountain_stage_result.race_runner.blank?) then link_to @mountain_stage_result.race_runner.display_name, cyclist_path(@mountain_stage_result.race_runner.cyclist) end%></td>
+  </tr>
+  <tr>
+    <td><b>Difficulté numéro</b></td>
+    <td><%= @mountain_stage_result.order %></td>
+  </tr>
+  <tr>
+    <td><b>Arrivée:</b></td>
+    <td><%= if (@mountain_stage_result.finish == 1) then 'oui' else 'non' end %></td>
+  </tr>
+</table>
+
+
+</p>
+
+
+<%= link_to 'Edit', edit_mountain_stage_result_path(@mountain_stage_result) %> |
+<%= link_to 'Back', mountain_stage_results_path %>

@@ -1,0 +1,2 @@
+module StatCountriesHelper
+end

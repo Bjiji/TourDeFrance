@@ -1,0 +1,21 @@
+<h1>Listing ig_stage_results</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ig_stage_results.each do |ig_stage_result| %>
+  <tr>
+    <td><%= link_to 'Show', ig_stage_result %></td>
+    <td><%= link_to 'Edit', edit_ig_stage_result_path(ig_stage_result) %></td>
+    <td><%= link_to 'Destroy', ig_stage_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ig stage result', new_ig_stage_result_path %>

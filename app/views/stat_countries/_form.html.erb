@@ -1,0 +1,17 @@
+<%= form_for(@stat_country) do |f| %>
+  <% if @stat_country.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stat_country.errors.count, "error") %> prohibited this stat_country from being saved:</h2>
+
+      <ul>
+      <% @stat_country.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

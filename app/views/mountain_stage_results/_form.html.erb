@@ -1,0 +1,53 @@
+<%= form_for(@mountain_stage_result) do |f| %>
+  <% if @mountain_stage_result.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mountain_stage_result.errors.count, "error") %> prohibited this mountain_stage_result from being saved:</h2>
+
+      <ul>
+      <% @mountain_stage_result.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+    <div class="field">
+      <%= f.label :altitude %><br />
+      <%= f.text_field :altitude %>
+    </div>
+  <div class="field">
+    <%= f.label :order %><br />
+    <%= f.text_field :order %>
+  </div>
+    <div class="field">
+      <%= f.label :finish %><br />
+      <%= f.check_box :finish %>
+    </div>
+    <div class="field">
+      <%= f.label :stage_id%><br />
+      <% c_array = Stage.joins(:race).where(:races => {:year => @mountain_stage_result.year}).map { |c| [c.display_label, c.id] } %>
+      <%= f.select :stage_id, c_array, {:include_blank => true} %>
+    </div>
+    <div class="field">
+      <%= f.label :leader_id%><br />
+      <% c_array = []
+      if (@mountain_stage_result.stage != nil) then c_array = RaceRunner.joins(:cyclist).where(:race_id => @mountain_stage_result.stage.race_id).order('lastname').map { |c| [c.display_name, c.id] } end %>
+      <%= f.select :leader_id, c_array, {:include_blank => true} %>
+    </div>
+    <div class="field">
+      <%= f.label :category_s %><br />
+      <%= f.text_field :category_s %>
+    </div>
+    <div class="field">
+      <%= f.label :year %><br />
+      <%= f.text_field :year %>
+    </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

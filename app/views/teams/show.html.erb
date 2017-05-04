@@ -1,0 +1,65 @@
+<script>
+    $(document).ready(function() {
+        $('#team_runners').dataTable( {
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 20,
+            "aaSorting": [],
+            "aoColumns" : [
+                {"bSortable": true, "bSearchable": true , "sType": "num-html"},
+                {"bSortable": true, "bSearchable": false , "sType": "num-html"},
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true }
+            ]
+        });
+    } );
+</script>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nom:</b>
+  <%= @team.name %>
+</p>
+
+<p>
+  <b>Coureurs:</b>
+  <%= link_to @team.cyclists.count, cyclists_path(:team => @team) %>
+</p>
+
+<p>
+  <b>Participation:</b>
+  <% @team.p_races.each do |race| %>
+  <%= link_to race.year, race_runners_path(:team => @team, :year => race.year)%>
+  <%end%>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @team.description %>
+</p>
+
+<hr>
+<h2>Partants</h2>
+<table class="display" id="team_runners">
+  <thead>
+  <tr>
+    <th>Année</th>
+    <th>Dossard</th>
+    <th>Nom</th>
+    <th>Nationalité</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @runners.each do |runner| %>
+      <tr>
+        <td><%= link_to(runner.year, race_path(runner.race)) %></td>
+        <td><%= link_to(runner.number, race_runner_path(runner)) %></td>
+        <td><%= link_to(runner.display_fullname, cyclist_path(runner.cyclist)) %></td>
+        <td><%= runner.nationality %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>
