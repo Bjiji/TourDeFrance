@@ -4,23 +4,38 @@
       <div><h2>Palmarès</h2>
       <table border=0>
         <tr>
-          <td align=center><img src="/assets/maillot_jaune_40.png"/></td>
+          <td align=center><img src="/assets/maillot_jaune_40.png"/></td><td>Classement Général</td>
           <td>
-            <%= if (@race.ig_race_result != nil && @race.ig_race_result.leader != nil) then link_to @race.ig_race_result.leader.display_fullname, cyclist_path(@race.ig_race_result.leader) end %>
+            <%= if (@race.ig_race_result != nil && @race.ig_race_result.leader != nil) then link_to @race.ig_race_result.leader.display_fullname, cyclist_path(@race.ig_race_result.leader.cyclist) end %>
           </td>
         </tr><tr>
-        <td align=center><img src="/assets/maillot_vert_40.png"/></td>
+        <td align=center><img src="/assets/maillot_vert_40.png"/></td><td>Classement par points</td>
         <td>
-          <%= if (@race.ig_race_result != nil && @race.ig_race_result.sprinter != nil) then link_to @race.ig_race_result.sprinter.display_fullname, cyclist_path(@race.ig_race_result.sprinter) end %>
+          <%= if (@race.ig_race_result != nil && @race.ig_race_result.sprinter != nil) then link_to @race.ig_race_result.sprinter.display_fullname, cyclist_path(@race.ig_race_result.sprinter.cyclist) end %>
         </td>
       </tr><tr>
-        <td align=center><img src="/assets/maillot_pois_40.png"/></td>
+        <td align=center><img src="/assets/maillot_pois_40.png"/></td><td>Classement de la montagne</td>
         <td>
-          <%= if @race.ig_race_result != nil && (@race.ig_race_result.climber != nil) then link_to @race.ig_race_result.climber.display_fullname, cyclist_path(@race.ig_race_result.climber) end %>
+          <%= if @race.ig_race_result != nil && (@race.ig_race_result.climber != nil) then link_to @race.ig_race_result.climber.display_fullname, cyclist_path(@race.ig_race_result.climber.cyclist) end %>
         </td>
       </tr>
         <tr>
-          <td></td><td></td>
+          <td align=center>&nbsp;</td><td>Classement par équipe</td>
+          <td>
+            <%= if (@race.ig_race_result != nil && @race.ig_race_result.team != nil) then link_to @race.ig_race_result.team.name, team_path(@race.ig_race_result.team) end %>
+          </td>
+        </tr>
+        <tr>
+          <td align=center>&nbsp;</td><td>Classement des jeunes</td>
+          <td>
+            <%= if (@race.ig_race_result != nil && @race.ig_race_result.young != nil) then link_to @race.ig_race_result.young.display_fullname,cyclist_path(@race.ig_race_result.young.cyclist) end %>
+          </td>
+        </tr>
+        <tr>
+          <td align=center>&nbsp;</td><td>Plus combatif</td>
+          <td>
+            <%= if (@race.ig_race_result != nil && @race.ig_race_result.combat != nil) then link_to @race.ig_race_result.combat.display_fullname,cyclist_path(@race.ig_race_result.combat.cyclist) end %>
+          </td>
         </tr>
       </table>
       </div>

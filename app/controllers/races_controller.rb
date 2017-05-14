@@ -13,8 +13,10 @@ class RacesController < ApplicationController
   # GET /races/1.json
   def show
     @race = Race.find(params[:id])
-    @stages = Stage.where(:race_id => params[:id])
-    @ite_stage_results_h = IteStageResult.where(:stage_id => params[:id])
+    @stages = Stage.where(:race_id => @race['id'])
+    @stage = Stage.where(:race_id => @race['id'], :is_last => 1).first
+    @ite_stage_results_h = IteStageResult.where(:stage_id => @stage['id'])
+    @yj_stage_results_h = YjStageResults.where(:stage_id =>@stage['id'])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @race }

@@ -9,7 +9,7 @@
     if (time_sec == nil || time_sec == 0) then
       str_time_sec  = " - "
     else
-      str_time_sec = ChronicDuration.output(time_sec)
+      str_time_sec = ChronicDuration.output(time_sec, :format => :chrono)
     end
     if (diff_time_sec == nil) then
       str_diff_time_sec  = " - "

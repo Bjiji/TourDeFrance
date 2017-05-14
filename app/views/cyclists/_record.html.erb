@@ -9,21 +9,21 @@
 <b>Victoires:</b>
 <ul>
   <%  @r_victories.each do |r| %>
-      <li><%= link_to r.race.name + ' (' + r.race.winnerPrize + ')', race_path(r.race) %></li>
+      <li><%= link_to r.race.name , race_path(r.race) %></li>
   <% end  %>
 </ul>
 
 <b>Maillot vert:</b>
 <ul>
   <%  @rs_victories.each do |r| %>
-      <li><%= link_to r.race.name + ' (' + r.race.winnerPrize + ')', race_path(r.race) %></li>
+      <li><%= link_to r.race.name, race_path(r.race) %></li>
   <% end  %>
 </ul>
 
 <b>Maillot à pois:</b>
 <ul>
   <%  @rc_victories.each do |r| %>
-      <li><%= link_to r.race.name + ' (' + r.race.winnerPrize + ')', race_path(r.race) %></li>
+      <li><%= link_to r.race.name , race_path(r.race) %></li>
   <% end  %>
 </ul>
 

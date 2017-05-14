@@ -25,7 +25,7 @@ class Stage < ActiveRecord::Base
   end
 
   def display_label
-    display_label = stage_name + ' ' + start + ' / ' + finish
+    display_label = (start.blank? ? '?' : start) + ' / ' + (finish.blank? ? '?' : finish)
   end
 
 
@@ -192,5 +192,11 @@ class Stage < ActiveRecord::Base
     Stage.find_by_sql(query)
   end
 
-
+  def averageSpeed
+    if (distance.blank? || time.blank?)
+      nil
+    else
+      (3600 * distance / time)
+    end
+  end
 end

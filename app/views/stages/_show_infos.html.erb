@@ -1,0 +1,84 @@
+<table>
+  <tr>
+    <td>
+      <table border=0>
+        <tr>
+          <td><b>Vainqueur d'étape</b>&nbsp;</td>
+          <td><%= if (@stage.ig_stage_result != nil && @stage.ig_stage_result.stage_winner != nil) then
+                    link_to @stage.ig_stage_result.stage_winner.display_fullname, cyclist_path(@stage.ig_stage_result.stage_winner.cyclist)
+                  end %></td>
+        </tr>
+        <tr>
+          <td><b>Date:</b></td>
+          <td><%= @stage.date %></td>
+        </tr>
+        <tr>
+          <td><b>Type:</b></td>
+          <td><%= @stage.stage_type %></td>
+        </tr>
+        <tr>
+          <td><b>Distance:</b></td>
+          <td><%= @stage.distance %></td>
+        </tr>
+        <tr>
+          <td><b>Moyenne:</b></td>
+          <td><%= @stage.averageSpeed ? sprintf("%.1f", @stage.averageSpeed) : "?" %></td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table cellspacing=5>
+        <tr>
+          <td>
+            <table>
+
+              <tr>
+              <tr>
+                <td align=center><img src="/assets/maillot_jaune_40.png"/></td>
+                <td>
+                  <strike><%= if (@stage.ig_stage_result != nil && @stage.ig_stage_result.previous_leader != nil && @stage.ig_stage_result.previous_leader != @stage.ig_stage_result.leader) then
+                                link_to @stage.ig_stage_result.previous_leader.display_fullname, cyclist_path(@stage.ig_stage_result.previous_leader)
+                              end %></strike><br>
+                  <%= if (@stage.ig_stage_result != nil && @stage.ig_stage_result.leader != nil) then
+                        link_to @stage.ig_stage_result.leader.display_fullname, cyclist_path(@stage.ig_stage_result.leader.cyclist)
+                      end %>
+                </td>
+              </tr>
+              <tr>
+                <td align=center><img src="/assets/maillot_vert_40.png"/></td>
+                <td>
+                  <strike><%= if (@stage.ig_stage_result != nil && @stage.ig_stage_result.previous_sprinter != nil && @stage.ig_stage_result.previous_sprinter != @stage.ig_stage_result.sprinter) then
+                                link_to @stage.ig_stage_result.previous_sprinter.display_fullname, cyclist_path(@stage.ig_stage_result.previous_sprinter)
+                              end %></strike><br>
+                  <%= if (@stage.ig_stage_result != nil && @stage.ig_stage_result.sprinter != nil) then
+                        link_to @stage.ig_stage_result.sprinter.display_fullname, cyclist_path(@stage.ig_stage_result.sprinter.cyclist)
+                      end %>
+                </td>
+              </tr>
+              <tr>
+                <td align=center><img src="/assets/maillot_pois_40.png"/></td>
+                <td>
+                  <strike><%= if (@stage.ig_stage_result != nil && @stage.ig_stage_result.previous_climber != nil && @stage.ig_stage_result.previous_climber != @stage.ig_stage_result.climber) then
+                                link_to @stage.ig_stage_result.previous_climber.display_fullname, cyclist_path(@stage.ig_stage_result.previous_climber)
+                              end %></strike><br>
+                  <%= if (@stage.ig_stage_result != nil && @stage.ig_stage_result.climber != nil) then
+                        link_to @stage.ig_stage_result.climber.display_fullname, cyclist_path(@stage.ig_stage_result.climber.cyclist)
+                      end %>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<b>Remarques:</b>
+    <%= if (@stage.info != nil) then
+          @stage.info.gsub(" : ", "<br>").gsub(" - ", "<br>").gsub("\n", "").html_safe
+        end %>

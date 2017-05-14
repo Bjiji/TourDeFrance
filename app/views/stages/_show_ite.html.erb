@@ -1,0 +1,63 @@
+<script>
+    $(document).ready(function () {
+        $('#stages_results').dataTable({
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50,
+            "aaSorting": [[0, "asc"]],
+            "aoColumns": [
+                {"asSorting": ["desc", "asc"], "bSortable": true, "bSearchable": true, "sType": "num-html"},
+                {"bSortable": true, "bSearchable": false, "sType": "num-html"},
+                {"bSortable": true, "bSearchable": true, "sType": "num-html"},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true}
+            ]
+        });
+    });
+</script>
+<table border=1 class="display" id="stages_results">
+  <thead>
+  <tr>
+    <th>Pos.</th>
+    <th>Temps</th>
+    <th>Ecart</th>
+    <th title="Porteur des différents maillots distinctifs durant l'étape">Maillots</th>
+    <th>Coureur</th>
+    <th>Equipe</th>
+    <th>Nat.</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%  @ite_stage_results_h.each do |result| %>
+      <% time_res = nil
+         time_diff = "-"
+         if (result.time_sec != nil && result.time_sec > 0) then
+           time_res = ChronicDuration.output(result.time_sec, :format => :short)
+         end
+         if (result.diff_time_sec != nil && result.diff_time_sec > 0) then
+           time_diff = ChronicDuration.output(result.diff_time_sec, :format => :short)
+         end
+
+      %>
+      <tr>
+        <td><%= link_to(if (result.pos.blank?) then '999' else result.pos.to_s end, ite_stage_result_path(result)) %></td>
+        <td><%= if (time_res.blank?) then result.stage_status else time_res end%></td>
+        <td><%= time_diff %></td>
+        <td><% if (@stage.ig_stage_result != nil) then if (@stage.ig_stage_result.previous_leader == result.race_runner) then %> <img src="/assets/maillot_jaune_20.png"/> <%end%><% if (@stage.ig_stage_result.previous_sprinter == result.race_runner) then %> <img src="/assets/maillot_vert_20.png"/> <%end%><% if (@stage.ig_stage_result.previous_climber == result.race_runner) then %> <img src="/assets/maillot_pois_20.png"/> <%end end%></td>
+        <td><%= if (result.race_runner.blank?) then
+                  if (result.team.blank?) then
+                    result.runner_s
+                  else
+                    link_to result.team.name, team_path(result.team)
+                  end
+                else link_to result.race_runner.display_fullname, cyclist_path(result.race_runner.cyclist)
+                end %></td>
+        <td><%=  if (!result.race_runner.blank?) then link_to result.race_runner.team.name, team_path(result.race_runner.team) end %></td>
+        <td><%=  if (!result.race_runner.blank?) then result.race_runner.nationality end %></td>
+
+      </tr>
+  <% end %>
+  </tbody>
+</table>
