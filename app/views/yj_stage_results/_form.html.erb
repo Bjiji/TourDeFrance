@@ -1,0 +1,17 @@
+<%= form_for(yj_stage_result) do |f| %>
+  <% if yj_stage_result.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(yj_stage_result.errors.count, "error") %> prohibited this yj_stage_result from being saved:</h2>
+
+      <ul>
+      <% yj_stage_result.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

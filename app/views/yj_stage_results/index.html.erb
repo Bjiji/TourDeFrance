@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Yj Stage Results</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @yj_stage_results.each do |yj_stage_result| %>
+      <tr>
+        <td><%= link_to 'Show', yj_stage_result %></td>
+        <td><%= link_to 'Edit', edit_yj_stage_result_path(yj_stage_result) %></td>
+        <td><%= link_to 'Destroy', yj_stage_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Yj Stage Result', new_yj_stage_result_path %>
