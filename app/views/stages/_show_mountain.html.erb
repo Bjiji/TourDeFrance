@@ -1,0 +1,6 @@
+<h2>Cols</h2>
+<table>
+  <%  @mountains.each do |mountain| %>
+      <tr><td><%= mountain.order %></td><td><%= link_to(mountain.name, mountain_stage_result_path(mountain)) %></td><td>(cat. <%= mountain.category_s %>)</td><td><%= if (mountain.race_runner != nil) then link_to(mountain.race_runner.display_name, race_runner_path(mountain.race_runner)) else "?" end %></td></tr>
+  <% end  %>
+</table>

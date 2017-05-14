@@ -1,0 +1,9 @@
+<b>Etapes (<%= @race.stages.count.to_s %>)</b>
+<ul>
+  <%  @stages.each do |stage| %>
+      <li><%= link_to stage.display_label, stage_path(stage) %> <%= if (stage.ig_stage_result != nil && stage.ig_stage_result.stage_winner != nil) then
+                                                                      link_to stage.ig_stage_result.stage_winner.display_fullname, cyclist_path(stage.ig_stage_result.stage_winner.cyclist)
+                                                                    end %></li>
+  <% end  %>
+</ul>
+</p>

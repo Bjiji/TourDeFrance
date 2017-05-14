@@ -57,10 +57,4 @@
     </td>
   </tr>
 </table>
-<b>Etapes  (<%= @race.stages.count.to_s %>)</b>
-<ul>
-  <%  @stages.each do |stage| %>
-      <li><%= link_to stage.display_label, stage_path(stage) %></li>
-  <% end  %>
-</ul>
-</p>
+

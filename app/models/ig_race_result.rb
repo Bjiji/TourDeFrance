@@ -4,6 +4,10 @@ class IgRaceResult < ActiveRecord::Base
   belongs_to :leader, :class_name => "RaceRunner", :foreign_key => "leader_id"
   belongs_to :sprinter, :class_name => "RaceRunner", :foreign_key => "sprinter_id"
   belongs_to :climber, :class_name => "RaceRunner", :foreign_key => "climber_id"
+  belongs_to :young, :class_name => "RaceRunner", :foreign_key => "young_id"
+  belongs_to :combine, :class_name => "RaceRunner", :foreign_key => "combine_id"
+  belongs_to :combat, :class_name => "RaceRunner", :foreign_key => "overall_combat_id"
+  belongs_to :team, :class_name => "Team", :foreign_key => "team_id"
 
 
   def self.find_by_leader(cyclist_id)

@@ -6,17 +6,25 @@
       <div id="tabs" width="100%">
         <ul>
           <li><a href="#tabs-1">Infos</a></li>
-          <li><a href="#tabs-2">Partants</a></li>
-          <li><a href="#tabs-3">Résultats</a></li>
+          <li><a href="#tabs-2">Etapes</a></li>
+          <li><a href="#tabs-3">Partants</a></li>
+          <li><a href="#tabs-4">Palmarès</a></li>
+          <li><a href="#tabs-5">Classement Général</a></li>
         </ul>
-        <div id="tabs-1" style="width:700px;">
+        <div id="tabs-1" style="width:900px;">
           <%= render :partial => 'races/show_infos' %>
         </div>
-        <div id="tabs-2" style="width:700px;">
+        <div id="tabs-2" style="width:900px;">
+          <%= render :partial => 'stages/list' %>
+        </div>
+        <div id="tabs-3" style="width:900px;">
           <%= render :partial => 'races/show_attendee' %>
         </div>
-        <div id="tabs-3" style="width:700px">
+        <div id="tabs-4" style="width:900px">
           <%= render :partial => 'races/show_results' %>
+        </div>
+        <div id="tabs-5" style="width:900px">
+          <%= render :partial => 'races/show_yj' %>
         </div>
       </div>
 </td>
