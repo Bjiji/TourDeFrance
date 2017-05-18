@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :yj_stage_results
+
   resources :stages
 
   resources :ite_stage_results
