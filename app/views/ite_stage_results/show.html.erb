@@ -1,7 +1,7 @@
 <%require 'chronic_duration'%>
 
 <p id="notice"><%= notice %></p>
-
+<h1><b><%= link_to "Edition " + @ite_stage_result.stage.year, race_path(@ite_stage_result.stage.race) %></b></h1>
 <p>
   <b>Stage:</b>
   <%= link_to @ite_stage_result.stage.display_label, stage_path(@ite_stage_result.stage) %>

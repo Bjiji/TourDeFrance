@@ -30,6 +30,7 @@ class StagesController < ApplicationController
     end;
     @ite_stage_results_h = IteStageResult.where(:stage_id => params[:id])
     @yj_stage_results_h = YjStageResults.where(:stage_id => params[:id])
+    @route = @stage.route.gsub(/\s+:\s+/, '<br>&nbsp;').gsub(/\s+-\s+/, '<br>&nbsp;')
     respond_to do |format|
       format.html # show.html.erb
       format.json {render :json => @stage}
