@@ -1,6 +1,7 @@
 class CyclistsController < ApplicationController
   # GET /cyclists
   # GET /cyclists.json
+
   def index
     if (params[:no_search] != 'true') then
       @cyclists = Cyclist.search(params)
