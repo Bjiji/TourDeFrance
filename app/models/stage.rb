@@ -24,8 +24,12 @@ class Stage < ActiveRecord::Base
     stage_name = tmp_name + stage_num
   end
 
-  def display_label
+  def display_simple_label
     display_label = (start.blank? ? '?' : start) + ' / ' + (finish.blank? ? '?' : finish)
+  end
+
+  def display_label
+    "#{stage_name} #{display_simple_label}"
   end
 
 

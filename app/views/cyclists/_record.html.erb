@@ -6,23 +6,30 @@
   <% end  %>
 </ul>
 
-<b>Victoires:</b>
+<b>Remporte le Tour de France</b>
 <ul>
   <%  @r_victories.each do |r| %>
       <li><%= link_to r.race.name , race_path(r.race) %></li>
   <% end  %>
 </ul>
 
-<b>Maillot vert:</b>
+<b>Remporte le maillot vert:</b>
 <ul>
   <%  @rs_victories.each do |r| %>
       <li><%= link_to r.race.name, race_path(r.race) %></li>
   <% end  %>
 </ul>
 
-<b>Maillot à pois:</b>
+<b>Remporte le maillot à pois:</b>
 <ul>
   <%  @rc_victories.each do |r| %>
+      <li><%= link_to r.race.name , race_path(r.race) %></li>
+  <% end  %>
+</ul>
+
+<b>Remporte le maillot blanc</b>
+<ul>
+  <%  @ry_victories.each do |r| %>
       <li><%= link_to r.race.name , race_path(r.race) %></li>
   <% end  %>
 </ul>

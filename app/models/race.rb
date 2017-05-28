@@ -40,6 +40,15 @@ class Race < ActiveRecord::Base
     end
   end
 
+  def young
+    result =  IgRaceResult.where(:race_id => self).first
+    if (result == nil || result.young == nil) then
+      young = nil
+    else
+      young = result.young.cyclist
+    end
+  end
+
   def nationalities
     sql = 'SELECT distinct nationality
  FROM race_runners rr
