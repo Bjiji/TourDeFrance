@@ -24,6 +24,13 @@ class IgRaceResult < ActiveRecord::Base
     where c.id = '" + cyclist_id + "'")
   end
 
+  def self.find_by_young(cyclist_id)
+    find_by_sql("select irs.* from ig_race_results irs
+    join race_runners r on r.id = irs.young_id
+    join cyclists c on c.id = r.cyclist_id
+    where c.id = '" + cyclist_id + "'")
+  end
+
   def self.find_by_climber(cyclist_id)
     find_by_sql("select irs.* from ig_race_results irs
     join race_runners r on r.id = irs.climber_id

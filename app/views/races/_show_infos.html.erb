@@ -50,6 +50,12 @@
         </td>
       </tr>
         <tr>
+          <td align=center>Maillot Blanc</td>
+          <td>
+            <%= if (@race.young != nil) then link_to @race.young.display_fullname, cyclist_path(@race.young) end %>
+          </td>
+        </tr>
+        <tr>
           <td></td><td></td>
         </tr>
       </table>
