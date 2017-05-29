@@ -28,10 +28,10 @@
                 <td>Etape</td>
                 <td>
                   <% selected = params[:c_stage_pos] %>
-                  <% @tmp = IteStageResult.connection.select_values('select distinct(stage_status) from ite_stage_results where not(stage_status is null)')
+                  <!--% @tmp = IteStageResult.connection.select_values('select distinct(stage_status) from ite_stage_results where not(stage_status is null)')
                      @stage_status = @tmp.map{|u| ['- ' + u, 'dnf'+u]}
-                  %>
-                  <%= select_tag :c_stage_pos, options_for_select([['Partant', 'run'], ['Termine', 'finish'], ['- Vainqueur', 'winner'], ['- Podium', 'topthree'], ['- Dans les 10 premiers', 'topten'], ['- Non vainqueur', 'nowinner'], ['Ne termine pas', 'nofinish']] + @stage_status, params[:c_stage_pos]),  {:include_blank => false} %>
+                  %-->
+                  <%= select_tag :c_stage_pos, options_for_select([['Partant', 'run'], ['Termine', 'finish'], ['- Vainqueur', 'winner'], ['- Podium', 'topthree'], ['- Dans les 10 premiers', 'topten'], ['- Non vainqueur', 'nowinner'], ['Non classé', 'nofinish'], ['- Abandon', 'dnf'], ['- Non partant', 'dns'], ['- Eliminé', 'dnq']], params[:c_stage_pos]),  {:include_blank => false} %>
                 </td>
                 <td><img src="/assets/maillot_jaune_40.png"/></td>
                 <td>
