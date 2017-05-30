@@ -170,16 +170,11 @@ class Stage < ActiveRecord::Base
       query = query + " AND isr.pos <= 3 "
     elsif search[:c_stage_pos] == "topten" then
       query = query + " AND isr.pos <= 10 "
-    elsif search[:c_stage_pos] == "finish" then
-      query = query + " AND (isr.pos > 0) "
-    elsif search[:c_stage_pos] == "nofinish" then
-      query = query + " AND (isr.pos > 0) "
-    elsif (!(search[:c_stage_pos].blank?) && search[:c_stage_pos].start_with?("dnf")) then
-      query = query + " AND (isr.stage_status = '" + search[:c_stage_pos][3..-1] + "') "
-    elsif search[:c_stage_pos] == "dnq" then
-      query = query + " AND (isr.dnq) "
-    elsif search[:c_stage_pos] == "dnf" then
-      query = query + " AND (isr.dnf) "
+    elsif search[:c_stage_pos] == "finish" then query = query + " AND NOT (isr.pos is null) "
+    elsif search[:c_stage_pos] == "nofinish" then query = query + " AND ((isr.pos is null)) "
+    elsif search[:c_stage_pos] == "dns" then query = query + " AND (isr.dns)"
+    elsif search[:c_stage_pos] == "dnq" then query = query + " AND (isr.dnq) "
+    elsif search[:c_stage_pos] == "dnf" then query = query + " AND (isr.dnf) "
     end
     if (!(team == nil) && !team.blank?) then
       query = query + " AND team.name LIKE '%" + team + "%'"
