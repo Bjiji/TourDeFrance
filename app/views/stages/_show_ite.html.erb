@@ -34,10 +34,10 @@
       <% time_res = nil
          time_diff = "-"
          if (result.time_sec != nil && result.time_sec > 0) then
-           time_res = ChronicDuration.output(result.time_sec, :format => :short)
+           time_res =  IteStageResult.displayTime(result.time_sec)
          end
          if (result.diff_time_sec != nil && result.diff_time_sec > 0) then
-           time_diff = ChronicDuration.output(result.diff_time_sec, :format => :short)
+           time_diff =  IteStageResult.displayTime(result.diff_time_sec)
          end
 
       %>

@@ -40,7 +40,7 @@
   <% @stat_stage_diffs.each do |stage| %>
       <tr>
         <td><%= if (stage.diff_time != nil && stage.diff_time > 0) then
-                  ChronicDuration.output(stage.diff_time)
+                  IteStageResult.displayTime(stage.diff_time)
                 else
                   '-'
                 end %></td>

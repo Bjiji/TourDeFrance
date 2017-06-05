@@ -15,6 +15,7 @@ class YjStageResults < ApplicationRecord
       str_diff_time_sec = (diff_time_sec / 60).to_s + "'" + (diff_time_sec % 60).to_s + "''"
     end
     # display_time = str_time_sec + ' (' + str_diff_time_sec + ')'
-    display_time = str_diff_time_sec
+    # display_time = str_diff_time_sec
+    IteStageResult.displayTime(diff_time_sec)
   end
 end

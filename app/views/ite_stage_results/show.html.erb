@@ -17,12 +17,12 @@
 
 <p>
   <b>Time:</b>
-  <%= if (@ite_stage_result.time_sec.blank?) then '-' else ChronicDuration.output(@ite_stage_result.time_sec) end %>
+  <%= if (@ite_stage_result.time_sec.blank?) then '-' else  IteStageResult.displayTime(@ite_stage_result.time_sec) end %>
 </p>
 
 <p>
   <b>Diff time:</b>
-  <%= if (@ite_stage_result.diff_time_sec.blank?) then '-' else ChronicDuration.output(@ite_stage_result.diff_time_sec) end %>
+  <%= if (@ite_stage_result.diff_time_sec.blank?) then '-' else  IteStageResult.displayTime(@ite_stage_result.diff_time_sec) end %>
 </p>
 <p>
   <b>Status de course:</b>

@@ -30,6 +30,9 @@ class StagesController < ApplicationController
     end;
     @ite_stage_results_h = IteStageResult.where(:stage_id => params[:id])
     @yj_stage_results_h = YjStageResults.where(:stage_id => params[:id])
+    @dnf = IteStageResult.where(:stage_id => params[:id], :dnf => "1")
+    @dns = IteStageResult.where(:stage_id => params[:id], :dns => "1")
+    @dnq = IteStageResult.where(:stage_id => params[:id], :dnq => "1")
     if (@stage.route != nil) then
     @route = @stage.route.gsub(/\s+:\s+/, '<br>&nbsp;').gsub(/\s+-\s+/, '<br>&nbsp;')
     else
