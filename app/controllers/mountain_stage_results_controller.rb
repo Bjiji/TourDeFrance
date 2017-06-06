@@ -63,7 +63,7 @@ class MountainStageResultsController < ApplicationController
     @mountain_stage_result = MountainStageResult.find(params[:id])
 
     respond_to do |format|
-      if @mountain_stage_result.update_attributes(params[:mountain_stage_result])
+      if @mountain_stage_result.update_attributes(params.required(:mountain_stage_result).permit!)
         format.html { redirect_to @mountain_stage_result, notice: 'Mountain stage result was successfully updated.' }
         format.json { head :no_content }
       else

@@ -19,15 +19,15 @@ class CyclistsController < ApplicationController
   # GET /cyclists/1.json
   def show
     @cyclist = Cyclist.find(params[:id])
-    @runs = RaceRunner.joins(:cyclist).where(:cyclists => {:id => params[:id]})
-    @r_victories = IgRaceResult.find_by_leader(params[:id])
-    @rc_victories = IgRaceResult.find_by_climber(params[:id])
-    @rs_victories = IgRaceResult.find_by_sprinter(params[:id])
-    @ry_victories = IgRaceResult.find_by_young(params[:id])
-    @s_victories = IgStageResult.joins(:stage_winner).where(:race_runners => { :cyclist_id => params[:id]})
-    @y_jersey = IgStageResult.joins(:leader).where(:race_runners => { :cyclist_id => params[:id]})
-    @c_jersey = IgStageResult.joins(:climber).where(:race_runners => { :cyclist_id => params[:id]})
-    @s_jersey = IgStageResult.joins(:sprinter).where(:race_runners => { :cyclist_id => params[:id]})
+    @runs = RaceRunner.joins(:cyclist).where(:cyclists => {:id => params[:id]}).order(year: :DESC)
+    @r_victories = IgRaceResult.joins(:leader).where(:race_runners => {:cyclist_id => params[:id]}).order(year: :DESC)
+    @rc_victories = IgRaceResult.joins(:climber).where(:race_runners => {:cyclist_id => params[:id]}).order(year: :DESC)
+    @rs_victories =IgRaceResult.joins(:sprinter).where(:race_runners => {:cyclist_id => params[:id]}).order(year: :DESC)
+    @ry_victories = IgRaceResult.joins(:young).where(:race_runners => {:cyclist_id => params[:id]}).order(year: :DESC)
+    @s_victories = IgStageResult.joins(:stage_winner).where(:race_runners => { :cyclist_id => params[:id]}).order(year: :DESC)
+    @y_jersey = IgStageResult.joins(:leader).where(:race_runners => { :cyclist_id => params[:id]}).order(year: :DESC)
+    @c_jersey = IgStageResult.joins(:climber).where(:race_runners => { :cyclist_id => params[:id]}).order(year: :DESC)
+    @s_jersey = IgStageResult.joins(:sprinter).where(:race_runners => { :cyclist_id => params[:id]}).order(year: :DESC)
 #    @race = Race.where(:cyclist)
     respond_to do |format|
       format.html # show.html.erb
@@ -73,7 +73,7 @@ class CyclistsController < ApplicationController
     @cyclist = Cyclist.find(params[:id])
 
     respond_to do |format|
-      if @cyclist.update_attributes(params[:cyclist])
+      if @cyclist.update_attributes(params.required(:cyclist).permit!)
         format.html { redirect_to @cyclist, :notice => 'Cyclist was successfully updated.' }
         format.json { head :no_content }
       else

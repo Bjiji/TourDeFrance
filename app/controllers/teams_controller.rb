@@ -66,7 +66,7 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
 
     respond_to do |format|
-      if @team.update_attributes(params[:team])
+      if @team.update_attributes(params.required(:team).permit!)
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { head :no_content }
       else

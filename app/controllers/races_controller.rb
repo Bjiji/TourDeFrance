@@ -61,7 +61,7 @@ class RacesController < ApplicationController
     @race = Race.find(params[:id])
 
     respond_to do |format|
-      if @race.update_attributes(params[:race])
+      if @race.update_attributes(params.required(:race).permit!)
         format.html { redirect_to @race, :notice => 'Race was successfully updated.' }
         format.json { head :no_content }
       else

@@ -82,7 +82,7 @@ class StagesController < ApplicationController
     @stage = Stage.find(params[:id])
 
     respond_to do |format|
-      if @stage.update_attributes(params[:stage])
+      if @stage.update_attributes(params.required(:stage).permit!)
         format.html {redirect_to @stage, :notice => 'Stage was successfully updated.'}
         format.json {head :no_content}
       else

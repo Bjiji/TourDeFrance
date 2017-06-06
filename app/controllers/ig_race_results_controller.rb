@@ -59,7 +59,7 @@ class IgRaceResultsController < ApplicationController
     @ig_race_result = IgRaceResult.find(params[:id])
 
     respond_to do |format|
-      if @ig_race_result.update_attributes(params[:ig_race_result])
+      if @ig_race_result.update_attributes(params.required(:ig_race_result).permit!)
         format.html { redirect_to @ig_race_result, notice: 'Ig race result was successfully updated.' }
         format.json { head :no_content }
       else

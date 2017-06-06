@@ -59,7 +59,7 @@ class IgStageResultsController < ApplicationController
     @ig_stage_result = IgStageResult.find(params[:id])
 
     respond_to do |format|
-      if @ig_stage_result.update_attributes(params[:ig_stage_result])
+      if @ig_stage_result.update_attributes(params.required(:ig_stage_result).permit!)
         format.html { redirect_to @ig_stage_result, notice: 'Ig stage result was successfully updated.' }
         format.json { head :no_content }
       else
