@@ -47,7 +47,7 @@
         </td><td>
         <% st = stage.time %>
         <%= if(st != nil && st > 0) then
-              sprintf "%.1f", (3600 * stage.distance / stage.time)
+              sprintf "%.3f", (3600 * stage.distance / stage.time)
             end %>
       </td>
         <td><%= stage.stage_type %></td>
