@@ -16,8 +16,13 @@
      if ( runners != nil && runners.length > 0) then runner = runners[0] end
   %>
     <table>
-      <tr><td>Imported name: </td><td><%= @ig_stage_result.stage_winner_s %></td></tr>
-      <tr><td>first place: </td><td> <%= if (runner != nil) then runner.display_fullname end %></td></tr>
+      <tr><td>
+        <div class="field">
+          <div class="field">
+            <%= f.label :stage_winner_s %><br />
+            <%= f.text_field :stage_winner_s %>
+          </div>
+        </div></td></tr>
       <tr><td>
         <div class="field">
         <%= f.label :stage_winner_id %><br />
@@ -40,6 +45,11 @@
       <%= f.label :climber_id %><br />
       <% c_array = RaceRunner.where(:year => @ig_stage_result.stage.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
       <%= f.select :climber_id, c_array, {:include_blank => true} %>
+    </div>
+    <div class="field">
+      <%= f.label :young_id %><br />
+      <% c_array = RaceRunner.where(:year => @ig_stage_result.stage.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+      <%= f.select :young_id, c_array, {:include_blank => true} %>
     </div>
   <div class="actions">
 

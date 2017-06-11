@@ -49,7 +49,7 @@
         <td><%= if (ite_stage_result.stage.blank?) then '?' else  ite_stage_result.stage.start end %></td>
         <td><%= if (ite_stage_result.stage.blank?) then '?' else ite_stage_result.stage.finish end %></td>
         <td><%= if (ite_stage_result.stage.blank?) then '?' else  ite_stage_result.stage.stage_type end %></td>
-        <td><%= if (ite_stage_result.pos.blank?) then 'NaN' else link_to(ite_stage_result.pos, ite_stage_result) end %></td>
+        <td><%= if (ite_stage_result.pos.blank?) then '999' else link_to(ite_stage_result.pos, ite_stage_result) end %></td>
         <td><%= ite_stage_result.display_time %></td>
         <td><%= if (ite_stage_result.race_runner.blank?) then
                   if (ite_stage_result.team.blank?) then
