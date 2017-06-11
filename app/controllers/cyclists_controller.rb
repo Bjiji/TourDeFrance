@@ -54,7 +54,7 @@ class CyclistsController < ApplicationController
   # POST /cyclists
   # POST /cyclists.json
   def create
-    @cyclist = Cyclist.new(params[:cyclist])
+    @cyclist = Cyclist.new(params[:cyclist].permit!)
 
     respond_to do |format|
       if @cyclist.save
