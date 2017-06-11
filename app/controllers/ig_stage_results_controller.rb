@@ -40,7 +40,7 @@ class IgStageResultsController < ApplicationController
   # POST /ig_stage_results
   # POST /ig_stage_results.json
   def create
-    @ig_stage_result = IgStageResult.new(params[:ig_stage_result])
+    @ig_stage_result = IgStageResult.new(params.required(:ig_stage_result).permit!)
 
     respond_to do |format|
       if @ig_stage_result.save

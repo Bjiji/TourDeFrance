@@ -41,7 +41,7 @@ class RaceRunnersController < ApplicationController
   # POST /race_runners
   # POST /race_runners.json
   def create
-    @race_runner = RaceRunner.new(params[:race_runner])
+    @race_runner = RaceRunner.new(params.required(:race_runner).permit!)
 
     respond_to do |format|
       if @race_runner.save

@@ -44,7 +44,7 @@ class IteStageResultsController < ApplicationController
   # POST /ite_stage_results
   # POST /ite_stage_results.json
   def create
-    @ite_stage_result = IteStageResult.new(params[:ite_stage_result])
+    @ite_stage_result = IteStageResult.new(params.required(:ite_stage_result).permit!)
 
     respond_to do |format|
       if @ite_stage_result.save

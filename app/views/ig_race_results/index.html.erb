@@ -17,6 +17,7 @@
     <td><%= if (ig_race_result.leader != nil) then link_to ig_race_result.leader.cyclist.display_name, ig_race_result.leader.cyclist end %></td>
     <td><%= if (ig_race_result.climber != nil) then link_to ig_race_result.climber.cyclist.display_name, ig_race_result.climber.cyclist end %></td>
     <td><%= if (ig_race_result.sprinter != nil) then link_to ig_race_result.sprinter.cyclist.display_name, ig_race_result.sprinter.cyclist end %></td>
+    <td><%= if (ig_race_result.young != nil) then link_to ig_race_result.young.cyclist.display_name, ig_race_result.young.cyclist end %></td>
     <td><%= link_to 'Show', ig_race_result %></td>
     <td><%= link_to 'Edit', edit_ig_race_result_path(ig_race_result) %></td>
     <td><%= link_to 'Destroy', ig_race_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
