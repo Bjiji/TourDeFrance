@@ -28,6 +28,12 @@
       <%= f.select :climber_id, c_array, {:include_blank => true} %>
     </div>
 
+    <div class="field">
+      <%= f.label :young %><br />
+      <% c_array = RaceRunner.where(:year => @ig_race_result.race.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+      <%= f.select :young_id, c_array, {:include_blank => true} %>
+    </div>
+
     <div class="actions">
     <%= f.submit %>
   </div>

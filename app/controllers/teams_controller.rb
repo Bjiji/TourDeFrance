@@ -47,7 +47,7 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    @team = Team.new(params[:team])
+    @team = Team.new(params.required(:team).permit!)
 
     respond_to do |format|
       if @team.save

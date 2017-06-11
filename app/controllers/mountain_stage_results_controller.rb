@@ -44,7 +44,7 @@ class MountainStageResultsController < ApplicationController
   # POST /mountain_stage_results
   # POST /mountain_stage_results.json
   def create
-    @mountain_stage_result = MountainStageResult.new(params[:mountain_stage_result])
+    @mountain_stage_result = MountainStageResult.new(params.required(:mountain_stage_result).permit!)
 
     respond_to do |format|
       if @mountain_stage_result.save

@@ -63,7 +63,7 @@ class StagesController < ApplicationController
   # POST /stages
   # POST /stages.json
   def create
-    @stage = Stage.new(params[:stage])
+    @stage = Stage.new(params.required(:stage).permit!)
 
     respond_to do |format|
       if @stage.save
