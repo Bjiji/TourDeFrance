@@ -9,16 +9,16 @@
       " - "
     else
       if (time_sec < 60) then
-        "#{time_sec}''"
+        "#{time_sec}\""
       elsif (time_sec < 3600) then
         sec = time_sec % 60
         min = (time_sec / 60) % 60
-        "#{min}\"#{sec}'"
+        "#{min}'#{sec}\""
       else
         sec = time_sec % 60
         min = (time_sec / 60) % 60
         hour = (time_sec / 3600)
-      "#{hour}h#{min}\"#{sec}'"
+      "#{hour}h#{min}''#{sec}\""
       end
     end
   end
