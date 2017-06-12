@@ -15,7 +15,7 @@ development:
   database: tdf
   pool: 5
   username: root
-  password: root
+  password: Facile43
   host: 127.0.0.1
 
 # Warning: The database defined as "test" will be erased and
@@ -28,7 +28,7 @@ test:
   database: tdf_test
   pool: 5
   username: root
-  password: root
+  password: Facile43
   host: localhost
 
 production:
@@ -38,5 +38,5 @@ production:
   database: tdf
   pool: 5
   username: root
-  password: root
+  password: Facile43
   host: 127.0.0.1
