@@ -79,14 +79,14 @@
 </table>
 <table>
   <%= if @dns != nil && @dns.size > 0 then
-        ('<tr><td><b>Non-partant: </b></td><td>' + @dns.map {|ite| link_to ite.race_runner.display_fullname, cyclist_path(ite.race_runner.cyclist)}.join(", ")+'</td></tr>').html_safe
+        ('<tr><td><b>Non-partant: </b></td><td>' + @dns.map {|ite| if (ite.race_runner != nil) then link_to ite.race_runner.display_fullname, cyclist_path(ite.race_runner.cyclist) end}.join(", ")+'</td></tr>').html_safe
       end %>
   <%= if @dnf != nil && @dnf.size > 0 then
-      ('<tr><td><b>Abandon: </b></td><td>' + @dnf.map {|ite| link_to ite.race_runner.display_fullname, cyclist_path(ite.race_runner.cyclist)}.join(", ")+'</td></tr>').html_safe
+      ('<tr><td><b>Abandon: </b></td><td>' + @dnf.map {|ite| if (ite.race_runner != nil) then link_to ite.race_runner.display_fullname, cyclist_path(ite.race_runner.cyclist) end}.join(", ")+'</td></tr>').html_safe
     end %>
 
   <%= if @dnq != nil && @dnq.size > 0 then
-      ('<tr><td><b>Disqualifié: </b></td><td>' + @dnq.map {|ite| link_to ite.race_runner.display_fullname, cyclist_path(ite.race_runner.cyclist)}.join(", ")+'</td></tr>').html_safe
+      ('<tr><td><b>Disqualifié: </b></td><td>' + @dnq.map {|ite| if (ite.race_runner != nil) then link_to ite.race_runner.display_fullname, cyclist_path(ite.race_runner.cyclist) end}.join(", ")+'</td></tr>').html_safe
     end %>
   <%= if @stage.info != nil then
   ('<tr><td><b>Remarques: </b></td><td>' + @stage.info.gsub(" : ", "<br>").gsub(" - ", "<br>").gsub("\n", "")+'</td></tr>').html_safe

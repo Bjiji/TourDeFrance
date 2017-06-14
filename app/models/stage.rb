@@ -121,7 +121,7 @@ class Stage < ActiveRecord::Base
       LEFT JOIN teams team on team.id = runner.team_id
       LEFT JOIN cyclists cyclist ON cyclist.id = runner.cyclist_id
       WHERE stages.year " + y_operator + " '" + year_condition + "'
-      AND stages.stage_type LIKE '" + type_condition + "'
+      AND stages.stage_type LIKE '" + type_condition + "%'
       AND (stages.start LIKE '" + start_city_condition + "' OR stages.finish LIKE '" + end_city_condition + "') "
     if (!search[:lastname].blank?) then
       query = query + " AND cyclist.lastname LIKE '" + lastname_condition + "'"
