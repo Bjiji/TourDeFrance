@@ -1,0 +1,38 @@
+<script>
+    $(document).ready(function() {
+        $('#cyclists').dataTable( {
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50,
+            "aoColumns" : [
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true , "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+            ]
+        });
+    } );
+</script>
+<table class="display" id="cyclists">
+<thead>
+  <tr>
+    <th>Nom</th>
+    <th>Nationalité</th>
+    <th>DoB</th>
+    <th>PoB</th>
+    <th>Parti.</th>
+  </tr>
+</thead>
+<tbody>
+<% @cyclists.each do |cyclist| %>
+  <tr>
+    <td><%= link_to cyclist.display_fullname, cyclist_path(cyclist) %></td>
+    <td><%= cyclist.nationality %></td>
+    <td><%= cyclist.dob %></td>
+    <td><%= cyclist.pob %></td>
+    <td><%= cyclist.races.size() %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>

@@ -118,7 +118,8 @@ class Stage < ActiveRecord::Base
       LEFT JOIN ig_stage_results ON ig_stage_results.stage_id = stages.id
       LEFT JOIN ite_stage_results isr ON isr.stage_id = stages.id
       LEFT JOIN race_runners runner ON isr.race_runner_id = runner.id and runner.year = stages.year
-      LEFT JOIN teams team on team.id = runner.team_id
+      LEFT JOIN race_teams rteam on rteam.id = runner.race_team_id
+      LEFT JOIN teams team on team.id = rteam.team_id
       LEFT JOIN cyclists cyclist ON cyclist.id = runner.cyclist_id
       WHERE stages.year " + y_operator + " '" + year_condition + "'
       AND stages.stage_type LIKE '" + type_condition + "%'

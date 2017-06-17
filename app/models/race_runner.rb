@@ -2,7 +2,8 @@ class RaceRunner < ActiveRecord::Base
   #attr_accessor :nationality, :number, :team , :year, :race_id, :cyclist_id, :team_id
   belongs_to :race
   belongs_to :cyclist
-  belongs_to :team
+  belongs_to :race_team
+  delegate :team, :to => :race_team, :allow_nil => true
   has_many :ite_stage_results
 
 def display_name

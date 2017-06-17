@@ -1,0 +1,64 @@
+<script>
+    $(document).ready(function() {
+        $('#ite_results').dataTable( {
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50,
+            "aaSorting": [[ 0, "desc" ], [1, "desc"]],
+            "aoColumns" : [
+                {"asSorting": [ "desc", "asc" ], "bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": false},
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true }
+            ]
+        });
+    } );
+</script>
+<table class="display" id="ite_results">
+  <thead>
+  <tr>
+    <th>Année</th>
+    <th title="Numéro d'étape">Et.</th>
+    <th>Départ</th>
+    <th>Arrivée</th>
+    <th>Type</th>
+    <th title="Position du coureur à l'arrivée de l'étape">Pos.</th>
+    <th title="Temps réalisé par le coureur">Tps</th>
+    <th>Coureur</th>
+    <th>Equipe</th>
+    <th>Nationalité</th>
+    <th title="Divers infomations liés à ce résultat">Misc.</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @ite_stage_results.each do |ite_stage_result| %>
+      <tr>
+        <td><%= if (ite_stage_result.stage.blank?) then '?' else link_to ite_stage_result.stage.year, ite_stage_result.stage.race end %></td>
+        <td><%= if (ite_stage_result.stage.blank?) then '?' else link_to ite_stage_result.stage.stage_num, ite_stage_result.stage end %></td>
+        <td><%= if (ite_stage_result.stage.blank?) then '?' else  ite_stage_result.stage.start end %></td>
+        <td><%= if (ite_stage_result.stage.blank?) then '?' else ite_stage_result.stage.finish end %></td>
+        <td><%= if (ite_stage_result.stage.blank?) then '?' else  ite_stage_result.stage.stage_type end %></td>
+        <td><%= if (ite_stage_result.pos.blank?) then '999' else link_to(ite_stage_result.pos, ite_stage_result) end %></td>
+        <td><%= ite_stage_result.display_time %></td>
+        <td><%= if (ite_stage_result.race_runner.blank?) then
+                  if (ite_stage_result.team.blank?) then
+                    ite_stage_result.runner_s
+                  else
+                    link_to ite_stage_result.team.name, team_path(ite_stage_result.team)
+                  end
+                else link_to ite_stage_result.race_runner.display_fullname, cyclist_path(ite_stage_result.race_runner.cyclist)
+                end %></td>
+        <td><%= if (!ite_stage_result.race_runner.blank?) then link_to ite_stage_result.race_runner.team.name, ite_stage_result.race_runner.team end %></td>
+        <td><%= if (!ite_stage_result.race_runner.blank?) then ite_stage_result.race_runner.nationality end %></td>
+        <td><%= ite_stage_result.stage_status %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

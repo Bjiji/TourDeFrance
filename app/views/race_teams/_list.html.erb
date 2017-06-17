@@ -1,0 +1,33 @@
+<script>
+    $(document).ready(function() {
+        $('#race_teams').dataTable( {
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50,
+            "aaSorting": [[ 0, "desc" ]],
+            "aoColumns" : [
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true , "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+            ]
+        });
+    } );
+</script>
+<table class="display" id="race_teams">
+<thead>
+  <tr>
+    <th>Année</th>
+    <th>Nom</th>
+    <th>Code UCI</th>
+  </tr>
+</thead>
+<tbody>
+<% @race_teams.each do |rteam| %>
+  <tr>
+    <td><%= link_to rteam.year, race_path(rteam.race) %></td>
+    <td><%= link_to rteam.label, race_team_path(rteam) %></td>
+    <td><%= link_to rteam.team.uci, team_path(rteam.team) %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>

@@ -1,7 +1,7 @@
 class Cyclist < ActiveRecord::Base
  # attr_accessor :description, :dob, :firstname, :lastname, :nationality, :pob, :tag, :races
   has_many :race_runners
-  has_many :teams, :through => :race_runners
+  has_many :race_teams, :through => :race_runners
   has_many :races, :through => :race_runners
   has_many :ite_stage_results, :through => :race_runners
 
@@ -102,7 +102,8 @@ class Cyclist < ActiveRecord::Base
     query = "select c.*
     from cyclists c
     inner join race_runners r on r.cyclist_id = c.id
-    left JOIN teams ON teams.id = r.team_id "
+   left JOIN race_teams ON race_teams.id = r.race_team_id
+    left JOIN teams ON teams.id = race_teams.team_id "
     if (!search[:wjaune_cnt].blank? && search[:wjaune_cnt].to_i > 0)
       query = query + " \nleft join ig_race_results ir_jaune on ir_jaune.leader_id = r.id "
     end

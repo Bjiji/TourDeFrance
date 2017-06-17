@@ -15,3 +15,28 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+
+<div class="field">
+  <%= f.label :race_runner %><br />
+  <% c_array = RaceRunner.where(:year => @yj_stage_result.stage.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+  <%= f.select :race_runner_id, c_array, {:include_blank => true} %>
+</div>
+
+<div class="field">
+  <%= f.label :time_sec %><br />
+  <%= f.text_field :time_sec %>
+</div>
+<div class="field">
+  <%= f.label :diff_time_sec %><br />
+  <%= f.text_field :diff_time_sec %>
+</div>
+
+<div class="field">
+  <%= f.label :pos %><br />
+  <%= f.number_field :pos %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>

@@ -1,65 +1,39 @@
-<script>
-    $(document).ready(function() {
-        $('#team_runners').dataTable( {
-            "sDom": "<'wrapper'i>, <fprtfp>",
-            "bJQueryUI": true,
-            "iDisplayLength": 20,
-            "aaSorting": [],
-            "aoColumns" : [
-                {"bSortable": true, "bSearchable": true},
-                {"bSortable": true, "bSearchable": false},
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true }
-            ]
-        });
-    } );
-</script>
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Nom:</b>
-  <%= @team.name %>
-</p>
-
-<p>
-  <b>Coureurs:</b>
-  <%= link_to @team.cyclists.count, cyclists_path(:team => @team) %>
-</p>
-
-<p>
-  <b>Participation:</b>
-  <% @team.p_races.each do |race| %>
-  <%= link_to race.year, race_runners_path(:team => @team, :year => race.year)%>
-  <%end%>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @team.description %>
-</p>
-
-<hr>
-<h2>Partants</h2>
-<table class="display" id="team_runners">
-  <thead>
-  <tr>
-    <th>Année</th>
-    <th>Dossard</th>
-    <th>Nom</th>
-    <th>Nationalité</th>
+<b><%= @team.name %></b><br><%= @team.uci %>
+<table  width="1000">
+  <tr width="100%">
+    <td width="100%">
+      <div id="tabs" width="100%">
+        <ul>
+          <li><a href="#tabs-1">Infos</a></li>
+          <li><a href="#tabs-2">Participations</a></li>
+          <li><a href="#tabs-3">Palmarès</a></li>
+          <li><a href="#tabs-4">Cyclistes</a></li>
+          <li><a href="#tabs-5">Engagés</a></li>
+          <li><a href="#tabs-6">Résultats complets</a></li>
+        </ul>
+        <div id="tabs-1" style="width:1000px;">
+          <%= render :partial => 'teams/info' %>
+        </div>
+        <div id="tabs-2" style="width:1000px;">
+          <%= render :partial => 'race_teams/list' %>
+        </div>
+        <div id="tabs-3" style="width:1000px;">
+          <%= render :partial => 'teams/record' %>
+        </div>
+        <div id="tabs-4" style="width:1000px;">
+          <%= render :partial => 'cyclists/list' %>
+        </div>
+        <div id="tabs-5" style="width:1000px;">
+          <%= render :partial => 'race_runners/list' %>
+        </div>
+        <div id="tabs-6" style="width:1000px;">
+          <%= render :partial => 'ite_stage_results/list' %>
+        </div>
+      </div>
+    </td>
   </tr>
-  </thead>
-  <tbody>
-  <% @runners.each do |runner| %>
-      <tr>
-        <td><%= link_to(runner.year, race_path(runner.race)) %></td>
-        <td><%= link_to(runner.number, race_runner_path(runner)) %></td>
-        <td><%= link_to(runner.display_fullname, cyclist_path(runner.cyclist)) %></td>
-        <td><%= runner.nationality %></td>
-      </tr>
-  <% end %>
-  </tbody>
 </table>
+
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>

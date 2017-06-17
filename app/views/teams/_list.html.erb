@@ -1,0 +1,38 @@
+<script>
+    $(document).ready(function() {
+        $('#teams').dataTable( {
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50,
+            "aoColumns" : [
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": false},
+                {"bSortable": true , "bSearchable": true},
+                {"bSortable": true , "bSearchable": true},
+                {"bSortable": true, "bSearchable": true} ]
+        });
+    } );
+</script>
+<table class="display" id="teams">
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Coureurs</th>
+    <th>Participations</th>
+    <th>Première participation</th>
+    <th>Dernière participation</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @teams.each do |team| %>
+      <tr>
+        <td><%= link_to team.name, team %></td>
+        <td><%= link_to team.cyclists.count('distinct cyclists.id'), cyclists_path(:team => team.name)%></td>
+        <td><%= team.races.size() %></td>
+        <td><%= min = team.races.order(year: :desc).first; link_to min.year, race_path(min)%></td>
+        <td><%= max = team.races.order(year: :asc).first; link_to max.year, race_path(max) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -20,8 +20,10 @@ class TeamsController < ApplicationController
   # GET /teams/1.json
   def show
     @team = Team.find(params[:id])
-    @runners = RaceRunner.where(:team_id => @team).order(:year, :number)
-
+    @race_runners = @team.race_runners.order(year: :desc, number: :asc)
+    @race_teams = @team.race_teams.order(year: :desc)
+    @cyclists = @team.cyclists
+    @ite_stage_results = IteStageResult.joins(race_runner: :race_team).where(:race_teams => {:team_id => params[:id]})
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @team }

@@ -10,7 +10,6 @@
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
-                {"bSortable": false, "bSearchable": false}
             ]
         });
     } );
@@ -23,7 +22,6 @@
     <th>Coureur</th>
     <th>Equipe</th>
     <th>Nat.</th>
-    <th></th>
   </tr>
 </thead>
 <tbody>
@@ -32,9 +30,8 @@
     <td><%= link_to race_runner.race.year, race_runner.race %></td>
     <td><%= link_to race_runner.number, race_runner_path(race_runner) %></td>
     <td><%= link_to race_runner.cyclist.display_fullname, race_runner.cyclist %></td>
-    <td><%= link_to race_runner.team.name, race_runner.team %></td>
+    <td><%= link_to race_runner.race_team.team.name, race_runner.race_team.team %></td>
     <td><%= race_runner.nationality %></td>
-    <td><%= link_to 'Edit', edit_race_runner_path(race_runner) %></td>
   </tr>
 <% end %>
 </tbody>

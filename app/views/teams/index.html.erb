@@ -1,44 +1,6 @@
-<script>
-    $(document).ready(function() {
-        $('#teams').dataTable( {
-            "sDom": "<'wrapper'i>, <fprtfp>",
-            "bJQueryUI": true,
-            "iDisplayLength": 50,
-            "aoColumns" : [
-                {"bSortable": true, "bSearchable": true},
-                {"bSortable": true, "bSearchable": false},
-                {"bSortable": true , "bSearchable": true},
-                {"bSortable": true, "bSearchable": true},
-                {"bSortable": false, "bSearchable": false}]
-        });
-    } );
-</script>
-
 <h1>Les équipes</h1>
 
-<table class="display" id="teams">
-  <thead>
-  <tr>
-    <th>Nom</th>
-    <th>Coureurs</th>
-    <th>Première participation</th>
-    <th>Dernière participation</th>
-    <th></th>
-  </tr>
-  </thead>
-
-<tbody>
-<% @teams.each do |team| %>
-  <tr>
-    <td><%= link_to team.name, team %></td>
-    <td><%= link_to team.cyclists.count('distinct cyclists.id'), cyclists_path(:team => team)%></td>
-    <td><%= team.races.minimum('year') %></td>
-    <td><%= team.races.maximum('year') %></td>
-    <td><%= link_to 'supprimer', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</tbody>
-</table>
+<%= render :partial => 'teams/list' %>
 
 <br/>
 
