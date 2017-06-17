@@ -5,30 +5,19 @@
   </tr>
   <tr>
     <td><b>code UCI:</b></td>
-    <td><%= @team.name %></td>
+    <td><%= @team.uci %></td>
   </tr>
   <tr>
-    <td><b>Participation:</b></td>
-    <td>
-      <ul>
-      <% @race_teams.each do |rt| %>
-            <li>
-          <%= link_to "#{rt.year}", race_path(rt.race) %>
-          (<%= link_to "#{rt.label}", race_team_path(rt) %>)
-            </li>
-      <% end %>
-      </ul>
-    </td>
+    <td><b>Participations:</b></td><td><%= @race_teams.size() %></td>
   </tr>
   <tr>
-    <td><b>Coureurs:</b></td>
-    <td><ul>
-      <% @cyclists.each do |c| %>
-          <li>
-            <%= link_to "#{c.firstname} #{c.lastname}", cyclist_path(c) %>
-          </li>
-      <% end %>
-    </ul>
-    </td>
+    <td><b>Coureurs:</b></td><td><%= @cyclists.size() %></td>
   </tr>
+  <tr>
+    <td><b>Engagés:</b></td><td><%= @race_runners.size() %></td>
+  </tr>
+  <tr>
+    <td><b>Résultats complets:</b></td><td><%= link_to "ici", ite_stage_results_path(:uci => @team.uci) %></td>
+  </tr>
+
 </table>

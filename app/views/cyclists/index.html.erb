@@ -1,54 +1,8 @@
-<script>
-    $(document).ready(function() {
-        $('#cyclists').dataTable( {
-            "sDom": "<'wrapper'i>, <fprtfp>",
-            "bJQueryUI": true,
-            "iDisplayLength": 50,
-            "aaSorting": [[ 0, "desc" ]],
-            "aoColumns" : [
-                {"asSorting": [ "desc", "asc" ], "bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": false, "bSearchable": false },
-                {"bSortable": false, "bSearchable": false }
-            ]
-        });
-    } );
-</script>
 <h1>Coureurs</h1>
 <div id="search">
   <%= render :partial => 'cyclists/search' %>
 </div>
-<table class="display" id="cyclists">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Nationality</th>
-    <th>Partic.</th>
-    <th>M.Jaune</th>
-    <th>V.Etapes</th>
-    <th></th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-<% @cyclists.each do |cyclist| %>
-  <tr>
-    <td><%= link_to cyclist.display_fullname, cyclist %></td>
-    <td><%= cyclist.nationality %></td>
-    <td><%= cyclist.race_starts %></td>
-    <td><%= cyclist.race_victories %></td>
-    <td><%= cyclist.stage_victories %></td>
-    <td><%= link_to 'Edit', edit_cyclist_path(cyclist) %></td>
-    <td><%= link_to 'Del', cyclist, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</tbody>
-</table>
-
-<br/>
+<%= render :partial => 'cyclists/list' %>
 <p>
 <%= link_to '+', new_cyclist_path %>
 </p>

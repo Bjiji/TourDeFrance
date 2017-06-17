@@ -22,7 +22,8 @@
                 <td>Nom</td><td><%= text_field_tag :lastname, params[:lastname] %></td>
                 <td>Prénom</td><td><%= text_field_tag :firstname, params[:firstname] %></td>
                 <td>Nat.</td><td><%= select_tag :nationality, options_for_select(RaceRunner.connection.select_values('select sub.n from (select count(1) cnt, nationality n from race_runners group by nationality order by count(1) desc) sub'), params[:nationality]), {:include_blank => true} %></td>
-                <td>Equipe</td><td><%= text_field_tag :team, params[:team] %></td>
+                <td>Equipe</td><td><%= text_field_tag :race_team, params[:race_team] %></td>
+                <td>Code UCI</td><td><%= text_field_tag :uci, params[:uci] %></td>
               </tr>
               <tr>
                 <td>Etape</td>
