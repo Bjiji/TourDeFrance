@@ -1,0 +1,2 @@
+module RaceTeamsHelper
+end

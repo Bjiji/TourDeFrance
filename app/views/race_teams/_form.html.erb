@@ -1,0 +1,36 @@
+<%= form_for(race_team) do |f| %>
+  <% if race_team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(race_team.errors.count, "error") %> prohibited this race_team from being saved:</h2>
+
+      <ul>
+      <% race_team.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+<div class="field">
+  <%= f.label :label %><br />
+  <%= f.text_field :label %>
+</div>
+
+<div class="field">
+  <%= f.label :team_id %><br />
+  <% c_array = Team.order('name').all.map { |c| [c.name, c.id] } %>
+  <%= f.select :team_id, c_array, {:include_blank => true} %>
+</div>
+
+<div class="field">
+  <%= f.label :race_id %><br />
+  <% c_array = Race.order('year').all.map { |c| [c.year, c.id] } %>
+  <%= f.select :race_id, c_array, {:include_blank => true} %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>
