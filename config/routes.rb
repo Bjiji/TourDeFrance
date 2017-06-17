@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :race_teams
+
   resources :yj_stage_results
 
   resources :stages
