@@ -24,6 +24,14 @@ class TeamsController < ApplicationController
     @race_teams = @team.race_teams.order(year: :desc)
     @cyclists = @team.cyclists
     @ite_stage_results = IteStageResult.joins(race_runner: :race_team).where(:race_teams => {:team_id => params[:id]})
+    @r_victories = IgRaceResult.joins(leader: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
+    @rc_victories = IgRaceResult.joins(climber: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
+    @rs_victories =IgRaceResult.joins(sprinter: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
+    @ry_victories = IgRaceResult.joins(young: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
+    @s_victories = IgStageResult.joins(stage_winner: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
+    @y_jersey = IgStageResult.joins(leader: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
+    @c_jersey = IgStageResult.joins(climber: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
+    @s_jersey = IgStageResult.joins(sprinter: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @team }

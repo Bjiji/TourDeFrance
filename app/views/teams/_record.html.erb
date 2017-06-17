@@ -1,0 +1,50 @@
+<b>Remporte le Tour de France</b>
+<ul>
+  <%  @r_victories.each do |r| %>
+      <li><%= link_to r.race.name , race_path(r.race) %>: <%= link_to r.leader.display_name , cyclist_path(r.leader.cyclist) %></li>
+  <% end  %>
+</ul>
+<b>Remporte le maillot vert:</b>
+<ul>
+  <%  @rs_victories.each do |r| %>
+      <li><%= link_to r.race.name, race_path(r.race) %>: <%= link_to r.sprinter.display_name , cyclist_path(r.sprinter.cyclist) %></li>
+  <% end  %>
+</ul>
+<b>Remporte le maillot à pois:</b>
+<ul>
+  <%  @rc_victories.each do |r| %>
+      <li><%= link_to r.race.name , race_path(r.race) %>: <%= link_to r.climber.display_name , cyclist_path(r.climber.cyclist) %></li>
+  <% end  %>
+</ul>
+<b>Remporte le maillot blanc</b>
+<ul>
+  <%  @ry_victories.each do |r| %>
+      <li><%= link_to r.race.name , race_path(r.race) %>: <%= link_to r.young.display_name , cyclist_path(r.young.cyclist) %></li>
+  <% end  %>
+</ul>
+<b>Porteur maillot jaune </b>(<%= @y_jersey.size() %>)
+<ul>
+  <%  @y_jersey.each do |r| %>
+      <li><%= link_to r.stage.display_label, stage_path(r.stage) %>: <%= link_to r.leader.display_name , cyclist_path(r.leader.cyclist) %></li>
+  <% end  %>
+</ul>
+<b>Porteur maillot vert </b>(<%= @s_jersey.size() %>)
+<ul>
+  <%  @s_jersey.each do |r| %>
+      <li><%= link_to r.stage.display_label, stage_path(r.stage) %>: <%= link_to r.sprinter.display_name , cyclist_path(r.sprinter.cyclist) %></li>
+  <% end  %>
+</ul>
+
+<b>Porteur maillot à pois </b>(<%= @c_jersey.size() %>)
+<ul>
+  <%  @c_jersey.each do |r| %>
+      <li><%= link_to r.stage.display_label, stage_path(r.stage) %>: <%= link_to r.climber.display_name , cyclist_path(r.climber.cyclist) %></li>
+  <% end  %>
+</ul>
+
+<b>Victoire d'étapes: </b> (<%= @s_victories.size() %>)
+<ul>
+  <%  @s_victories.each do |ig_stage_result| %>
+      <li><%= link_to ig_stage_result.stage.display_label , stage_path(ig_stage_result.stage) %>: : <%= link_to ig_stage_result.stage_winner.display_name , cyclist_path(ig_stage_result.stage_winner.cyclist) %></li>
+  <% end  %>
+</ul>
