@@ -21,7 +21,8 @@ class RaceTeamsController < ApplicationController
 
   # POST /race_teams
   def create
-    @race_team = RaceTeam.new(race_team_params)
+    #@race_team = RaceTeam.new(race_team_params)
+    @race_team = RaceTeam.new(params.required(:race_team).permit!)
 
     if @race_team.save
       redirect_to @race_team, notice: 'Race team was successfully created.'

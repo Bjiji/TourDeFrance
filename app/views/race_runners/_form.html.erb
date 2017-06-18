@@ -27,9 +27,9 @@
     </div>
 
     <div class="field">
-      <%= f.label :team %><br />
-      <% t_array = Team.order('name').all.map { |t| [t.name, t.id] } %>
-      <%= f.select :team_id, t_array, {:include_blank => true} %>
+      <%= f.label :race_team_id %><br />
+      <% t_array = RaceTeam.order('label').all.map { |t| [t.label, t.id] } %>
+      <%= f.select :race_team_id, t_array, {:include_blank => true} %>
     </div><div class="field">
 
       <%= f.label :year %><br />

@@ -21,7 +21,7 @@
 
 <p>
   <b>Equipe:</b>
-  <%= if (!@race_runner.race.blank?) then link_to @race_runner.team.name, team_path(@race_runner.team) end %>
+  <%= if (!@race_runner.race.blank?) then link_to @race_runner.race_team.label, team_path(@race_runner.team) end %>
 </p>
 
 

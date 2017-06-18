@@ -2,7 +2,7 @@
 
 <ul>
   <%  @runs.each do |run| %>
-    <li><%= if (!run.race.blank?) then link_to run.race.year, race_path(run.race) end %>:   <%= if(!run.number.blank?) then link_to 'dossard ' + run.number.to_s, race_runner_path(run) end %>, <%= if (!run.team.blank?) then link_to run.team.name, run.team end %> (<%= run.nationality %>) </li>
+    <li><%= if (!run.race.blank?) then link_to run.race.year, race_path(run.race) end %>:   <%= if(!run.number.blank?) then link_to 'dossard ' + run.number.to_s, race_runner_path(run) end %>, <%= if (!run.team.blank?) then link_to run.race_team.label, run.team end %> (<%= run.nationality %>) </li>
   <% end  %>
 </ul>
 <b>Remporte le Tour de France</b>
@@ -49,7 +49,7 @@
   <% end  %>
 </ul>
 
-<b>Victoire d'étapes: </b> (<%= @c_jersey.size() %>)
+<b>Victoire d'étapes: </b> (<%= @s_victories.size() %>)
 <ul>
   <%  @s_victories.each do |ig_stage_result| %>
       <li><%= link_to ig_stage_result.stage.display_label , stage_path(ig_stage_result.stage) %></li>

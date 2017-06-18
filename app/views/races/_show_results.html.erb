@@ -22,7 +22,7 @@
         <tr>
           <td align=center>&nbsp;</td><td>Classement par équipe</td>
           <td>
-            <%= if (@race.ig_race_result != nil && @race.ig_race_result.team != nil) then link_to @race.ig_race_result.team.name, team_path(@race.ig_race_result.team) end %>
+            <%= if (@race.ig_race_result != nil && @race.ig_race_result.team != nil) then link_to @race.ig_race_result.race_team.label, team_path(@race.ig_race_result.team) end %>
           </td>
         </tr>
         <tr>

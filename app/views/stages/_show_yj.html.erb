@@ -54,7 +54,7 @@
                   end
                 else link_to result.race_runner.display_fullname, cyclist_path(result.race_runner.cyclist)
                 end %></td>
-        <td><%=  if (!result.race_runner.blank?) then link_to result.race_runner.team.name, team_path(result.race_runner.team) end %></td>
+        <td><%=  if (!result.race_runner.blank?) then link_to result.race_runner.race_team.label, team_path(result.race_runner.team) end %></td>
         <td><%=  if (!result.race_runner.blank?) then result.race_runner.nationality end %></td>
 
       </tr>
