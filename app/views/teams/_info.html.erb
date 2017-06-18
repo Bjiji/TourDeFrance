@@ -1,11 +1,18 @@
-<table>
+<table height="300">
   <tr>
-    <td><b>Nom de l'équipe:</b></td>
+    <td>
+      <table>
+        <tr>
+          <td><b>Nom de l'équipe:</b></td>
     <td><%= @team.name %></td>
   </tr>
   <tr>
     <td><b>code UCI:</b></td>
     <td><%= @team.uci %></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
   </tr>
   <tr>
     <td><b>Participations:</b></td><td><%= @race_teams.size() %></td>
@@ -17,7 +24,14 @@
     <td><b>Engagés:</b></td><td><%= @race_runners.size() %></td>
   </tr>
   <tr>
-    <td><b>Résultats complets:</b></td><td><%= link_to "ici", ite_stage_results_path(:uci => @team.uci) %></td>
+    <td>&nbsp;</td>
+    <td></td>
   </tr>
-
 </table>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Résultats complets:</b> <%= link_to "ici", ite_stage_results_path(:uci => @team.uci) %></td>
+  </tr>
+</table>
+
