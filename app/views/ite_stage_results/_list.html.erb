@@ -59,7 +59,7 @@
                 end %></td>
         <td><%= if (!ite_stage_result.race_runner.blank?) then link_to ite_stage_result.race_runner.race_team.label, team_path(ite_stage_result.race_runner.team) end %></td>
         <td><%= if (!ite_stage_result.race_runner.blank?) then ite_stage_result.race_runner.nationality end %></td>
-        <td><% if (ite_stage_result.stage.ig_stage_result != nil) then
+        <td><% if (ite_stage_result.stage != nil && ite_stage_result.stage.ig_stage_result != nil) then
                  ig_stage_result = ite_stage_result.stage.ig_stage_result;
                  if (ig_stage_result.previous_leader == ite_stage_result.race_runner) then %><img src="/assets/maillot_jaune_20.png"/><%end%>
               <% if (ig_stage_result.previous_sprinter == ite_stage_result.race_runner) then %><img src="/assets/maillot_vert_20.png"/><%end%>
