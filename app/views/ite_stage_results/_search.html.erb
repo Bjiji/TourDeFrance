@@ -67,6 +67,18 @@
                     </tr>
                   </table>
                 </td>
+                <td><img src="/assets/maillot_blanc_40.png"/></td>
+                <td>
+                  <table>
+                    <tr>
+                      <td>au départ</td><td><%= select_tag :c_start_young, options_for_select([['Oui', 'yes'], ['Non', 'no']],  params[:c_start_young]), {:include_blank => true} %></td>
+                    </tr>
+                    <tr>
+                      <td>à l'arrivée</td><td><%= select_tag :c_finish_young, options_for_select([['Oui', 'yes'], ['Non', 'no']],  params[:c_finish_young]), {:include_blank => true} %></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr><tr>
                 <td>pour son premier tour</td><td><%= check_box_tag(:first_time, params[:first_time],  params[:first_time]) %></td>
               </tr>
             </table>

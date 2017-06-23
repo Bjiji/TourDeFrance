@@ -45,6 +45,14 @@
 <b>Victoire d'étapes: </b> (<%= @s_victories.size() %>)
 <ul>
   <%  @s_victories.each do |ig_stage_result| %>
-      <li><%= link_to ig_stage_result.stage.display_label , stage_path(ig_stage_result.stage) %>: : <%= link_to ig_stage_result.stage_winner.display_name , cyclist_path(ig_stage_result.stage_winner.cyclist) %></li>
+      <li><%= link_to ig_stage_result.stage.display_label , stage_path(ig_stage_result.stage) %>: :
+        <% if !ig_stage_result.stage_winner.blank? then %>
+        <%= link_to ig_stage_result.stage_winner.display_name , cyclist_path(ig_stage_result.stage_winner.cyclist) %>
+            <% elsif !ig_stage_result.team.blank? then %>
+            <%= link_to ig_stage_result.race_team.label , team_path(ig_stage_result.team) %>
+        <% else %>
+            ?
+        <% end %>
+      </li>
   <% end  %>
 </ul>

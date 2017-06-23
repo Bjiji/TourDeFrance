@@ -49,6 +49,13 @@
   <% end  %>
 </ul>
 
+<b>Porteur maillot blanc </b>(<%= @yg_jersey.size() %>)
+<ul>
+  <%  @yg_jersey.each do |r| %>
+      <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
+  <% end  %>
+</ul>
+
 <b>Victoire d'étapes: </b> (<%= @s_victories.size() %>)
 <ul>
   <%  @s_victories.each do |ig_stage_result| %>

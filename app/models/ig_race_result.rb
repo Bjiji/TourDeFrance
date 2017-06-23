@@ -7,7 +7,8 @@ class IgRaceResult < ActiveRecord::Base
   belongs_to :young, :class_name => "RaceRunner", :foreign_key => "young_id"
   belongs_to :combine, :class_name => "RaceRunner", :foreign_key => "combine_id"
   belongs_to :combat, :class_name => "RaceRunner", :foreign_key => "overall_combat_id"
-  belongs_to :team, :class_name => "Team", :foreign_key => "team_id"
+  belongs_to :race_team, :class_name => "RaceTeam", :foreign_key => "team_id"
+  delegate :team, :to => :race_team, :allow_nil => true
 
 
   def self.find_by_leader(cyclist_id)

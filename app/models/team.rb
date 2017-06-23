@@ -8,4 +8,14 @@ class Team < ActiveRecord::Base
   def p_races
     p_races = races.select('distinct races.*')
   end
+
+  def stage_victories
+    IgStageResult.find_by_sql("select ig.* from ig_stage_results ig
+join stages s on s.id = ig.stage_id
+left join race_runners rr on rr.id = ig.stage_winner_id
+left join race_teams rt on rt.id = rr.race_team_id
+left join race_teams rt2 on rt2.id = ig.race_team_id
+where rt2.team_id = #{self.id} or rt.team_id = #{self.id} order by s.year desc, s.ordinal desc")
+
+  end
 end

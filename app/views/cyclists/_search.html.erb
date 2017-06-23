@@ -48,6 +48,17 @@
             </tr>
           </table>
         </td>
+        <td><img src="/assets/maillot_blanc_40.png"/></td>
+        <td>
+          <table>
+            <tr>
+              <td>vainqueur sur au moins</td> <td><%= number_field_tag(:wyoung_cnt, params[:wyoung_cnt], :size => 2, :min => 0, :max => 20) %> édition(s) </td>
+            </tr>
+            <tr>
+              <td>porteur sur au moins</td><td><%= number_field_tag(:pyoung_cnt, params[:pyoung_cnt], :size => 2, :min => 0, :max => 99) %> étape(s) </td>
+            </tr>
+          </table>
+        </td>
         <td>Lors de sa première participation</td><td><%= check_box_tag(:first_time, params[:first_time],  params[:first_time]) %></td>
   </tr>
   <tr>

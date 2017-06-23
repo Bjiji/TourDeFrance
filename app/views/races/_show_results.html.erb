@@ -19,6 +19,12 @@
           <%= if @race.ig_race_result != nil && (@race.ig_race_result.climber != nil) then link_to @race.ig_race_result.climber.display_fullname, cyclist_path(@race.ig_race_result.climber.cyclist) end %>
         </td>
       </tr>
+	  <tr>
+        <td align=center><img src="/assets/maillot_blanc_40.png"/></td><td>Classement des jeunes</td>
+        <td>
+          <%= if @race.ig_race_result != nil && (@race.ig_race_result.young != nil) then link_to @race.ig_race_result.young.display_fullname, cyclist_path(@race.ig_race_result.young.cyclist) end %>
+        </td>
+      </tr>
         <tr>
           <td align=center>&nbsp;</td><td>Classement par équipe</td>
           <td>

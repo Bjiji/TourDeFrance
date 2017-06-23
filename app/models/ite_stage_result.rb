@@ -115,6 +115,12 @@
     if search[:c_start_climber] == "yes" then query = query + " AND ig_stage_results.previous_climber=runner.id "
     elsif search[:c_start_climber] == "no" then query = query + " AND  (ig_stage_results.previous_climber is null OR ig_stage_results.previous_climber!=runner.id) "
     end
+    if search[:c_finish_young] == "yes" then query = query + " AND ig_stage_results.young_id=runner.id "
+    elsif search[:c_finish_young] == "no" then query = query + " AND (ig_stage_results.young_id is null OR ig_stage_results.young_id!=runner.id) "
+    end
+    if search[:c_start_young] == "yes" then query = query + " AND ig_stage_results.previous_young=runner.id "
+    elsif search[:c_start_young] == "no" then query = query + " AND  (ig_stage_results.previous_young is null OR ig_stage_results.previous_young!=runner.id) "
+    end
     if search[:c_finish_sprinter] == "yes" then query = query + " AND ig_stage_results.sprinter_id=runner.id "
     elsif search[:c_finish_sprinter] == "no" then query = query + " AND (ig_stage_results.sprinter_id is null OR ig_stage_results.sprinter_id!=runner.id) "
     end

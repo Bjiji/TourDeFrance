@@ -113,6 +113,9 @@ class Cyclist < ActiveRecord::Base
     if (!search[:wclimber_cnt].blank? && search[:wclimber_cnt].to_i > 0)
       query = query + " \nleft join ig_race_results ir_climber on ir_climber.climber_id = r.id "
     end
+    if (!search[:wyoung_cnt].blank? && search[:wyoung_cnt].to_i > 0)
+      query = query + " \nleft join ig_race_results ir_young on ir_young.young_id = r.id "
+    end
     if (!search[:pjaune_cnt].blank? && search[:pjaune_cnt].to_i > 0)
       query = query + " \nleft join ig_stage_results is_jaune on is_jaune.leader_id = r.id "
     end
@@ -121,6 +124,9 @@ class Cyclist < ActiveRecord::Base
     end
     if (!search[:pclimber_cnt].blank? && search[:pclimber_cnt].to_i > 0)
       query = query + " \nleft join ig_stage_results is_climber on is_climber.climber_id = r.id "
+    end
+    if (!search[:pyoung_cnt].blank? && search[:pyoung_cnt].to_i > 0)
+      query = query + " \nleft join ig_stage_results is_young on is_young.young_id = r.id "
     end
     if (!search[:wstage_cnt].blank? && search[:wstage_cnt].to_i > 0)
       query = query + " \nleft join ig_stage_results is_stage on is_stage.stage_winner_id = r.id "
@@ -165,6 +171,16 @@ class Cyclist < ActiveRecord::Base
       query = query + " \n count(distinct ir_climber.id) >= " + search[:wclimber_cnt]
       need_having_clause = false
     end
+    if (!search[:wyoung_cnt].blank? && search[:wyoung_cnt].to_i > 0)
+      if (need_having_clause) then
+        query = query + " HAVING "
+      else
+        query = query + " AND "
+      end
+      query = query + " \n count(distinct ir_young.id) >= " + search[:wyoung_cnt]
+      need_having_clause = false
+    end
+
     if (!search[:pjaune_cnt].blank? && search[:pjaune_cnt].to_i > 0)
       if (need_having_clause) then
         query = query + " HAVING "
@@ -190,6 +206,15 @@ class Cyclist < ActiveRecord::Base
         query = query + " AND "
       end
       query = query + " \n count(distinct is_climber.id) >= " + search[:pclimber_cnt]
+      need_having_clause = false
+    end
+    if (!search[:pyoung_cnt].blank? && search[:pyoung_cnt].to_i > 0)
+      if (need_having_clause) then
+        query = query + " HAVING "
+      else
+        query = query + " AND "
+      end
+      query = query + " \n count(distinct is_young.id) >= " + search[:pyoung_cnt]
       need_having_clause = false
     end
     if (!search[:wstage_cnt].blank? && search[:wstage_cnt].to_i > 0)

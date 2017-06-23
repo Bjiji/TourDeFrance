@@ -24,10 +24,13 @@ class CyclistsController < ApplicationController
     @rc_victories = IgRaceResult.joins(:climber).where(:race_runners => {:cyclist_id => params[:id]}).order(year: :DESC)
     @rs_victories =IgRaceResult.joins(:sprinter).where(:race_runners => {:cyclist_id => params[:id]}).order(year: :DESC)
     @ry_victories = IgRaceResult.joins(:young).where(:race_runners => {:cyclist_id => params[:id]}).order(year: :DESC)
-    @s_victories = IgStageResult.joins(:stage_winner).where(:race_runners => { :cyclist_id => params[:id]}).order(year: :DESC)
-    @y_jersey = IgStageResult.joins(:leader).where(:race_runners => { :cyclist_id => params[:id]}).order(year: :DESC)
-    @c_jersey = IgStageResult.joins(:climber).where(:race_runners => { :cyclist_id => params[:id]}).order(year: :DESC)
-    @s_jersey = IgStageResult.joins(:sprinter).where(:race_runners => { :cyclist_id => params[:id]}).order(year: :DESC)
+
+
+    @s_victories = IgStageResult.joins(:stage_winner).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
+    @y_jersey = IgStageResult.joins(:leader).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
+    @c_jersey = IgStageResult.joins(:climber).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
+    @s_jersey = IgStageResult.joins(:sprinter).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
+    @yg_jersey = IgStageResult.joins(:young).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
 #    @race = Race.where(:cyclist)
     respond_to do |format|
       format.html # show.html.erb

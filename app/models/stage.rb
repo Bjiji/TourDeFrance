@@ -36,7 +36,7 @@ class Stage < ActiveRecord::Base
   def team_winner
     winner = nil
     if (ig_stage_result != nil) then
-      winner = ig_stage_result.team_winner
+      winner = ig_stage_result.race_team
     end
   end
 
@@ -153,6 +153,14 @@ class Stage < ActiveRecord::Base
     elsif search[:c_start_climber] == "no" then
       query = query + " AND  (ig_stage_results.previous_climber is null OR ig_stage_results.previous_climber!=runner.id) "
     end
+    if search[:c_finish_young] == "yes" then query = query + " AND ig_stage_results.young_id=runner.id "
+    elsif search[:c_finish_young] == "no" then query = query + " AND (ig_stage_results.young_id is null OR ig_stage_results.young_id!=runner.id) "
+    end
+    if search[:c_start_young] == "yes" then query = query + " AND ig_stage_results.previous_young=runner.id "
+    elsif search[:c_start_young] == "no" then query = query + " AND  (ig_stage_results.previous_young is null OR ig_stage_results.previous_young!=runner.id) "
+    end
+
+
     if search[:c_finish_sprinter] == "yes" then
       query = query + " AND ig_stage_results.sprinter_id=runner.id "
     elsif search[:c_finish_sprinter] == "no" then

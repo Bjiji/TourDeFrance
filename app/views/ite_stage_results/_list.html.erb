@@ -63,7 +63,8 @@
                  ig_stage_result = ite_stage_result.stage.ig_stage_result;
                  if (ig_stage_result.previous_leader == ite_stage_result.race_runner) then %><img src="/assets/maillot_jaune_20.png"/><%end%>
               <% if (ig_stage_result.previous_sprinter == ite_stage_result.race_runner) then %><img src="/assets/maillot_vert_20.png"/><%end%>
-              <% if (ig_stage_result.previous_climber == ite_stage_result.race_runner) then %><img src="/assets/maillot_pois_20.png"/><%end end%>
+              <% if (ig_stage_result.previous_climber == ite_stage_result.race_runner) then %><img src="/assets/maillot_pois_20.png"/><%end%>
+			        <% if (ig_stage_result.previous_young == ite_stage_result.race_runner) then %><img src="/assets/maillot_blanc_20.png"/><%end end%>
         </td>
         <td><%= ite_stage_result.stage_status %></td>
       </tr>
