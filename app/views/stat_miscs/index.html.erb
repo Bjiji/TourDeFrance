@@ -82,7 +82,7 @@
   <tbody>
   <% @stat_misc_succ_stages.each do |row| %>
       <tr>
-        <td><%= link_to row[0].name, team_path(row[0]) %></td>
+        <td><%= link_to row[0].label, team_path(row[0].team) %></td>
         <td><%= link_to(row[1].year, race_path(row[1].race)) %></td>
         <td><%= link_to(row[1].stage_num, stage_path(row[1])) + ", " + link_to(row[2].stage_num, stage_path(row[2])) + ", " + link_to(row[3].stage_num, stage_path(row[3]))%></td>
         <td><%=  link_to(row[4].display_fullname, race_runner_path(row[4])) + ", " + link_to(row[5].display_fullname, race_runner_path(row[5])) + ", " + link_to(row[6].display_fullname, race_runner_path(row[6])) %></td>
