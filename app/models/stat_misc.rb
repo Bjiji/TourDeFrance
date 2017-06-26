@@ -1,17 +1,17 @@
 class StatMisc < ActiveRecord::Base
 
   def self.statDnf(year)
-    sql_array = [ %q{select s.runners_cnt - s.finishers_cnt as 'nb',  format(100 * (s.runners_cnt - s.finishers_cnt) / s.runners_cnt, 1) as 'percent', s.*
+    sql_array = [%q{select s.runners_cnt - s.finishers_cnt as 'nb',  format(100 * (s.runners_cnt - s.finishers_cnt) / s.runners_cnt, 1) as 'percent', s.*
 from stages s
 where s.year > ?
 group by s.id
-order by 1 desc limit 25;}, year ]
+order by 1 desc limit 25;}, year]
     sql = ActiveRecord::Base::sanitize_sql_array(sql_array)
     statDnf = Stage.find_by_sql(sql)
   end
 
   def self.statSuccStages(year)
-    sql_array = [ %q{SELECT distinct stages.id as stage1, stages2.id as stage2, stages3.id as stage3, rteam.id as team, runner.id as runner1, runner2.id as runner2, runner3.id as runner3
+    sql_array = [%q{SELECT distinct stages.id as stage1, stages2.id as stage2, stages3.id as stage3, rteam.id as team, runner.id as runner1, runner2.id as runner2, runner3.id as runner3
  FROM stages
  LEFT JOIN ig_stage_results igsr ON igsr.stage_id = stages.id
  LEFT JOIN race_runners runner ON runner.year = stages.year and runner.id = igsr.stage_winner_id
@@ -33,8 +33,57 @@ order by 1 desc limit 25;}, year ]
  and runner.race_team_id = runner2.race_team_id
  and runner.race_team_id = runner3.race_team_id
  order by stages.year desc, stages.ordinal desc limit 25
- ;}, year ]
+ ;}, year]
     sql = ActiveRecord::Base::sanitize_sql_array(sql_array)
     statSuccStages = ActiveRecord::Base.connection.select_all(sql)
   end
+
+  def self.stage_age(column_name, order, limit)
+
+    if (order == 'asc') then
+      group_method = 'min'
+    else
+      group_method = 'max'
+    end
+
+    query = "select #{group_method}(datediff(s.date, c.dob)) as day_age, ig.id as ig_id, c.id as c_id, s.id as s_id, r.id as r_id
+    from cyclists c
+    join race_runners rr on rr.cyclist_id = c.id
+    join ig_stage_results ig on ig.#{column_name} = rr.id
+    join stages s on s.id = ig.stage_id
+    join races r on r.id = rr.race_id
+    where c.dob > 0
+    group by rr.id
+    order by 1 #{order}
+    limit #{limit};"
+
+    sql = ActiveRecord::Base::sanitize_sql_array(query)
+    stage_age = ActiveRecord::Base.connection.select_all(sql)
+
+  end
+
+  def self.race_age(column_name, order, limit)
+
+    if (order == 'asc') then
+      group_method = 'min'
+    else
+      group_method = 'max'
+    end
+
+    query = "select #{group_method}(datediff(s.date, c.dob)) as day_age, ig.id as ig_id, c.id as c_id, s.id as s_id, r.id as r_id
+    from cyclists c
+    join race_runners rr on rr.cyclist_id = c.id
+    join ig_race_results ig on ig.#{column_name} = rr.id
+    join races r on r.id = rr.race_id
+    join stages s on s.race_id = r.id and s.is_last
+    where c.dob > 0
+    group by rr.id
+    order by 1 #{order}
+    limit #{limit};"
+
+    sql = ActiveRecord::Base::sanitize_sql_array(query)
+    stage_age = ActiveRecord::Base.connection.select_all(sql)
+
+  end
+
 end

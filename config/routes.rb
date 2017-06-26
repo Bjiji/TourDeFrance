@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :races
 
+  resources :stat_ages
+
   resources :cyclists
 
   resources :ig_race_results

@@ -3,9 +3,9 @@ class StatMiscsController < ApplicationController
   # GET /stat_miscs.json
   def index
     @stat_misc_dnf = StatMisc.statDnf(params[:year])
-    @tmp = StatMisc.statSuccStages(params[:year])
+    @statSuccStages = StatMisc.statSuccStages(params[:year])
 
-    @stat_misc_succ_stages = @tmp.map{|u| [RaceTeam.find(u['team']), Stage.find(u['stage1']), Stage.find(u['stage2']), Stage.find(u['stage3']), RaceRunner.find(u['runner1']), RaceRunner.find(u['runner2']), RaceRunner.find(u['runner3'])]}
+    @stat_misc_succ_stages = @statSuccStages.map{|u| [RaceTeam.find(u['team']), Stage.find(u['stage1']), Stage.find(u['stage2']), Stage.find(u['stage3']), RaceRunner.find(u['runner1']), RaceRunner.find(u['runner2']), RaceRunner.find(u['runner3'])]}
 
     respond_to do |format|
       format.html # index.html.erb

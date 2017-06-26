@@ -29,6 +29,7 @@
   </ul>
   <h3>Statistiques</h3>
   <ul title="Statistiques">
+    <li><%= link_to "âge", stat_ages_url%></li>
     <li><%= link_to "écarts", stat_stage_diffs_url(:no_search => "true") %></li>
     <li><%= link_to 'nationalité', stat_countries_url(:nationality1 => 'France') %></li>
     <li><%= link_to 'stats', stat_miscs_url(:year => "1947")%></li>
