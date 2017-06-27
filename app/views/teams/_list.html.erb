@@ -1,12 +1,17 @@
 <script>
     $(document).ready(function() {
         $('#teams').dataTable( {
-            "sDom": "<'wrapper'i>, <fprtfp>",
+            "sDom": "<fptp>",
             "bJQueryUI": true,
             "iDisplayLength": 50,
+            "aaSorting": [[ 2, "desc" ]],
             "aoColumns" : [
                 {"bSortable": true, "bSearchable": true},
-                {"bSortable": true, "bSearchable": false},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true , "bSearchable": true},
+                {"bSortable": true , "bSearchable": true},
+                {"bSortable": true , "bSearchable": true},
+                {"bSortable": true , "bSearchable": true},
                 {"bSortable": true , "bSearchable": true},
                 {"bSortable": true , "bSearchable": true},
                 {"bSortable": true, "bSearchable": true} ]
@@ -18,9 +23,13 @@
   <tr>
     <th>Nom</th>
     <th>Coureurs</th>
-    <th>Participations</th>
-    <th>Première participation</th>
-    <th>Dernière participation</th>
+    <th>Part.</th>
+    <th>Vict. d'étape</th>
+    <th>Jours / général</th>
+    <th>Jours / points</th>
+    <th>Jours / montagne</th>
+    <th>1ère édition</th>
+    <th>Dern. édition</th>
   </tr>
   </thead>
 
@@ -30,6 +39,10 @@
         <td><%= link_to team.name, team %></td>
         <td><%= link_to team.cyclists.count('distinct cyclists.id'), cyclists_path(:team => team.name)%></td>
         <td><%= team.races.size() %></td>
+        <td><%= team.stage_victories.size() %></td>
+        <td><%= team.stage_yellow_jersey.size() %></td>
+        <td><%= team.stage_sprinter_jersey.size() %></td>
+        <td><%= team.stage_climber_jersey.size() %></td>
         <td><%= min = team.races.order(year: :asc).first; if (min != nil) then link_to min.year, race_path(min) end %></td>
         <td><%= max = team.races.order(year: :desc).first; if (max != nil) then link_to max.year, race_path(max) end %></td>
       </tr>

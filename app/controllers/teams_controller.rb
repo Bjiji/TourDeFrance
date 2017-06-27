@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
     if (params[:year] != nil) then
       @teams = Team.joins(:races).where(:races => {:year => params[:year]}).select('distinct teams.*')
     else
-      @teams = Team.all
+      @teams = Team.joins(:races).select('distinct teams.*')
     end
 
 

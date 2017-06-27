@@ -38,8 +38,11 @@ order by 1 desc limit 25;}, year]
     statSuccStages = ActiveRecord::Base.connection.select_all(sql)
   end
 
-  def self.stage_age(column_name, order, limit)
+  def self.stage_age(column_name, order, limit, nationality, year)
 
+    if (limit.blank?) then
+      limit = "5"
+    end
     if (order == 'asc') then
       group_method = 'min'
     else
@@ -52,8 +55,14 @@ order by 1 desc limit 25;}, year]
     join ig_stage_results ig on ig.#{column_name} = rr.id
     join stages s on s.id = ig.stage_id
     join races r on r.id = rr.race_id
-    where c.dob > 0
-    group by rr.id
+    where c.dob > 0 "
+    if (!year.blank?) then
+      query += " and r.year > #{year} "
+    end
+    if (!nationality.blank?) then
+      query += " and rr.nationality like '#{nationality}' "
+    end
+    query += " group by rr.id
     order by 1 #{order}
     limit #{limit};"
 
@@ -62,8 +71,11 @@ order by 1 desc limit 25;}, year]
 
   end
 
-  def self.race_age(column_name, order, limit)
+  def self.race_age(column_name, order, limit, nationality, year)
 
+    if (limit.blank?) then
+      limit = "5"
+    end
     if (order == 'asc') then
       group_method = 'min'
     else
@@ -76,8 +88,14 @@ order by 1 desc limit 25;}, year]
     join ig_race_results ig on ig.#{column_name} = rr.id
     join races r on r.id = rr.race_id
     join stages s on s.race_id = r.id and s.is_last
-    where c.dob > 0
-    group by rr.id
+    where c.dob > 0 "
+    if (!year.blank?) then
+      query += " and r.year > #{year} "
+    end
+    if (!nationality.blank?) then
+      query += " and rr.nationality like '#{nationality}' "
+    end
+    query += " group by rr.id
     order by 1 #{order}
     limit #{limit};"
 
