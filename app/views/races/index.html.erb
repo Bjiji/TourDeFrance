@@ -15,7 +15,6 @@ $(document).ready(function() {
          {"bSortable": true, "bSearchable": true },
          {"bSortable": true, "bSearchable": true },
          {"bSortable": true, "bSearchable": false },
-         {"bSortable": false, "bSearchable": false },
          {"bSortable": false, "bSearchable": false }
      ]
  });
@@ -35,7 +34,6 @@ $(document).ready(function() {
     <th>Partants</th>
     <th>Nat.</th>
     <th></th>
-    <th></th>
   </tr>
   </thead>
 
@@ -52,7 +50,6 @@ $(document).ready(function() {
     <td><%= if (true) then link_to race.race_runners.count, cyclists_path(:year => race.year) else 0 end %></td>
     <td><%= race.nationalities.length %></td>
     <td><%= link_to 'Voir', race %></td>
-    <td><%= link_to 'Editer', edit_race_path(race) %></td>
   </tr>
 <% end %>
 </tbody>
