@@ -12,6 +12,11 @@
   <% end %>
 
     <div class="field">
+      <%= f.label :stage %><br />
+      <%= f.text_field :stage %>
+    </div>
+
+    <div class="field">
       <%= f.label :race_runner %><br />
       <% if (@ite_stage_result != nil && @ite_stage_result.stage != nil) then c_array = RaceRunner.where(:year => @ite_stage_result.stage.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } else c_array = [] end %>
       <%= f.select :race_runner_id, c_array, {:include_blank => true} %>
