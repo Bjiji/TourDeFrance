@@ -113,8 +113,8 @@ class MountainStageResult < ActiveRecord::Base
     if search[:c_start_young] == "yes" then query = query + " AND ig_stage_results.previous_young=runner.id "
     elsif search[:c_start_young] == "no" then query = query + " AND  (ig_stage_results.previous_young is null OR ig_stage_results.previous_young!=runner.id) "
     end
-    if search[:c_stage_pos] == "winner" then query = query + " AND ig_stage_results.stage_winner=runner.id "
-    elsif search[:c_stage_pos] == "nowinner" then query = query + " AND ig_stage_results.stage_winner!=runner.id "
+    if search[:c_stage_pos] == "winner" then query = query + " AND ig_stage_results.stage_winner_id=runner.id "
+    elsif search[:c_stage_pos] == "nowinner" then query = query + " AND ig_stage_results.stage_winner_id!=runner.id "
     elsif search[:c_stage_pos] == "podium" then query = query + " AND isr.pos <= 3 "
     elsif search[:c_stage_pos] == "topten" then query = query + " AND isr.pos <= 10 "
     elsif search[:c_stage_pos] == "finish" then query = query + " AND (!isr.dns && !isr.dnf && !isr.dnq) "
