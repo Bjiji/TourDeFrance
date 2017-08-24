@@ -13,7 +13,8 @@
 
     <div class="field">
       <%= f.label :stage %><br />
-      <%= f.text_field :stage %>
+      <% s_array = Stage.order('year', 'ordinal').all.map { |c| [c.stage_name, c.id] } %>
+      <%= f.select :stage_id, s_array, {:include_blank => true} %>
     </div>
 
     <div class="field">
