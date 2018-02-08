@@ -28,8 +28,8 @@ class StagesController < ApplicationController
       @previous_stage = Stage.where(:race_id => @stage.race.id, :ordinal => @stage.ordinal - 1).first()
       @next_stage = Stage.where(:race_id => @stage.race.id, :ordinal => @stage.ordinal + 1).first()
     end;
-    @ite_stage_results_h = IteStageResult.where(:stage_id => params[:id])
-    @yj_stage_results_h = YjStageResults.where(:stage_id => params[:id])
+    @ite_stage_results = IteStageResult.where(:stage_id => params[:id])
+    @yj_stage_results = YjStageResults.where(:stage_id => params[:id])
     @dnf = IteStageResult.where(:stage_id => params[:id], :dnf => "1")
     @dns = IteStageResult.where(:stage_id => params[:id], :dns => "1")
     @dnq = IteStageResult.where(:stage_id => params[:id], :dnq => "1")

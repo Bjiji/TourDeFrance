@@ -2,7 +2,7 @@
    #attr_accessor :runner_s, :diff_time_sec, :dnf, :dnq, :dns, :pos, :time_sec, :stage_status, :stage_tag, :race_runner_id, :_confidence
   belongs_to :stage
   belongs_to :race_runner
-  belongs_to :team
+  belongs_to :race_team
 
   def self.displayTime(time_sec)
     if (time_sec == nil || time_sec == 0) then

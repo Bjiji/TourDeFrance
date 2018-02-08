@@ -19,9 +19,9 @@
 </div>
 
 <div class="field">
-  <%= f.label :team_id %><br />
+  <%= f.label :race_team_id %><br />
   <% c_array = Team.order('name').all.map { |c| [c.name, c.id] } %>
-  <%= f.select :team_id, c_array, {:include_blank => true} %>
+  <%= f.select :race_team_id, c_array, {:include_blank => true} %>
 </div>
 
 <div class="field">

@@ -30,7 +30,7 @@
   </tr>
   </thead>
   <tbody>
-  <%  @ite_stage_results_h.each do |result| %>
+  <%  @ite_stage_results.each do |result| %>
       <% time_res = nil
          time_diff = "-"
          if (result.time_sec != nil && result.time_sec > 0) then
@@ -51,14 +51,19 @@
               <% if (@stage.ig_stage_result.previous_climber == result.race_runner) then %> <img src="/assets/maillot_pois_20.png"/> <%end %>
               <% if (@stage.ig_stage_result.previous_young == result.race_runner) then %> <img src="/assets/maillot_blanc_20.png"/> <%end end%></td>
         <td><%= if (result.race_runner.blank?) then
-                  if (result.team.blank?) then
+                  if (result.race_team.blank?) then
                     result.runner_s
                   else
-                    link_to result.race_team.label, team_path(result.team)
+                    link_to result.race_team.label, team_path(result.race_team.team)
                   end
                 else link_to result.race_runner.display_fullname, cyclist_path(result.race_runner.cyclist)
                 end %></td>
-        <td><%=  if (!result.race_runner.blank?) then link_to result.race_runner.race_team.label, team_path(result.race_runner.team) end %></td>
+        <td><%= if (!result.race_runner.blank?) then
+                   link_to result.race_runner.race_team.label, team_path(result.race_runner.team)
+                elsif (!result.race_team.blank?) then
+                  link_to result.race_team.label, team_path(result.race_team.team)
+                end
+        %></td>
         <td><%=  if (!result.race_runner.blank?) then result.race_runner.nationality end %></td>
 
       </tr>

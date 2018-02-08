@@ -19,15 +19,15 @@ where rt2.team_id = #{self.id} or rt.team_id = #{self.id} order by s.year desc, 
   end
 
   def stage_yellow_jersey
-    IgStageResult.joins(leader: :race_team).joins(:stage).where(:race_teams => {:team_id => self.id}).order("year DESC, stages.ordinal DESC")
+    IgStageResult.joins(leader: :race_team).joins(:stage).where(:race_teams => {:race_team_id => self.id}).order("year DESC, stages.ordinal DESC")
 
   end
 
   def stage_sprinter_jersey
-    @s_jersey = IgStageResult.joins(sprinter: :race_team).joins(:stage).where(:race_teams => {:team_id => self.id}).order("year DESC, stages.ordinal DESC")
+    @s_jersey = IgStageResult.joins(sprinter: :race_team).joins(:stage).where(:race_teams => {:race_team_id => self.id}).order("year DESC, stages.ordinal DESC")
   end
 
   def stage_climber_jersey
-    @c_jersey = IgStageResult.joins(climber: :race_team).joins(:stage).where(:race_teams => {:team_id => self.id}).order("year DESC, stages.ordinal DESC")
+    @c_jersey = IgStageResult.joins(climber: :race_team).joins(:stage).where(:race_teams => {:race_team_id => self.id}).order("year DESC, stages.ordinal DESC")
   end
 end
