@@ -3,7 +3,7 @@ class RaceRunnersController < ApplicationController
   # GET /race_runners.json
   def index
     #@race_runners = RaceRunner.all
-    @race_runners = RaceRunner.joins(:race).joins(:team).where(:teams => {:id => params[:team]}, :races => {:year => params[:year]})
+    @race_runners = RaceRunner.joins(:race).joins(:race_team).where(:race_teams => {:team => params[:team]}, :races => {:year => params[:year]})
 
     respond_to do |format|
       format.html # index.html.erb

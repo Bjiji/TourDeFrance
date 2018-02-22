@@ -22,6 +22,9 @@
   </tr>
 </table>
 
-
 <%= link_to 'Edit', edit_cyclist_path(@cyclist) %> |
+<%= link_to 'Delete',
+            cyclist_path(@cyclist),
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', cyclists_path %>

@@ -29,11 +29,15 @@
   </div>
   <div class="field">
     <%= f.label :nationality %><br />
-    <%= f.select :nationality, Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(*) desc) sub'), {:include_blank => true} %>
+    <%= f.select :nationality, Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from cyclists group by nationality order by count(*) desc) sub'), {:include_blank => true} %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :alternate_name %><br />
+    <%= f.text_field :alternate_name %>
   </div>
   <div class="actions">
     <%= f.submit %>
