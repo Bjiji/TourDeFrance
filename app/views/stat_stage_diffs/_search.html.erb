@@ -9,7 +9,7 @@
               <table border=0 width="100%">
                 <tr>
                   <td>ville</td><td><%= text_field_tag :city, params[:city] %><%= select_tag :city_kind, options_for_select([['Etape', 'both'], ['Départ', 'start'], ['Arrivée', 'end']], params[:city_kind]) %></td>
-                  <td>type</td><td><%= select_tag :s_type, options_for_select(Stage.connection.select_values('select distinct stage_type from Stages'), params[:s_type]), {:include_blank => true} %></td>
+                  <td>type</td><td><%= select_tag :s_type, options_for_select(Stage.connection.select_values('select distinct stage_type from stages'), params[:s_type]), {:include_blank => true} %></td>
                   <td>année</td><td><%= select_tag :year_operator, options_for_select([['en', 'equals'], ['depuis', 'since'], ['avant', 'before']],  params[:year_operator]), {:include_blank => false} %><%=number_field_tag( :year, params[:year], :size => 4, :min => 1900, :max => 2100) %></td><td>&nbsp;</td>
                 </tr>
               </table>

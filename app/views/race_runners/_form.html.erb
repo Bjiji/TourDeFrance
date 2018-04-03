@@ -36,7 +36,7 @@
 
     <div class="field">
       <%= f.label :race_team_id %><br />
-      <% t_array = RaceTeam.order('label').all.map { |t| [t.label, t.id] } %>
+      <% t_array = RaceTeam.order('label').where(:year => @race_runner.year).all.map { |t| ["#{t.label} (#{t.id})", t.id] } %>
       <%= f.select :race_team_id, t_array, {:include_blank => true} %>
     </div><div class="field">
 

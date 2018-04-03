@@ -28,7 +28,8 @@ class IteStageResultsController < ApplicationController
   # GET /ite_stage_results/new
   # GET /ite_stage_results/new.json
   def new
-    @ite_stage_result = IteStageResult.new
+    @ite_stage_result = IteStageResult.new(params.required(:ite_stage_result).permit!)
+    #@ite_stage_result = IteStageResult.new
 
     respond_to do |format|
       format.html # new.html.erb

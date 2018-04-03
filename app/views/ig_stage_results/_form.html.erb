@@ -32,6 +32,12 @@
         <% if @ig_stage_result.stage != nil then c_array = RaceRunner.where(:year => @ig_stage_result.stage.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } else c_array = [] end  %>
         <%= f.select :stage_winner_id, c_array, {:include_blank => true} %>
       </div></td></tr>
+      <tr><td>
+        <div class="field">
+          <%= f.label :race_team_id %><br />
+          <% if @ig_stage_result.stage != nil then c_array = RaceTeam.where(:year => @ig_stage_result.stage.year).order('label').all.map { |c| [c.label, c.id] } else c_array = [] end  %>
+          <%= f.select :race_team_id, c_array, {:include_blank => true} %>
+        </div></td></tr>
     </table>
 
     <div class="field">
