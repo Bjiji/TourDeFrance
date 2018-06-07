@@ -4,48 +4,42 @@ class Race < ActiveRecord::Base
   has_many :stages
   has_one :ig_race_result
 
+  def display_name
+    "Édition #{year}"
+  end
   def winner
-    result =  IgRaceResult.where(:race_id => self).first
-    if (result == nil || result.leader == nil) then
-      winner = nil
+    if (ig_race_result == nil || ig_race_result.leader == nil) then
+      nil
     else
-      winner = result.leader.cyclist
+      ig_race_result.leader.cyclist
     end
   end
 
   def sprinter
-    result =  IgRaceResult.where(:race_id => self).first
-    if (result == nil || result.sprinter == nil) then
-      winner = nil
+    if (ig_race_result == nil || ig_race_result.sprinter == nil) then
+      nil
     else
-      winner = result.sprinter.cyclist
+      ig_race_result.sprinter.cyclist
     end
   end
 
   def climber
-    result =  IgRaceResult.where(:race_id => self).first
-    if (result == nil || result.climber == nil) then
-      winner = nil
+    if (ig_race_result == nil || ig_race_result.climber == nil) then
+      nil
     else
-      winner = result.climber.cyclist
+      ig_race_result.climber.cyclist
     end
   end
 
   def leader
-    result =  IgRaceResult.where(:race_id => self).first
-    if (result == nil || result.leader == nil) then
-      leader = nil
-    else
-      leader = result.leader.cyclist
-    end
+    winner
   end
 
   def young
-    result =  IgRaceResult.where(:race_id => self).first
-    if (result == nil || result.young == nil) then
-      young = nil
+    if (ig_race_result == nil || ig_race_result.young == nil) then
+      nil
     else
-      young = result.young.cyclist
+      ig_race_result.young.cyclist
     end
   end
 

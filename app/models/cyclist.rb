@@ -22,7 +22,7 @@ class Cyclist < ActiveRecord::Base
   end
 
   def display_name
-    display_name = "" + lastname_c + " " + firstname_c.byteslice(0) + "."
+    "#{firstname_c.byteslice(0)}. #{lastname_c.upcase}"
   end
 
   def display_fullname

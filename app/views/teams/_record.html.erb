@@ -1,58 +1,258 @@
-<b>Remporte le Tour de France</b>
-<ul>
-  <%  @r_victories.each do |r| %>
-      <li><%= link_to r.race.name , race_path(r.race) %>: <%= link_to r.leader.display_name , cyclist_path(r.leader.cyclist) %></li>
-  <% end  %>
-</ul>
-<b>Remporte le maillot vert:</b>
-<ul>
-  <%  @rs_victories.each do |r| %>
-      <li><%= link_to r.race.name, race_path(r.race) %>: <%= link_to r.sprinter.display_name , cyclist_path(r.sprinter.cyclist) %></li>
-  <% end  %>
-</ul>
-<b>Remporte le maillot à pois:</b>
-<ul>
-  <%  @rc_victories.each do |r| %>
-      <li><%= link_to r.race.name , race_path(r.race) %>: <%= link_to r.climber.display_name , cyclist_path(r.climber.cyclist) %></li>
-  <% end  %>
-</ul>
-<b>Remporte le maillot blanc</b>
-<ul>
-  <%  @ry_victories.each do |r| %>
-      <li><%= link_to r.race.name , race_path(r.race) %>: <%= link_to r.young.display_name , cyclist_path(r.young.cyclist) %></li>
-  <% end  %>
-</ul>
-<b>Porteur maillot jaune </b>(<%= @y_jersey.size() %>)
-<ul>
-  <%  @y_jersey.each do |r| %>
-      <li><%= link_to r.stage.display_label, stage_path(r.stage) %>: <%= link_to r.leader.display_name , cyclist_path(r.leader.cyclist) %></li>
-  <% end  %>
-</ul>
-<b>Porteur maillot vert </b>(<%= @s_jersey.size() %>)
-<ul>
-  <%  @s_jersey.each do |r| %>
-      <li><%= link_to r.stage.display_label, stage_path(r.stage) %>: <%= link_to r.sprinter.display_name , cyclist_path(r.sprinter.cyclist) %></li>
-  <% end  %>
-</ul>
+<table border="0">
+  <tr>
+    <td>
+      <b>Remporte le maillot jaune</b></td>
+    <td>
+      <% if @r_victories.size() > 0 then %>
+          <%= link_to @r_victories[0].race.display_name, race_path(@r_victories[0].race) %>
+          - <i><%= link_to @r_victories[0].leader.display_name, cyclist_path(@r_victories[0].leader.cyclist) %></i>
 
-<b>Porteur maillot à pois </b>(<%= @c_jersey.size() %>)
-<ul>
-  <%  @c_jersey.each do |r| %>
-      <li><%= link_to r.stage.display_label, stage_path(r.stage) %>: <%= link_to r.climber.display_name , cyclist_path(r.climber.cyclist) %></li>
-  <% end  %>
-</ul>
+      <% else %>
+          -
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="accordionClosed" %>
+        <a href="#">
+          <b>r&eacute;sultats complets: (<%= @r_victories.size() %>)</b>
+        </a>
+        <div>
 
-<b>Victoire d'étapes: </b> (<%= @s_victories.size() %>)
-<ul>
-  <%  @s_victories.each do |ig_stage_result| %>
-      <li><%= link_to ig_stage_result.stage.display_label , stage_path(ig_stage_result.stage) %>: :
-        <% if !ig_stage_result.stage_winner.blank? then %>
-        <%= link_to ig_stage_result.stage_winner.display_name , cyclist_path(ig_stage_result.stage_winner.cyclist) %>
-            <% elsif !ig_stage_result.team.blank? then %>
-            <%= link_to ig_stage_result.race_team.label , team_path(ig_stage_result.team) %>
-        <% else %>
-            ?
-        <% end %>
-      </li>
-  <% end  %>
-</ul>
+          <% @r_victories.each do |r| %>
+              <%= link_to r.race.display_name, race_path(r.race) %> -
+              <i><%= link_to r.leader.display_name, cyclist_path(r.leader.cyclist) %></i><br>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <b>Remporte le maillot à vert </b></td>
+    <td>
+      <% if @rs_victories.size() > 0 then %>
+          <%= link_to @rs_victories[0].race.display_name, race_path(@rs_victories[0].race) %>
+          -
+          <i><%= link_to @rs_victories[0].sprinter.display_name, cyclist_path(@rs_victories[0].sprinter.cyclist) %></i>
+
+      <% else %>
+          -
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="accordionClosed" %>
+        <a href="#">
+          <b>r&eacute;sultats complets: (<%= @rs_victories.size() %>)</b>
+        </a>
+        <div>
+          <% @rs_victories.each do |r| %>
+              <%= link_to r.race.display_name, race_path(r.race) %>
+              - <i><%= link_to r.sprinter.display_name, cyclist_path(r.sprinter.cyclist) %></i><br>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <b>Remporte le maillot à pois </b></td>
+    <td>
+      <% if @rc_victories.size() > 0 then %>
+          <%= link_to @rc_victories[0].race.display_name, race_path(@rc_victories[0].race) %>
+          - <i><%= link_to @rc_victories[0].climber.display_name, cyclist_path(@rc_victories[0].climber.cyclist) %></i>
+
+      <% else %>
+          -
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="accordionClosed" %>
+        <a href="#">
+          <b>r&eacute;sultats complets: (<%= @rc_victories.size() %>)</b>
+        </a>
+        <div>
+          <% @rc_victories.each do |r| %>
+              <%= link_to r.race.display_name, race_path(r.race) %>
+              - <i><%= link_to r.climber.display_name, cyclist_path(r.climber.cyclist) %></i><br>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <b>Remporte le maillot blanc </b></td>
+    <td>
+      <% if @ry_victories.size() > 0 then %>
+          <%= link_to @ry_victories[0].race.display_name, race_path(@ry_victories[0].race) %> -
+          <i><%= link_to @ry_victories[0].young.display_name, cyclist_path(@ry_victories[0].young.cyclist) %></i>
+      <% else %>
+          -
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="accordionClosed" %>
+        <a href="#">
+          <b>r&eacute;sultats complets: (<%= @ry_victories.size() %>)</b>
+        </a>
+        <div>
+          <% @ry_victories.each do |r| %>
+              <%= link_to r.race.display_name, race_path(r.race) %> -
+              <i><%= link_to r.young.display_name, cyclist_path(r.young.cyclist) %></i><br>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Porteur maillot jaune </b></td>
+    <td>
+      <% if @y_jersey.size() > 0 then %>
+          <%= link_to @y_jersey[0].stage.display_label, stage_path(@y_jersey[0].stage) %>
+          - <i><%= link_to @y_jersey[0].leader.display_name, cyclist_path(@y_jersey[0].sprinter.cyclist) %></i>
+
+      <% else %>
+          -
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="accordionClosed" %>
+        <a href="#">
+          <b>r&eacute;sultats complets: (<%= @y_jersey.size() %>)</b>
+        </a>
+        <div>
+          <% @s_jersey.each do |r| %>
+              <%= link_to r.stage.display_label, stage_path(r.stage) %>
+              - <i><%= link_to r.leader.display_name, cyclist_path(r.leader.cyclist) %></i><br>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <b>Porteur maillot vert: </b></td>
+    <td>
+      <% if @s_jersey.size() > 0 then %>
+          <%= link_to @s_jersey[0].stage.display_label, stage_path(@s_jersey[0].stage) %>
+          - <i><%= link_to @s_jersey[0].sprinter.display_name, cyclist_path(@s_jersey[0].sprinter.cyclist) %></i>
+
+      <% else %>
+          -
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="accordionClosed" %>
+        <a href="#">
+          <b>r&eacute;sultats complets: (<%= @s_jersey.size() %>)</b>
+        </a>
+        <div>
+          <% @s_jersey.each do |r| %>
+              <%= link_to r.stage.display_label, stage_path(r.stage) %>
+              - <i><%= link_to r.sprinter.display_name, cyclist_path(r.sprinter.cyclist) %></i><br>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Porteur maillot à pois : </b></td>
+    <td>
+      <% if @c_jersey.size() > 0 then %>
+          <%= link_to @c_jersey[0].stage.display_label, stage_path(@c_jersey[0].stage) %>
+          - <i><%= link_to @c_jersey[0].climber.display_name, cyclist_path(@c_jersey[0].climber.cyclist) %></i>
+
+      <% else %>
+          -
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="accordionClosed" %>
+        <a href="#">
+          <b>r&eacute;sultats complets: (<%= @c_jersey.size() %>)</b>
+        </a>
+        <div>
+          <% @c_jersey.each do |r| %>
+              <%= link_to r.stage.display_label, stage_path(r.stage) %>
+              - <i><%= link_to r.climber.display_name, cyclist_path(r.climber.cyclist) %></i><br>
+
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Victoire d'étape:</b></td>
+    <td>
+      <% if @s_victories.size() > 0 then %>
+          <%= link_to @s_victories[0].stage.display_label, stage_path(@s_victories[0].stage) %>
+          - <i>
+      <% if !@s_victories[0].stage_winner.blank? then %>
+          <%= link_to @s_victories[0].stage_winner.display_name, cyclist_path(@s_victories[0].stage_winner.cyclist) %>
+      <% elsif !@s_victories[0].team.blank? then %>
+          <%= link_to @s_victories[0].race_team.label, team_path(@s_victories[0].team) %>
+      <% else %>
+          ?
+      <% end %>
+    </i>
+      <% else %>
+          -
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="accordionClosed" %>
+        <a href="#">
+          <b>r&eacute;sultats complets: (<%= @s_victories.size() %>)</b>
+        </a>
+        <div>
+          <% @s_victories.each do |ig_stage_result| %>
+              <%= link_to ig_stage_result.stage.display_label, stage_path(ig_stage_result.stage) %>
+              - <i>
+          <% if !ig_stage_result.stage_winner.blank? then %>
+              <%= link_to ig_stage_result.stage_winner.display_name, cyclist_path(ig_stage_result.stage_winner.cyclist) %>
+          <% elsif !ig_stage_result.team.blank? then %>
+              <%= link_to ig_stage_result.race_team.label, team_path(ig_stage_result.team) %>
+          <% else %>
+              ?
+          <% end %>
+        </i>
+              <br>
+          <% end %>
+        </div>
+      </div>
+
+    </td>
+  </tr>
+</table>
+
+
+<script type="text/javascript">
+    $(".accordionOpen").accordion({collapsible: true});
+</script>
+<script type="text/javascript">
+    $(".accordionClosed").accordion({collapsible: true, active: false});
+</script>
+
+

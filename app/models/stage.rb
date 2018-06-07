@@ -29,7 +29,7 @@ class Stage < ActiveRecord::Base
   end
 
   def display_label
-    "#{stage_name} #{display_simple_label}"
+    "#{stage_name} #{display_simple_label} (#{stage_type})"
   end
 
 

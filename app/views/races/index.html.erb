@@ -47,8 +47,10 @@ $(document).ready(function() {
     <td><%= if (race.climber != nil) then link_to race.climber.display_name, cyclist_path(race.climber) end  %></td>
     <td><%= if (race.sprinter != nil) then link_to race.sprinter.display_name, cyclist_path(race.sprinter) end  %></td>
     <td><%= if (race.young != nil) then link_to race.young.display_name, cyclist_path(race.young) end  %></td>
-    <td><%= if (true) then link_to race.race_runners.count, cyclists_path(:year => race.year) else 0 end %></td>
-    <td><%= race.nationalities.length %></td>
+    <td><%= link_to race.race_runners.count, cyclists_path(:year => race.year) %></td>
+    <td><%= if (false) then
+              race.nationalities.length
+            end %></td>
     <td><%= link_to 'Voir', race %></td>
   </tr>
 <% end %>

@@ -2,7 +2,7 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.json
   def index
-    @races = Race.all
+    @races = Race.includes(:ig_race_result).all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @races }
