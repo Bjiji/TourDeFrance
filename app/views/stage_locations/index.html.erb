@@ -2,6 +2,7 @@
 
 <h1>Stage Locations</h1>
 
+<%= link_to 'New Stage Location', new_stage_location_path %>
 <table>
   <thead>
   <tr>
@@ -10,9 +11,10 @@
   </thead>
 
   <tbody>
+
   <% @stage_locations.each do |stage_location| %>
       <tr>
-        <td><%= link_to 'Show', stage_location %></td>
+        <td><%= "#{stage_location.name}" %></td>
         <td><%= link_to 'Edit', edit_stage_location_path(stage_location) %></td>
         <td><%= link_to 'Destroy', stage_location, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
@@ -20,6 +22,5 @@
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Stage Location', new_stage_location_path %>
+

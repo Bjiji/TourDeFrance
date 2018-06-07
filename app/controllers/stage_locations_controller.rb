@@ -3,7 +3,7 @@ class StageLocationsController < ApplicationController
 
   # GET /stage_locations
   def index
-    @stage_locations = StageLocation.all
+    @stage_locations = StageLocation.order(:name).all
   end
 
   # GET /stage_locations/1
@@ -19,9 +19,10 @@ class StageLocationsController < ApplicationController
   def edit
   end
 
+
   # POST /stage_locations
   def create
-    @stage_location = StageLocation.new(stage_location_params)
+    @stage_location = StageLocation.new(stage_location_params.permit!)
 
     if @stage_location.save
       redirect_to @stage_location, notice: 'Stage location was successfully created.'
