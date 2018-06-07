@@ -1,0 +1,18 @@
+<%= form_for(stage_location) do |f| %>
+    <% if stage_location.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(stage_location.errors.count, "error") %> prohibited this stage_location from being
+            saved:</h2>
+
+          <ul>
+            <% stage_location.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
