@@ -135,7 +135,7 @@
           <b>r&eacute;sultats complets: (<%= @y_jersey.size() %>)</b>
         </a>
         <div>
-          <% @s_jersey.each do |r| %>
+          <% @y_jersey.each do |r| %>
               <%= link_to r.stage.display_label, stage_path(r.stage) %>
               - <i><%= link_to r.leader.display_name, cyclist_path(r.leader.cyclist) %></i><br>
           <% end %>
