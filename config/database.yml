@@ -14,8 +14,8 @@ development:
   reconnect: false
   database: tdf
   pool: 5
-  username: root
-  password: root
+  username: tdf
+  password: tdf
   host: 127.0.0.1
 
 # Warning: The database defined as "test" will be erased and
