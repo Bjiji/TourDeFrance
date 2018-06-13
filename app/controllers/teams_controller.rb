@@ -32,6 +32,12 @@ class TeamsController < ApplicationController
     @y_jersey = IgStageResult.joins(leader: :race_team).joins(:stage).where(:race_teams => {:team_id => params[:id]}).order("year DESC, stages.ordinal DESC")
     @c_jersey = IgStageResult.joins(climber: :race_team).joins(:stage).where(:race_teams => {:team_id => params[:id]}).order("year DESC, stages.ordinal DESC")
     @s_jersey = IgStageResult.joins(sprinter: :race_team).joins(:stage).where(:race_teams => {:team_id => params[:id]}).order("year DESC, stages.ordinal DESC")
+
+
+    @r_podium = YjStageResults.joins(race_runner: :race_team).joins(:stage).where("stages.is_last = true AND race_teams.team_id = ? AND pos <= 3", params[:id]).order("year DESC")
+
+    @rt_victories = IgRaceResult.where(:race_team_id => params[:id]).order(year: :DESC)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @team }

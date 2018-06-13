@@ -1,7 +1,7 @@
 <table border="0">
   <tr>
     <td>
-      <b>Remporte le maillot jaune</b></td>
+      <b>Remporte le classement général</b></td>
     <td>
       <% if @r_victories.size() > 0 then %>
           <%= link_to @r_victories[0].race.display_name, race_path(@r_victories[0].race) %>
@@ -28,6 +28,70 @@
       </div>
     </td>
   </tr>
+
+  <tr>
+    <td>
+      <b>Podium du classement général</b></td>
+    <td>
+      <% if @r_podium.size() > 0 then %>
+          <%= link_to @r_podium[0].stage.race.display_name, race_path(@r_podium[0].stage.race) %>
+          -
+          <i><%= link_to @r_podium[0].race_runner.cyclist.display_name, cyclist_path(@r_podium[0].race_runner.cyclist) %></i>
+          - <%= @r_podium[0].pos %>
+
+      <% else %>
+          -
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="accordionClosed" %>
+        <a href="#">
+          <b>r&eacute;sultats complets: (<%= @r_podium.size() %>)</b>
+        </a>
+        <div>
+
+          <% @r_podium.each do |r| %>
+              <%= link_to r.stage.race.display_name, race_path(r.stage.race) %> -
+              <i><%= link_to r.race_runner.cyclist.display_name, cyclist_path(r.race_runner.cyclist) %></i>
+              - <%= r.pos %> <br>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <b>Remporte le classement par équipe </b></td>
+    <td>
+      <% if @rt_victories.size() > 0 then %>
+          <%= link_to @rt_victories[0].race.display_name, race_path(@rt_victories[0].race) %>
+          -
+          <i><%= link_to @rt_victories[0].sprinter.display_name, cyclist_path(@rt_victories[0].sprinter.cyclist) %></i>
+
+      <% else %>
+          -
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="accordionClosed" %>
+        <a href="#">
+          <b>r&eacute;sultats complets: (<%= @rt_victories.size() %>)</b>
+        </a>
+        <div>
+          <% @rt_victories.each do |r| %>
+              <%= link_to r.race.display_name, race_path(r.race) %>
+              - <i><%= link_to r.sprinter.display_name, cyclist_path(r.sprinter.cyclist) %></i><br>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+
 
   <tr>
     <td>

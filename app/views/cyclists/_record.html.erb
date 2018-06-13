@@ -29,6 +29,24 @@
     </ul>
   </div>
 </div>
+
+<div class=<%= @r_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
+  <h3><a href="#"><b>Podium du classement général:</b>
+    (<%= @r_podium.size() %>)
+  </a></h3>
+  <div>
+    <ul>
+      <% @r_podium.each do |r| %>
+          <%= link_to r.stage.race.display_name, race_path(r.stage.race) %> -
+          <i><%= link_to r.race_runner.cyclist.display_name, cyclist_path(r.race_runner.cyclist) %></i> - <%= r.pos %>
+          <br>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
+
 <div class=<%= @rs_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
   <h3><a href="#">
     <b>Vainqueur du classement à points: </b>

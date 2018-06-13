@@ -31,6 +31,9 @@ class CyclistsController < ApplicationController
     @c_jersey = IgStageResult.joins(:climber).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
     @s_jersey = IgStageResult.joins(:sprinter).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
     @yg_jersey = IgStageResult.joins(:young).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
+
+    @r_podium = YjStageResults.joins(:race_runner).joins(:stage).where("stages.is_last = true AND race_runners.cyclist_id = ? AND pos <= 3", params[:id]).order("year DESC")
+
 #    @race = Race.where(:cyclist)
     respond_to do |format|
       format.html # show.html.erb
