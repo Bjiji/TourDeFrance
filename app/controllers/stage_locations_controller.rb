@@ -33,7 +33,7 @@ class StageLocationsController < ApplicationController
 
   # PATCH/PUT /stage_locations/1
   def update
-    if @stage_location.update(stage_location_params)
+    if @stage_location.update(stage_location_params.permit!)
       redirect_to @stage_location, notice: 'Stage location was successfully updated.'
     else
       render :edit
