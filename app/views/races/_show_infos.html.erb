@@ -2,9 +2,14 @@
 <table border=0>
   <tr>
     <td width=480 valign="top">
-<div><h2><%= "Infos"%></h2>
+      <table>
+        <tr>
+          <td><h2><%= "Infos" %></h2></td>
+          <td><h2>Palmarès</h2></td>
+        </tr>
+        <tr>
+          <td>
 <table border=0>
-
   <tr>
     <td><b>Distance</b></td>
     <td><%= @race.distance %></td>
@@ -12,26 +17,18 @@
   <tr>
     <td><b>Moyenne</b></td>
     <td><%= @race.averageSpeed %></td>
+  </tr>
   <tr>
     <td><b>Prime au vainqueur</b></td>
     <td><%= @race.winnerPrize %></td>
   </tr>
   <tr>
-  <tr>
     <td><b>Prime totale</b></td>
     <td><%= @race.poolPrize %></td>
   </tr>
-  </tr>
-    <td><b>Description</b></td>
-    <td><%= if (@race.description != nil) then @race.description.gsub("\n", "<br>").html_safe end %></td>
-  </tr>
-
-  <tr>
 </table>
-</div>
-    </td>
-    <td  valign="top">
-      <div><h2>Palmarès</h2>
+          </td>
+          <td>
       <table border=0>
         <tr>
           <td align=center><img src="/assets/maillot_jaune_40.png"/></td>
@@ -61,6 +58,16 @@
       </table>
       </div>
     </td>
+  </tr>
+</table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan=2><h2>Description</h2></td>
+  <tr>
+    <td colspan=2><%= if (@race.description != nil) then
+                        @race.description.gsub("\n", "<br>").html_safe
+                      end %></td>
   </tr>
 </table>
 
