@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
     if (params[:year] != nil) then
       year = params[:year];
     else
-      year = Race.maximum(year)
+      year = Race.maximum('year')
     end
     @teams = Team.joins(:races).where(:races => {:year => year}).select('distinct teams.*')
 
