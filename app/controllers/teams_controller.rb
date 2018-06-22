@@ -4,10 +4,11 @@ class TeamsController < ApplicationController
   def index
 
     if (params[:year] != nil) then
-      @teams = Team.joins(:races).where(:races => {:year => params[:year]}).select('distinct teams.*')
+      year = params[:year];
     else
-      @teams = Team.joins(:races).select('distinct teams.*')
+      year = Race.maximum(year)
     end
+    @teams = Team.joins(:races).where(:races => {:year => year}).select('distinct teams.*')
 
 
     respond_to do |format|
