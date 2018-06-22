@@ -15,8 +15,10 @@ class RacesController < ApplicationController
     @race = Race.find(params[:id])
     @stages = Stage.where(:race_id => @race['id'])
     @stage = Stage.where(:race_id => @race['id'], :is_last => 1).first
+    if (@stage != nil) then
     @ite_stage_results = IteStageResult.where(:stage_id => @stage['id'])
     @yj_stage_results = YjStageResults.where(:stage_id =>@stage['id'])
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @race }
@@ -42,7 +44,7 @@ class RacesController < ApplicationController
   # POST /races
   # POST /races.json
   def create
-    @race = Race.new(params[:race])
+    @race = Race.new(params[:race].permit!)
 
     respond_to do |format|
       if @race.save

@@ -30,7 +30,8 @@
   </tr>
   </thead>
   <tbody>
-  <%  @yj_stage_results.each do |result| %>
+  <% if (@yj_stage_results != nil) then
+       @yj_stage_results.each do |result| %>
       <% time_res = nil
          time_diff = "-"
          if (result.time_sec != nil && result.time_sec > 0) then
@@ -58,6 +59,6 @@
         <td><%=  if (!result.race_runner.blank?) then result.race_runner.nationality end %></td>
 
       </tr>
-  <% end %>
+      <% end end %>
   </tbody>
 </table>
