@@ -2,7 +2,7 @@ class IgRaceResultsController < ApplicationController
   # GET /ig_race_results
   # GET /ig_race_results.json
   def index
-    @ig_race_results = IgRaceResult.all
+    @ig_race_results = IgRaceResult.all.order("year DESC")
 
     respond_to do |format|
       format.html # index.html.erb

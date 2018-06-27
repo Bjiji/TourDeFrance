@@ -1,16 +1,39 @@
-<h1>Listing ig_race_results</h1>
-
-<table>
+<script>
+    $(document).ready(function () {
+        $('#race_results').dataTable({
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50,
+            "aaSorting": [[0, "desc"]],
+            "aoColumns": [
+                {"asSorting": ["desc", "asc"], "bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": false, "bSearchable": false},
+                {"bSortable": false, "bSearchable": false}
+            ]
+        });
+    });
+</script>
+<table class="display" id="race_results">
+  <thead>
   <tr>
     <th>Année</th>
     <th>Vainqueur</th>
     <th>Meilleur Grimpeur</th>
     <th>Meilleur Sprinter</th>
-    <th></th>
+    <th>Meilleur Jeune</th>
+    <th>Plus combatif</th>
+    <th>Meilleure équipe</th>
     <th></th>
     <th></th>
   </tr>
-
+  </thead>
+  <tbody>
 <% @ig_race_results.each do |ig_race_result| %>
   <tr>
     <td><%= ig_race_result.year %></td>
@@ -18,11 +41,17 @@
     <td><%= if (ig_race_result.climber != nil) then link_to ig_race_result.climber.cyclist.display_name, ig_race_result.climber.cyclist end %></td>
     <td><%= if (ig_race_result.sprinter != nil) then link_to ig_race_result.sprinter.cyclist.display_name, ig_race_result.sprinter.cyclist end %></td>
     <td><%= if (ig_race_result.young != nil) then link_to ig_race_result.young.cyclist.display_name, ig_race_result.young.cyclist end %></td>
-    <td><%= link_to 'Show', ig_race_result %></td>
+    <td><%= if (ig_race_result.combat != nil) then
+              link_to ig_race_result.combat.cyclist.display_name, ig_race_result.combat.cyclist
+            end %></td>
+    <td><%= if (ig_race_result.race_team != nil) then
+              link_to ig_race_result.race_team.label, ig_race_result.race_team
+            end %></td>
     <td><%= link_to 'Edit', edit_ig_race_result_path(ig_race_result) %></td>
     <td><%= link_to 'Destroy', ig_race_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+  </tbody>
 </table>
 
 <br />
