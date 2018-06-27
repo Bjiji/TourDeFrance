@@ -69,7 +69,7 @@
       <% if @rt_victories.size() > 0 then %>
           <%= link_to @rt_victories[0].race.display_name, race_path(@rt_victories[0].race) %>
           -
-          <i><%= link_to @rt_victories[0].sprinter.display_name, cyclist_path(@rt_victories[0].sprinter.cyclist) %></i>
+          <i><%= link_to @rt_victories[0].race_team.label, race_path(@rt_victories[0].race_team.team) %></i>
 
       <% else %>
           -
@@ -84,8 +84,8 @@
         </a>
         <div>
           <% @rt_victories.each do |r| %>
-              <%= link_to r.race.display_name, race_path(r.race) %>
-              - <i><%= link_to r.sprinter.display_name, cyclist_path(r.sprinter.cyclist) %></i><br>
+              <%= link_to @rt_victories[0].race.display_name, race_path(@rt_victories[0].race) %>
+              - <i><%= link_to r.race_team.label, team_path(r.race_team.team) %></i><br>
           <% end %>
         </div>
       </div>

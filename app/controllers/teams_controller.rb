@@ -37,7 +37,7 @@ class TeamsController < ApplicationController
 
     @r_podium = YjStageResults.joins(race_runner: :race_team).joins(:stage).where("stages.is_last = true AND race_teams.team_id = ? AND pos <= 3", params[:id]).order("year DESC")
 
-    @rt_victories = IgRaceResult.where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
+    @rt_victories = IgRaceResult.joins(:race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
 
     respond_to do |format|
       format.html # show.html.erb
