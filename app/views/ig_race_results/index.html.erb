@@ -45,7 +45,7 @@
               link_to ig_race_result.combat.cyclist.display_name, ig_race_result.combat.cyclist
             end %></td>
     <td><%= if (ig_race_result.race_team != nil) then
-              link_to ig_race_result.race_team.label, ig_race_result.race_team
+              link_to ig_race_result.race_team.label, ig_race_result.race_team.team
             end %></td>
     <td><%= link_to 'Edit', edit_ig_race_result_path(ig_race_result) %></td>
     <td><%= link_to 'Destroy', ig_race_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
