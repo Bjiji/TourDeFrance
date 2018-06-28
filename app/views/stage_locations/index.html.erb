@@ -14,7 +14,7 @@
 
   <% @stage_locations.each do |stage_location| %>
       <tr>
-        <td><%= "#{stage_location.name}" %></td>
+        <td><%= link_to "#{stage_location.name}", stage_location_path(stage_location) %></td>
         <td><%= "#{stage_location.department}" %></td>
         <td><%= "#{stage_location.code}" %></td>
         <td><%= "#{stage_location.country}" %></td>

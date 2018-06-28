@@ -14,22 +14,25 @@ class MountainStageResult < ActiveRecord::Base
     mountain_name = if(search[:m_name].blank?) then "%" else "%" + search[:m_name] + "%" end
     mountain_category = search[:m_category] || "%"
     mountain_finish = search[:m_finish]
-    lastname = search[:lastname]  || ""
-    lastname_condition = "%" + lastname + "%"
-    firstname = search[:firstname]  || ""
-    firstname_condition = "%" + firstname + "%"
+    department = "%#{search[:department]}%"
+    country = "%#{search[:country]}%"
+    lastname_condition = "%#{search[:lastname]}%"
+    firstname_condition = "%#{search[:firstname]}%"
     nationality = search[:nationality]  || ""
     nationality_condition = "%" + nationality + "%"
     start_city_condition = "%"
     end_city_condition = "%"
     city = "%" + (search[:city] || "") + "%"
     if (search[:city_kind] == "both") then
+      join_location = "LEFT JOIN stage_locations sl on sl.id = stages.start_location OR sl.id = stages.finish_location "
       start_city_condition = city
       end_city_condition =  city
     elsif (search[:city_kind] == "start")
+      join_location = "LEFT JOIN stage_locations sl on sl.id = stages.start_location "
       start_city_condition =  city
       end_city_condition =  "-"
     elsif (search[:city_kind] == "end")
+      join_location = "LEFT JOIN stage_locations sl on sl.id = stages.finish_location "
       start_city_condition =  "-"
       end_city_condition =  city
     end
@@ -76,6 +79,7 @@ class MountainStageResult < ActiveRecord::Base
       LEFT JOIN race_runners runner ON msr.leader_id = runner.id
       LEFT JOIN cyclists cyclist ON cyclist.id = runner.cyclist_id
       LEFT JOIN stages ON msr.stage_id = stages.id
+      #{join_location}
       LEFT JOIN ig_stage_results ON ig_stage_results.stage_id = stages.id
       LEFT JOIN ite_stage_results isr ON isr.stage_id = stages.id AND runner.id = isr.race_runner_id
       WHERE stages.year " +  y_operator + " '" + year_condition + "' "
@@ -85,6 +89,8 @@ class MountainStageResult < ActiveRecord::Base
     if (!altitude.blank?) then query = query + "AND msr.altitude " +  a_operator + " '" + altitude_condition + "'" end
       query += "AND stages.stage_type LIKE '" + type_condition + "'
       AND stages.stage_type LIKE '" + type_condition + "'
+      AND (sl.id is NULL OR sl.department LIKE '#{department}' OR sl.code LIKE '#{department}')
+      AND (sl.id is NULL or sl.country LIKE \"#{country}\")
       AND (stages.start LIKE '" + start_city_condition + "' OR stages.finish LIKE '" + end_city_condition + "') "
        if (!search[:lastname].blank?) then query = query + " AND cyclist.lastname LIKE '" + lastname_condition + "'"  end
     if (!search[:firstname].blank?) then query = query + " AND cyclist.firstname LIKE '" + firstname_condition + "'" end

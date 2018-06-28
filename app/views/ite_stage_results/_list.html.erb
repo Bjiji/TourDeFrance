@@ -44,8 +44,16 @@
       <tr>
         <td><%= if (ite_stage_result.stage.blank?) then '?' else link_to ite_stage_result.stage.year, race_path(ite_stage_result.stage.race_id) end %></td>
         <td><%= if (ite_stage_result.stage.blank?) then '?' else link_to ite_stage_result.stage.stage_num, ite_stage_result.stage end %></td>
-        <td><%= if (ite_stage_result.stage.blank?) then '?' else  ite_stage_result.stage.start end %></td>
-        <td><%= if (ite_stage_result.stage.blank?) then '?' else ite_stage_result.stage.finish end %></td>
+        <td><%= if (ite_stage_result.stage.blank?) then
+                  '?'
+                else
+                  link_to ite_stage_result.stage.start, stage_location_path(ite_stage_result.stage.start_location)
+                end %></td>
+        <td><%= if (ite_stage_result.stage.blank?) then
+                  '?'
+                else
+                  link_to ite_stage_result.stage.finish, stage_location_path(ite_stage_result.stage.finish_location)
+                end %></td>
         <td><%= if (ite_stage_result.stage.blank?) then '?' else  ite_stage_result.stage.stage_type end %></td>
         <td><%= if (ite_stage_result.pos.blank?) then '999' else link_to(ite_stage_result.pos, ite_stage_result) end %></td>
         <td><%= ite_stage_result.display_time %></td>

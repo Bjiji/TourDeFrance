@@ -8,6 +8,7 @@ class StageLocationsController < ApplicationController
 
   # GET /stage_locations/1
   def show
+    @stages = @stage_location.stages
   end
 
   # GET /stage_locations/new

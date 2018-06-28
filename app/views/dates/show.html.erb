@@ -86,8 +86,8 @@
         <tr>
           <td><%= link_to ite_stage_result.stage.stage_name, ite_stage_result_path(ite_stage_result) %></td>
           <td><%= ite_stage_result.stage.stage_type %></td>
-          <td><%= ite_stage_result.stage.start %></td>
-          <td><%= ite_stage_result.stage.finish %></td>
+          <td><%= link_to ite_stage_result.stage.start, stage_location_path(ite_stage_result.stage.start_location) %></td>
+          <td><%= link_to ite_stage_result.stage.finish, stage_location_path(ite_stage_result.stage.finish_location) %></td>
           <td><%= link_to(ite_stage_result.pos.to_s, ite_stage_result_path(ite_stage_result)) %></td>
           <td><%= ite_stage_result.display_time %></td>
           <td><%= " " %></td>

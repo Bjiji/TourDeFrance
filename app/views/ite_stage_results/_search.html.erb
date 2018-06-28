@@ -1,93 +1,124 @@
 <%= form_tag ite_stage_results_path, :action => 'index', :method => 'get' do %>
     <table border=1 bgcolor="#CCCCEE" width="100%">
-      <tr><td><table width="100%">
-        <tr>
-          <td>
-            <FIELDSET>
-              <LEGEND align=top>Etape</LEGEND>
-              <table border=0 width="100%">
-                <tr>
-                  <td>ville</td><td><%= text_field_tag :city, params[:city] %><%= select_tag :city_kind, options_for_select([['Etape', 'both'], ['Départ', 'start'], ['Arrivée', 'end']], params[:city_kind]) %></td>
-                  <td>type</td><td><%= select_tag :s_type, options_for_select(Stage.connection.select_values('select distinct stage_type from stages'), params[:s_type]), {:include_blank => true} %></td>
-                  <td>année</td><td><%= select_tag :year_operator, options_for_select([['en', 'equals'], ['depuis', 'since'], ['avant', 'before']],  params[:year_operator]), {:include_blank => false} %><%=number_field_tag( :year, params[:year], :size => 4, :min => 1900, :max => 2100) %></td><td>&nbsp;</td>
-                </tr>
-              </table>
-            </FIELDSET>
-          </td></tr>
-        <tr><td>
-          <FIELDSET>
-            <LEGEND align=top>Coureur</LEGEND>
-            <table border=0 width="100%">
-              <tr>
-                <td>Nom</td><td><%= text_field_tag :lastname, params[:lastname] %></td>
-                <td>Prénom</td><td><%= text_field_tag :firstname, params[:firstname] %></td>
-                <td>Nat.</td><td><%= select_tag :nationality, options_for_select(RaceRunner.connection.select_values('select sub.n from (select count(1) cnt, nationality n from race_runners group by nationality order by count(1) desc) sub'), params[:nationality]), {:include_blank => true} %></td>
-                <td>Equipe</td><td><%= text_field_tag :race_team, params[:race_team] %></td>
-                <td>Code UCI</td><td><%= text_field_tag :uci, params[:uci] %></td>
-              </tr>
-              <tr>
-                <td>Etape</td>
-                <td>
-                  <% selected = params[:c_stage_pos] %>
-                  <!--% @tmp = IteStageResult.connection.select_values('select distinct(stage_status) from ite_stage_results where not(stage_status is null)')
-                     @stage_status = @tmp.map{|u| ['- ' + u, 'dnf'+u]}
-                  %-->
-                  <%= select_tag :c_stage_pos, options_for_select([['Partant', 'run'], ['Termine', 'finish'], ['- Vainqueur', 'winner'], ['- Podium', 'topthree'], ['- Dans les 10 premiers', 'topten'], ['- Non vainqueur', 'nowinner'], ['Non classé', 'nofinish'], ['- Abandon', 'dnf'], ['- Non partant', 'dns'], ['- Eliminé', 'dnq']], params[:c_stage_pos]),  {:include_blank => false} %>
-                </td>
-                <td><img src="/assets/maillot_jaune_40.png"/></td>
-                <td>
-                  <table>
+      <tr>
+        <td>
+          <table width="100%">
+            <tr>
+              <td>
+                <FIELDSET>
+                  <LEGEND align=top>Etape</LEGEND>
+                  <table border=0 width="100%">
                     <tr>
-                      <td>au départ</td><td><%= select_tag :c_start_leader, options_for_select([['Oui', 'yes'], ['Non', 'no']], params[:c_start_leader]), {:include_blank => true} %></td>
+                      <td>ville</td>
+                      <td><%= text_field_tag :city, params[:city] %><%= select_tag :city_kind, options_for_select([['Etape', 'both'], ['Départ', 'start'], ['Arrivée', 'end']], params[:city_kind]) %></td>
+                      <td>département</td>
+                      <td><%= text_field_tag :department, params[:department] %></td>
+                      <td>pays</td>
+                      <td><%= text_field_tag :country, params[:country] %></td>
                     </tr>
                     <tr>
-                      <td>à l'arrivée</td><td><%= select_tag :c_finish_leader, options_for_select([['Oui', 'yes'], ['Non', 'no']],  params[:c_finish_leader]), {:include_blank => true} %></td>
+                      <td>type</td>
+                      <td><%= select_tag :s_type, options_for_select(Stage.connection.select_values('select distinct stage_type from stages'), params[:s_type]), {:include_blank => true} %></td>
+                      <td>année</td>
+                      <td><%= select_tag :year_operator, options_for_select([['en', 'equals'], ['depuis', 'since'], ['avant', 'before']], params[:year_operator]), {:include_blank => false} %><%= number_field_tag(:year, params[:year], :size => 4, :min => 1900, :max => 2100) %></td>
+                      <td>&nbsp;</td>
                     </tr>
                   </table>
-                </td>
-                <td><img src="/assets/maillot_vert_40.png"/></td>
-                <td>
-                  <table>
+                </FIELDSET>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <FIELDSET>
+                  <LEGEND align=top>Coureur</LEGEND>
+                  <table border=0 width="100%">
                     <tr>
-                      <td>au départ</td><td><%= select_tag :c_start_sprinter, options_for_select([['Oui', 'yes'], ['Non', 'no']],  params[:c_start_sprinter]), {:include_blank => true} %></td>
+                      <td>Nom</td>
+                      <td><%= text_field_tag :lastname, params[:lastname] %></td>
+                      <td>Prénom</td>
+                      <td><%= text_field_tag :firstname, params[:firstname] %></td>
+                      <td>Nat.</td>
+                      <td><%= select_tag :nationality, options_for_select(RaceRunner.connection.select_values('select sub.n from (select count(1) cnt, nationality n from race_runners group by nationality order by count(1) desc) sub'), params[:nationality]), {:include_blank => true} %></td>
+                      <td>Equipe</td>
+                      <td><%= text_field_tag :race_team, params[:race_team] %></td>
+                      <td>Code UCI</td>
+                      <td><%= text_field_tag :uci, params[:uci] %></td>
                     </tr>
                     <tr>
-                      <td>à l'arrivée</td><td><%= select_tag :c_finish_sprinter, options_for_select([['Oui', 'yes'], ['Non', 'no']],  params[:c_finish_sprinter]), {:include_blank => true} %></td>
+                      <td>Etape</td>
+                      <td>
+                        <% selected = params[:c_stage_pos] %>
+                        <!--% @tmp = IteStageResult.connection.select_values('select distinct(stage_status) from ite_stage_results where not(stage_status is null)')
+                           @stage_status = @tmp.map{|u| ['- ' + u, 'dnf'+u]}
+                        %-->
+                        <%= select_tag :c_stage_pos, options_for_select([['Partant', 'run'], ['Termine', 'finish'], ['- Vainqueur', 'winner'], ['- Podium', 'topthree'], ['- Dans les 10 premiers', 'topten'], ['- Non vainqueur', 'nowinner'], ['Non classé', 'nofinish'], ['- Abandon', 'dnf'], ['- Non partant', 'dns'], ['- Eliminé', 'dnq']], params[:c_stage_pos]), {:include_blank => false} %>
+                      </td>
+                      <td><img src="/assets/maillot_jaune_40.png"/></td>
+                      <td>
+                        <table>
+                          <tr>
+                            <td>au départ</td>
+                            <td><%= select_tag :c_start_leader, options_for_select([['Oui', 'yes'], ['Non', 'no']], params[:c_start_leader]), {:include_blank => true} %></td>
+                          </tr>
+                          <tr>
+                            <td>à l'arrivée</td>
+                            <td><%= select_tag :c_finish_leader, options_for_select([['Oui', 'yes'], ['Non', 'no']], params[:c_finish_leader]), {:include_blank => true} %></td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td><img src="/assets/maillot_vert_40.png"/></td>
+                      <td>
+                        <table>
+                          <tr>
+                            <td>au départ</td>
+                            <td><%= select_tag :c_start_sprinter, options_for_select([['Oui', 'yes'], ['Non', 'no']], params[:c_start_sprinter]), {:include_blank => true} %></td>
+                          </tr>
+                          <tr>
+                            <td>à l'arrivée</td>
+                            <td><%= select_tag :c_finish_sprinter, options_for_select([['Oui', 'yes'], ['Non', 'no']], params[:c_finish_sprinter]), {:include_blank => true} %></td>
+                          </tr>
+                        </table>
+                      </td>
                     </tr>
-                  </table>
-                </td>
-              </tr><tr>
-                <td><img src="/assets/maillot_pois_40.png"/></td>
-                <td>
-                  <table>
                     <tr>
-                      <td>au départ</td><td><%= select_tag :c_start_climber, options_for_select([['Oui', 'yes'], ['Non', 'no']],  params[:c_start_climber]), {:include_blank => true} %></td>
-                    </tr>
-                    <tr>
-                      <td>à l'arrivée</td><td><%= select_tag :c_finish_climber, options_for_select([['Oui', 'yes'], ['Non', 'no']],  params[:c_finish_climber]), {:include_blank => true} %></td>
-                    </tr>
-                  </table>
-                </td>
-                <td><img src="/assets/maillot_blanc_40.png"/></td>
-                <td>
-                  <table>
-                    <tr>
-                      <td>au départ</td><td><%= select_tag :c_start_young, options_for_select([['Oui', 'yes'], ['Non', 'no']],  params[:c_start_young]), {:include_blank => true} %></td>
-                    </tr>
-                    <tr>
-                      <td>à l'arrivée</td><td><%= select_tag :c_finish_young, options_for_select([['Oui', 'yes'], ['Non', 'no']],  params[:c_finish_young]), {:include_blank => true} %></td>
-                    </tr>
-                  </table>
-                </td>
+                      <td><img src="/assets/maillot_pois_40.png"/></td>
+                      <td>
+                        <table>
+                          <tr>
+                            <td>au départ</td>
+                            <td><%= select_tag :c_start_climber, options_for_select([['Oui', 'yes'], ['Non', 'no']], params[:c_start_climber]), {:include_blank => true} %></td>
+                          </tr>
+                          <tr>
+                            <td>à l'arrivée</td>
+                            <td><%= select_tag :c_finish_climber, options_for_select([['Oui', 'yes'], ['Non', 'no']], params[:c_finish_climber]), {:include_blank => true} %></td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td><img src="/assets/maillot_blanc_40.png"/></td>
+                      <td>
+                        <table>
+                          <tr>
+                            <td>au départ</td>
+                            <td><%= select_tag :c_start_young, options_for_select([['Oui', 'yes'], ['Non', 'no']], params[:c_start_young]), {:include_blank => true} %></td>
+                          </tr>
+                          <tr>
+                            <td>à l'arrivée</td>
+                            <td><%= select_tag :c_finish_young, options_for_select([['Oui', 'yes'], ['Non', 'no']], params[:c_finish_young]), {:include_blank => true} %></td>
+                          </tr>
+                        </table>
+                      </td>
 
-                <td>pour son premier tour</td><td><%= check_box_tag(:first_time, params[:first_time],  params[:first_time]) %></td>
-              </tr>
-            </table>
-          </FIELDSET>
-        <tr>
+                      <td>pour son premier tour</td>
+                      <td><%= check_box_tag(:first_time, params[:first_time], params[:first_time]) %></td>
+                    </tr>
+                  </table>
+                </FIELDSET>
+            <tr>
 
-          <td><%= submit_tag "recherche", :name => nil %></td>
-        </tr>
-      </table></td></tr>
+              <td><%= submit_tag "recherche", :name => nil %></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
     </table>
 <% end %>

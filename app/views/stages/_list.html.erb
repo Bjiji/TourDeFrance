@@ -1,7 +1,7 @@
 <script>
     $(document).ready(function() {
         $('#stages').dataTable( {
-            "sDom": "<'wrapper'i>, <fprtfp>",
+            "dom": "<'toolbar'>flrtp",
             "bJQueryUI": true,
             "iDisplayLength": 50,
             "aaSorting": [[ 0, "desc" ], [1, "desc"]],
@@ -20,6 +20,7 @@
         });
     } );
 </script>
+<h3><b>Etapes:</b> (<%= @stages.size() %>)</h3>
 <table class="display" id="stages">
   <thead>
   <tr>
@@ -41,8 +42,8 @@
         <td><%= link_to stage.year, stage.race %></td>
         <td><%= link_to stage.stage_num, stage %></td>
         <td><%= link_to stage.date, stage %></td>
-        <td><%= stage.start %></td>
-        <td><%= stage.finish %></td>
+        <td><%= link_to stage.start, stage_location_path(stage.start_location) %></td>
+        <td><%= link_to stage.finish, stage_location_path(stage.finish_location) %></td>
         <td><%= stage.distance %></td>
         </td><td>
         <% st = stage.time %>

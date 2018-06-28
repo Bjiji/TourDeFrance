@@ -1,4 +1,26 @@
-<p id="notice"><%= notice %></p>
+<p id="notice" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+<table border=0 width="800">
+  <tr>
+    <td colspan="2">
+      <h2><%= @stage_location.name %></h2></td>
+  </tr>
+  <tr>
+    <td><b>Département:</b></td>
+    <td><%= "#{@stage_location.department} (#{@stage_location.code})" %></td>
+  </tr>
+  <tr>
+    <td>
+      <b>Pays:</b></td>
+    <td>
+      <%= @stage_location.country %>
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" colspan="2">
+      <%= render :partial => 'stages/list' %>
+    </td>
+  </tr>
+</table>
 
 <%= link_to 'Edit', edit_stage_location_path(@stage_location) %> |
 <%= link_to 'Back', stage_locations_path %>

@@ -11,6 +11,12 @@
                     <tr>
                       <td>ville</td>
                       <td><%= text_field_tag :city, params[:city] %><%= select_tag :city_kind, options_for_select([['Etape', 'both'], ['Départ', 'start'], ['Arrivée', 'end']], params[:city_kind]) %></td>
+                      <td>département</td>
+                      <td><%= text_field_tag :department, params[:department] %></td>
+                      <td>pays</td>
+                      <td><%= text_field_tag :country, params[:country] %></td>
+                    </tr>
+                    <tr>
                       <td>type</td>
                       <td><%= select_tag :s_type, options_for_select(Stage.connection.select_values('select distinct stage_type from stages'), params[:s_type]), {:include_blank => true} %></td>
                       <td>année</td>
