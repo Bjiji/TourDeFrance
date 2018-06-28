@@ -58,7 +58,8 @@ class StatStageDiff
       if search[:c_finish_leader] == "yes" then query = query + " AND ig_stage_results.leader_id=runner.id "
       elsif search[:c_finish_leader] == "no" then query = query + " AND ig_stage_results.leader_id!=runner.id "
       end
-      if search[:c_start_leader] == "yes" then query = query + " AND ig_stage_results.previous_leader_id=runner.id "
+      if search[:c_start_leader] == "yes" then
+        query = query + " AND ig_stage_results.previous_leader=runner.id "
       elsif search[:c_start_leader] == "no" then query = query + " AND ig_stage_results.previous_leader!=runner.id "
       end
       if search[:c_finish_climber] == "yes" then query = query + " AND ig_stage_results.climber_id=runner.id "
