@@ -4,13 +4,16 @@
       <LEGEND align=top>Pays</LEGEND>
 <table>
   <tr>
-    <td>(1)</td><td><%= select_tag :nationality1, options_for_select(Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(1) desc) sub'), params[:nationality1]), {:include_blank => true} %></td>
+    <td>(1)</td>
+    <td><%= select_tag :nationality1, options_for_select(Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from cyclists group by nationality order by count(1) desc) sub'), params[:nationality1]), {:include_blank => true} %></td>
     <td>
       <%= submit_tag "recherche", :name => nil %>
     </td>
     </tr>
     <tr>
-    <td>(2)</td><td><%= select_tag :nationality2, options_for_select(Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from Cyclists group by nationality order by count(1) desc) sub'), params[:nationality2]), {:include_blank => true} %></td><td></td>
+      <td>(2)</td>
+      <td><%= select_tag :nationality2, options_for_select(Cyclist.connection.select_values('select sub.n from (select count(1) cnt, nationality n from cyclists group by nationality order by count(1) desc) sub'), params[:nationality2]), {:include_blank => true} %></td>
+      <td></td>
   </tr>
   <tr>
 
