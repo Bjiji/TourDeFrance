@@ -29,5 +29,9 @@
   </tr>
 </table>
 <p>
-<%= link_to 'Edit', edit_yj_stage_result_path(@yj_stage_result) %>
+  <%= link_to '-',
+              yj_stage_results_path,
+              method: :delete,
+              data: {confirm: 'Are you sure?'} %> |
+  <%= link_to 'Edit', edit_yj_stage_result_path(@yj_stage_result) %>
 </p>
