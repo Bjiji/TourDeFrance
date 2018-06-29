@@ -1,3 +1,33 @@
-<p id="notice"><%= notice %></p>
-
+<p id="notice" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+<p>
+<h2><%= "Entrée du classement général:" %></h2>
+</p>
+<table>
+  <tr>
+    <td><b>Etape: </b></td>
+    <td><%= link_to @yj_stage_result.stage.display_label, stage_path(@yj_stage_result.stage) %></td>
+  </tr>
+  <tr>
+    <td><b>Position: </b></td>
+    <td><%= @yj_stage_result.pos %></td>
+  </tr>
+  <tr>
+    <td><b>Coureur:</b></td>
+    <td><%= if (@yj_stage_result.race_runner != nil) then
+              link_to @yj_stage_result.race_runner.cyclist.display_fullname, cyclist_path(@yj_stage_result.race_runner.cyclist)
+            else
+              "?"
+            end %></td>
+  </tr>
+  <tr>
+    <td><b>Temps:</b></td>
+    <td><%= IteStageResult.displayTime(@yj_stage_result.time_sec) %></td>
+  </tr>
+  <tr>
+    <td><b>Différence au vainqueur:</b></td>
+    <td><%= IteStageResult.displayTime(@yj_stage_result.diff_time_sec) %></td>
+  </tr>
+</table>
+<p>
 <%= link_to 'Edit', edit_yj_stage_result_path(@yj_stage_result) %>
+</p>

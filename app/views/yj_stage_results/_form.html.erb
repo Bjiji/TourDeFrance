@@ -1,42 +1,60 @@
-<%= form_for(yj_stage_result) do |f| %>
-  <% if yj_stage_result.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(yj_stage_result.errors.count, "error") %> prohibited this yj_stage_result from being saved:</h2>
+<%= form_for(@yj_stage_result) do |f| %>
+    <% if @yj_stage_result.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@yj_stage_result.errors.count, "error") %> prohibited this yj_stage_result from being
+            saved:</h2>
 
-      <ul>
-      <% yj_stage_result.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @yj_stage_result.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+    <div class="field">
+      <%= f.label :year %><br/>
+      <%= f.number_field :year %>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :stage %><br/>
+      <% s_array = Stage.where(:year => @yj_stage_result.year).order('year', 'ordinal').all.map {|c| [c.stage_name, c.id]} %>
+      <%= f.select :stage_id, s_array, {:include_blank => true} %>
+    </div>
+
+    <div class="field">
+      <%= f.label :pos %><br/>
+      <%= f.number_field :pos %>
+    </div>
+
+    <div class="field">
+      <%= f.label :runner_s %><br/>
+      <%= f.text_field :runner_s %>
+    </div>
+
+    <div class="field">
+      <%= f.label :race_runner %><br/>
+      <% if (@yj_stage_result != nil && @yj_stage_result.stage != nil) then
+           c_array = RaceRunner.where(:year => @yj_stage_result.stage.year).order('lastname').all.map {|c| [c.display_fullname, c.id]}
+         else
+           c_array = []
+         end %>
+      <%= f.select :race_runner_id, c_array, {:include_blank => true} %>
+    </div>
+
+    <div class="field">
+      <%= f.label :time_sec %><br/>
+      <%= f.number_field :time_sec %>
+    </div>
+    <div class="field">
+      <%= f.label :diff_time_sec %><br/>
+      <%= f.number_field :diff_time_sec %>
+    </div>
+
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>
-
-
-<div class="field">
-  <%= f.label :race_runner %><br />
-  <% c_array = RaceRunner.where(:year => @yj_stage_result.stage.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
-  <%= f.select :race_runner_id, c_array, {:include_blank => true} %>
-</div>
-
-<div class="field">
-  <%= f.label :time_sec %><br />
-  <%= f.text_field :time_sec %>
-</div>
-<div class="field">
-  <%= f.label :diff_time_sec %><br />
-  <%= f.text_field :diff_time_sec %>
-</div>
-
-<div class="field">
-  <%= f.label :pos %><br />
-  <%= f.number_field :pos %>
-</div>
-
-<div class="actions">
-  <%= f.submit %>
-</div>
