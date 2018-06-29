@@ -16,7 +16,7 @@
     <td><%= if (@yj_stage_result.race_runner != nil) then
               link_to @yj_stage_result.race_runner.cyclist.display_fullname, cyclist_path(@yj_stage_result.race_runner.cyclist)
             else
-              "?"
+              "? (<i>#{@yj_stage_result.runner_s}</i>)"
             end %></td>
   </tr>
   <tr>
@@ -30,7 +30,7 @@
 </table>
 <p>
   <%= link_to '-',
-              yj_stage_results_path,
+              yj_stage_result_path,
               method: :delete,
               data: {confirm: 'Are you sure?'} %> |
   <%= link_to 'Edit', edit_yj_stage_result_path(@yj_stage_result) %>
