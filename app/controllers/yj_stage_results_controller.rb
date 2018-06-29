@@ -50,7 +50,7 @@ class YjStageResultsController < ApplicationController
   # DELETE /yj_stage_results/1
   def destroy
     @yj_stage_result.destroy
-    redirect_to yj_stage_results_index_url, notice: 'Yj stage results was successfully destroyed.'
+    redirect_to yj_stage_results_url, notice: 'Yj stage results was successfully destroyed.'
   end
 
   private
