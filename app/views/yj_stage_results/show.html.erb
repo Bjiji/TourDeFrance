@@ -16,7 +16,7 @@
     <td><%= if (@yj_stage_result.race_runner != nil) then
               link_to @yj_stage_result.race_runner.cyclist.display_fullname, cyclist_path(@yj_stage_result.race_runner.cyclist)
             else
-              "? (<i>#{@yj_stage_result.runner_s}</i>)"
+              "? (#{@yj_stage_result.runner_s})"
             end %></td>
   </tr>
   <tr>
