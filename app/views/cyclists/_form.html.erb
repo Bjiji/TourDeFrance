@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :dob %><br />
-    <%= f.date_select(:dob, options={ :start_year => 1860})  %>
+    <%= f.date_select(:dob, options={:start_year => 1860, :end_year => 2010}) %>
   </div>
   <div class="field">
     <%= f.label :pob %><br />
