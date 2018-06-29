@@ -37,12 +37,20 @@
 <% @ig_race_results.each do |ig_race_result| %>
   <tr>
     <td><%= ig_race_result.year %></td>
-    <td><%= if (ig_race_result.leader != nil) then link_to ig_race_result.leader.cyclist.display_name, ig_race_result.leader.cyclist end %></td>
-    <td><%= if (ig_race_result.climber != nil) then link_to ig_race_result.climber.cyclist.display_name, ig_race_result.climber.cyclist end %></td>
-    <td><%= if (ig_race_result.sprinter != nil) then link_to ig_race_result.sprinter.cyclist.display_name, ig_race_result.sprinter.cyclist end %></td>
-    <td><%= if (ig_race_result.young != nil) then link_to ig_race_result.young.cyclist.display_name, ig_race_result.young.cyclist end %></td>
+    <td><%= if (ig_race_result.leader != nil) then
+              link_to ig_race_result.leader.display_name, ig_race_result.leader.cyclist
+            end %></td>
+    <td><%= if (ig_race_result.climber != nil) then
+              link_to ig_race_result.climber.display_name, ig_race_result.climber.cyclist
+            end %></td>
+    <td><%= if (ig_race_result.sprinter != nil) then
+              link_to ig_race_result.sprinter.display_name, ig_race_result.sprinter.cyclist
+            end %></td>
+    <td><%= if (ig_race_result.young != nil) then
+              link_to ig_race_result.young.display_name, ig_race_result.young.cyclist
+            end %></td>
     <td><%= if (ig_race_result.combat != nil) then
-              link_to ig_race_result.combat.cyclist.display_name, ig_race_result.combat.cyclist
+              link_to ig_race_result.combat.display_name, ig_race_result.combat.cyclist
             end %></td>
     <td><%= if (ig_race_result.race_team != nil) then
               link_to ig_race_result.race_team.label, ig_race_result.race_team.team

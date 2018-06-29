@@ -36,7 +36,7 @@
       <% if @r_podium.size() > 0 then %>
           <%= link_to @r_podium[0].stage.race.display_name, race_path(@r_podium[0].stage.race) %>
           -
-          <i><%= link_to @r_podium[0].race_runner.cyclist.display_name, cyclist_path(@r_podium[0].race_runner.cyclist) %></i>
+          <i><%= link_to @r_podium[0].race_runner.display_name, cyclist_path(@r_podium[0].race_runner.cyclist) %></i>
           - <%= @r_podium[0].pos %>
 
       <% else %>
@@ -54,7 +54,7 @@
 
           <% @r_podium.each do |r| %>
               <%= link_to r.stage.race.display_name, race_path(r.stage.race) %> -
-              <i><%= link_to r.race_runner.cyclist.display_name, cyclist_path(r.race_runner.cyclist) %></i>
+              <i><%= link_to r.race_runner.display_name, cyclist_path(r.race_runner.cyclist) %></i>
               - <%= r.pos %> <br>
           <% end %>
         </div>

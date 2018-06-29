@@ -14,7 +14,7 @@
   <tr>
     <td><b>Coureur:</b></td>
     <td><%= if (@yj_stage_result.race_runner != nil) then
-              link_to @yj_stage_result.race_runner.cyclist.display_fullname, cyclist_path(@yj_stage_result.race_runner.cyclist)
+              link_to @yj_stage_result.race_runner.display_fullname, cyclist_path(@yj_stage_result.race_runner.cyclist)
             else
               "? (#{@yj_stage_result.runner_s})"
             end %></td>

@@ -8,14 +8,16 @@ class RaceRunner < ActiveRecord::Base
 
 def display_name
   if (cyclist == nil)
-  then display_name = '?'
+  then
+    display_name = "? (#{name})"
   else display_name = cyclist.display_name
   end
 end
 
   def display_fullname
     if (cyclist == nil)
-    then display_fullname = '?'
+    then
+      display_fullname = "? (#{name})"
     else display_fullname = cyclist.display_fullname
     end
   end

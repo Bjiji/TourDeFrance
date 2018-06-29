@@ -38,7 +38,7 @@
     <ul>
       <% @r_podium.each do |r| %>
           <%= link_to r.stage.race.display_name, race_path(r.stage.race) %> -
-          <i><%= link_to r.race_runner.cyclist.display_name, cyclist_path(r.race_runner.cyclist) %></i> - <%= r.pos %>
+          <i><%= link_to r.race_runner.display_name, cyclist_path(r.race_runner.cyclist) %></i> - <%= r.pos %>
           <br>
       <% end %>
     </ul>
