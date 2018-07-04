@@ -29,6 +29,16 @@
     </div>
 
     <div class="field">
+      <%= f.label :race_team %><br/>
+      <% if (@ite_stage_result != nil && @ite_stage_result.stage != nil) then
+           c_array = RaceTeam.where(:year => @ite_stage_result.stage.year).order('label').all.map {|c| [c.label, c.id]}
+         else
+           c_array = []
+         end %>
+      <%= f.select :race_team, c_array, {:include_blank => true} %>
+    </div>
+
+    <div class="field">
       <%= f.label :time_sec %><br />
       <%= f.text_field :time_sec %>
     </div>

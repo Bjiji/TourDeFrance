@@ -53,4 +53,12 @@ FROM stages s
   JOIN race_runners r ON r.id = ig.leader_id
   JOIN race_runners r0 ON r0.id = ig.previous_leader
 WHERE ig.previous_leader <> ig.leader_id
-      AND datediff(last_stage.date, s.date) < 8
+      AND datediff(last_stage.date, s.date) < 8;
+
+SELECT
+  sl.name,
+  group_concat(DISTINCT (lower(trim(repalce(if(s.start_location = sl.id, s.start, s.finish)), '-', ' '))) FROM
+               stage_locations sl
+               JOIN stages s ON s.start_location = sl.id OR s.finish_location = sl.id
+               GROUP BY sl.id
+               HAVING count(1) > 10;
