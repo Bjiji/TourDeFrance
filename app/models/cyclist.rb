@@ -99,7 +99,7 @@ class Cyclist < ActiveRecord::Base
     #Cyclist.joins(:teams).all(:select => 'distinct cyclists.*', :conditions => ['teams.name LIKE ? AND cyclists.nationality LIKE ? AND cyclists.lastname LIKE ? AND cyclists.firstname LIKE ?', team_condition, nat_condition, lastname_condition, firstname_condition])
 
 
-    query = "select c.*
+    query = "select distinct c.*
     from cyclists c
     inner join race_runners r on r.cyclist_id = c.id
    left JOIN race_teams ON race_teams.id = r.race_team_id

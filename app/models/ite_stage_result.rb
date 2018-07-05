@@ -92,7 +92,7 @@
     end
     type_condition = s_type
 #        Stage.connection.select("select distinct s.* from stages s join ite_stage_results isr on isr.stage_id = s.id and isr.pos = 1 where s.year LIKE '"+ year_condition + "'")
-    query = "SELECT isr.*
+    query = "SELECT distinct isr.*
       FROM stages
       #{join_location}
       LEFT JOIN ig_stage_results ON ig_stage_results.stage_id = stages.id
