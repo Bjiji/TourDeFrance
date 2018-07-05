@@ -6,7 +6,8 @@
             "iDisplayLength": 50,
             "aoColumns" : [
                 {"bSortable": true, "bSearchable": true},
-                {"bSortable": true , "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
@@ -18,6 +19,7 @@
 <thead>
   <tr>
     <th>Nom</th>
+    <th>Prénom</th>
     <th>Nationalité</th>
     <th>DoB</th>
     <th>PoB</th>
@@ -27,7 +29,8 @@
 <tbody>
 <% @cyclists.each do |cyclist| %>
   <tr>
-    <td><%= link_to cyclist.display_fullname, cyclist_path(cyclist) %></td>
+    <td><%= link_to cyclist.lastname, cyclist_path(cyclist) %></td>
+    <td><%= link_to cyclist.firstname, cyclist_path(cyclist) %></td>
     <td><%= cyclist.nationality %></td>
     <td><%= cyclist.dob %></td>
     <td><%= cyclist.pob %></td>

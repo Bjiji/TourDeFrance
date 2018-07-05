@@ -57,8 +57,58 @@ WHERE ig.previous_leader <> ig.leader_id
 
 SELECT
   sl.name,
-  group_concat(DISTINCT (lower(trim(repalce(if(s.start_location = sl.id, s.start, s.finish)), '-', ' '))) FROM
+  group_concat(DISTINCT (lower(trim(replace(if(s.start_location = sl.id, s.start, s.finish), '-', ' ')))))
+FROM
                stage_locations sl
                JOIN stages s ON s.start_location = sl.id OR s.finish_location = sl.id
                GROUP BY sl.id
                HAVING count(1) > 10;
+
+SELECT
+  rt.id,
+  rr.year,
+  rt.label,
+  rt.year,
+  count(DISTINCT (rr.nationality)) AS dn,
+  group_concat(DISTINCT (rr.nationality))
+FROM race_runners rr
+  JOIN race_teams rt ON rt.id = rr.race_team_id
+GROUP BY rt.id, rr.year
+HAVING dn > 5;
+
+
+SELECT rr.*
+FROM race_runners rr
+  JOIN race_teams rt ON rt.id = rr.race_team_id
+-- join ite_stage_results ite on ite.race_runner_id = rr.id
+WHERE rt.id = 3368;
+
+-- select * from race_runners where lastname like "CAVENDISH" and year = 2015;
+
+SELECT
+  count(*),
+  rr.nationality
+FROM ig_stage_results ig
+  JOIN race_runners rr ON rr.id = ig.stage_winner_id
+  JOIN cyclists c ON c.id = rr.cyclist_id
+GROUP BY rr.nationality;
+
+SELECT *
+FROM race_runners
+WHERE nationality IS NULL;
+
+SELECT
+  count(DISTINCT cyclist_id),
+  rr.nationality
+FROM race_runners rr
+GROUP BY rr.nationality;
+
+SELECT
+  sl.name,
+  count(DISTINCT lower(trim(replace(if(s.start_location = sl.id, s.start, s.finish), '-', ' ')))) AS cnt,
+  group_concat(DISTINCT (lower(trim(replace(if(s.start_location = sl.id, s.start, s.finish), '-', ' ')))))
+FROM
+  stage_locations sl
+  JOIN stages s ON s.start_location = sl.id OR s.finish_location = sl.id
+GROUP BY sl.id
+HAVING cnt > 1;
