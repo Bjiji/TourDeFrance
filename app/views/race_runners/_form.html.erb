@@ -14,7 +14,7 @@
     <div class="field">
       <%= f.label :cyclist %><br />
       <% c_array =
-             Cyclist.order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+             Cyclist.order('lastname').all.map {|c| ["#{c.lastname} #{c.firstname}", c.id]} %>
       <%= f.select :cyclist_id, c_array, {:include_blank => true} %>
     </div>
   <div class="field">
