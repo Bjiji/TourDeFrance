@@ -103,12 +103,12 @@ SELECT
 FROM race_runners rr
 GROUP BY rr.nationality;
 
-SELECT
-  sl.name,
-  count(DISTINCT lower(trim(replace(if(s.start_location = sl.id, s.start, s.finish), '-', ' ')))) AS cnt,
-  group_concat(DISTINCT (lower(trim(replace(if(s.start_location = sl.id, s.start, s.finish), '-', ' ')))))
+SELECT count(1)
 FROM
   stage_locations sl
   JOIN stages s ON s.start_location = sl.id OR s.finish_location = sl.id
 GROUP BY sl.id
 HAVING cnt > 1;
+
+SELECT count(1)
+FROM stage_locations;
