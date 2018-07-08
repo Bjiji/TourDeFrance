@@ -24,8 +24,7 @@ class IgStageResultsController < ApplicationController
   # GET /ig_stage_results/new
   # GET /ig_stage_results/new.json
   def new
-    @ig_stage_result = IgStageResult.new
-
+    @ig_stage_result = IgStageResult.new(params.required(:ig_stage_result).permit!)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @ig_stage_result }

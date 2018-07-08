@@ -7,7 +7,7 @@ SELECT
   ig.*
 FROM stages s
   JOIN ig_stage_results ig ON ig.stage_id = s.id
-WHERE day(s.date) = day(now()) AND month(s.date) = month(now());
+WHERE day(s.date) = day(now()) AND month(s.date) = month(now()) AND (year(now()) - s.year) % 5 = 0;
 
 -- 3 porteurs (ou plus) du maillot jaune dans la meme équipe
 SELECT

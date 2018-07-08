@@ -51,7 +51,9 @@
 <%= link_to 'Edit infos', edit_stage_path(@stage) %> |
 <%= if (@stage.ig_stage_result != nil) then
       link_to 'Edit Results', edit_ig_stage_result_path(@stage.ig_stage_result)
+    else
+      link_to 'Edit Results', new_ig_stage_result_path(:ig_stage_result => {:stage_id => @stage.id})
     end %> |
-<%= link_to 'Add Results', new_ite_stage_result_path(:ite_stage_result => {:year => @stage.year, :stage_id => @stage.id}) %>
+<%= link_to 'Add ITE Results', new_ite_stage_result_path(:ite_stage_result => {:year => @stage.year, :stage_id => @stage.id}) %>
 |
 <%= link_to 'Back', stages_path %>
