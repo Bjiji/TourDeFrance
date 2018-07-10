@@ -26,13 +26,13 @@ class CyclistsController < ApplicationController
     @ry_victories = IgRaceResult.joins(:young).where(:race_runners => {:cyclist_id => params[:id]}).order(year: :DESC)
 
 
-    @s_victories = IgStageResult.joins(:stage_winner).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
-    @y_jersey = IgStageResult.joins(:leader).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
-    @c_jersey = IgStageResult.joins(:climber).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
-    @s_jersey = IgStageResult.joins(:sprinter).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
-    @yg_jersey = IgStageResult.joins(:young).joins(:stage).where(:race_runners => { :cyclist_id => params[:id]}).order("year DESC, stages.ordinal DESC")
+    @s_victories = IgStageResult.joins(:stage_winner).joins(:stage).where(:race_runners => {:cyclist_id => params[:id]}).order("stages.year DESC, stages.ordinal DESC")
+    @y_jersey = IgStageResult.joins(:leader).joins(:stage).where(:race_runners => {:cyclist_id => params[:id]}).order("stages.year DESC, stages.ordinal DESC")
+    @c_jersey = IgStageResult.joins(:climber).joins(:stage).where(:race_runners => {:cyclist_id => params[:id]}).order("stages.year DESC, stages.ordinal DESC")
+    @s_jersey = IgStageResult.joins(:sprinter).joins(:stage).where(:race_runners => {:cyclist_id => params[:id]}).order("stages.year DESC, stages.ordinal DESC")
+    @yg_jersey = IgStageResult.joins(:young).joins(:stage).where(:race_runners => {:cyclist_id => params[:id]}).order("stages.year DESC, stages.ordinal DESC")
 
-    @r_podium = YjStageResults.joins(:race_runner).joins(:stage).where("stages.is_last = true AND race_runners.cyclist_id = ? AND pos <= 3", params[:id]).order("year DESC")
+    @r_podium = YjStageResults.joins(:race_runner).joins(:stage).where("stages.is_last = true AND race_runners.cyclist_id = ? AND pos <= 3", params[:id]).order("stages.year DESC")
 
 #    @race = Race.where(:cyclist)
     respond_to do |format|
