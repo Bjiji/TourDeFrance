@@ -56,4 +56,6 @@
     end %> |
 <%= link_to 'Add ITE Results', new_ite_stage_result_path(:ite_stage_result => {:year => @stage.year, :stage_id => @stage.id}) %>
 |
+<%= link_to 'New Mountain stage result', new_mountain_stage_result_path(:mountain_stage_result => {:year => @stage.year, :stage_id => @stage.id}) %>
+|
 <%= link_to 'Back', stages_path %>

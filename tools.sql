@@ -7,7 +7,9 @@ SELECT
   ig.*
 FROM stages s
   JOIN ig_stage_results ig ON ig.stage_id = s.id
-WHERE day(s.date) = day(now()) AND month(s.date) = month(now()) AND (year(now()) - s.year) % 5 = 0;
+WHERE day(s.date) = day(now()) AND month(s.date) = month(now()) AND (year(now()) - s.year) % 5 = 0
+-- and ig.previous_leader <> ig.leader_id
+;
 
 -- 3 porteurs (ou plus) du maillot jaune dans la meme équipe
 SELECT
@@ -112,3 +114,14 @@ HAVING cnt > 1;
 
 SELECT count(1)
 FROM stage_locations;
+
+/* échappé terminant victorieuse */
+SELECT
+  s.year,
+  s.stageNb,
+  s.start,
+  s.finish
+FROM ite_stage_results ite
+  JOIN stages s ON s.id = ite.stage_id
+WHERE ite.pos = 5 AND ite.diff_time_sec > 9
+      AND (s.stage_type = "plaine" OR s.stage_type = "MM");

@@ -22,11 +22,11 @@ class Cyclist < ActiveRecord::Base
   end
 
   def display_name
-    "#{firstname_c.byteslice(0)}. #{lastname_c.upcase}"
+    "#{lastname_c.upcase} #{firstname_c.byteslice(0)}."
   end
 
   def display_fullname
-    "#{firstname_c} #{lastname_c.upcase}"
+    "#{lastname_c.upcase} #{firstname_c} "
   end
 
   def race_starts

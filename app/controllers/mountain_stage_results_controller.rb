@@ -28,7 +28,7 @@ class MountainStageResultsController < ApplicationController
   # GET /mountain_stage_results/new
   # GET /mountain_stage_results/new.json
   def new
-    @mountain_stage_result = MountainStageResult.new
+    @mountain_stage_result = MountainStageResult.new(params.required(:mountain_stage_result).permit!)
 
     respond_to do |format|
       format.html # new.html.erb
