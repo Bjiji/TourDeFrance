@@ -28,13 +28,16 @@
 </thead>
 <tbody>
 <% @cyclists.each do |cyclist| %>
+
   <tr>
     <td><%= link_to cyclist.lastname, cyclist_path(cyclist) %></td>
     <td><%= link_to cyclist.firstname, cyclist_path(cyclist) %></td>
     <td><%= cyclist.nationality %></td>
     <td><%= cyclist.dob %></td>
     <td><%= cyclist.pob %></td>
-    <td><%= cyclist.races.size() %></td>
+    <td>
+      <% cyclist.races.order(:year).each do |r| %> <%= link_to r.year, race_path(r) %>
+      <% end %></td>
   </tr>
 <% end %>
 </tbody>

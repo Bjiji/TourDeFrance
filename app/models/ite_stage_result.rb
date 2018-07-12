@@ -57,7 +57,7 @@
     start_city_condition = "%"
     end_city_condition = "%"
     city = "%" + (search[:city] || "") + "%"
-    if (search[:city_kind] == "both") then
+    if (search[:city_kind] == "both" || search[:city_kind].blank?) then
       join_location = "LEFT JOIN stage_locations sl on sl.id = stages.start_location OR sl.id = stages.finish_location "
       start_city_condition = city
       end_city_condition =  city
