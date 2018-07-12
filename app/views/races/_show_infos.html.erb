@@ -33,23 +33,31 @@
         <tr>
           <td align=center><img src="/assets/maillot_jaune_40.png"/></td>
           <td>
-            <%= if (@race.ig_race_result != nil && @race.ig_race_result.leader != nil) then link_to @race.ig_race_result.leader.display_fullname, cyclist_path(@race.ig_race_result.leader) end %>
+            <%= if (@race.ig_race_result != nil && @race.ig_race_result.leader != nil) then
+                  link_to @race.ig_race_result.leader.display_fullname, cyclist_path(@race.ig_race_result.leader.cyclist)
+                end %>
           </td>
         </tr><tr>
         <td align=center><img src="/assets/maillot_vert_40.png"/></td>
         <td>
-          <%= if (@race.ig_race_result != nil && @race.ig_race_result.sprinter != nil) then link_to @race.ig_race_result.sprinter.display_fullname, cyclist_path(@race.ig_race_result.sprinter) end %>
+          <%= if (@race.ig_race_result != nil && @race.ig_race_result.sprinter != nil) then
+                link_to @race.ig_race_result.sprinter.display_fullname, cyclist_path(@race.ig_race_result.sprinter.cyclist)
+              end %>
         </td>
       </tr><tr>
         <td align=center><img src="/assets/maillot_pois_40.png"/></td>
         <td>
-          <%= if (@race.ig_race_result != nil && @race.ig_race_result.climber != nil) then link_to @race.ig_race_result.climber.display_fullname, cyclist_path(@race.ig_race_result.climber) end %>
+          <%= if (@race.ig_race_result != nil && @race.ig_race_result.climber != nil) then
+                link_to @race.ig_race_result.climber.display_fullname, cyclist_path(@race.ig_race_result.climber.cyclist)
+              end %>
         </td>
       </tr>
         <tr>
           <td align=center><img src="/assets/maillot_blanc_40.png"/></td>
           <td>
-            <%= if (@race.young != nil) then link_to @race.young.display_fullname, cyclist_path(@race.young) end %>
+            <%= if (@race.young != nil) then
+                  link_to @race.young.display_fullname, cyclist_path(@race.young.cyclist)
+                end %>
           </td>
         </tr>
         <tr>
