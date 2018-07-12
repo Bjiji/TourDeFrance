@@ -146,7 +146,7 @@
     if(!(race_team == nil) && !race_team.blank?) then query = query + " AND rteam.label LIKE '%" + race_team + "%'" end
     if(!(uci == nil) && !uci.blank?) then query = query + " AND team.uci LIKE '%" + uci + "%'" end
     if(search[:first_time]) then query = query + " AND not exists(select 1 from race_runners r2 where r2.cyclist_id = runner.cyclist_id and r2.year < runner.year)" end
-    query = query + " order by stages.year desc, stages.ordinal desc, isr.pos asc limit 10000"
+    query = query + " order by stages.year desc, stages.ordinal desc, isr.pos asc limit 2000"
 #AND ig_stage_results.stage_winner=runner.id
 #AND ig_stage_results.leader=runner.id
 #AND ig_stage_results.climber=runner.id
