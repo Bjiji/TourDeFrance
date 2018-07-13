@@ -56,7 +56,7 @@
           <td align=center><img src="/assets/maillot_blanc_40.png"/></td>
           <td>
             <%= if (@race.young != nil) then
-                  link_to @race.young.display_fullname, cyclist_path(@race.young.cyclist)
+                  link_to @race.young.display_fullname, cyclist_path(@race.young)
                 end %>
           </td>
         </tr>

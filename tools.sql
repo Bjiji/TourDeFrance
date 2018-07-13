@@ -7,9 +7,29 @@ SELECT
   ig.*
 FROM stages s
   JOIN ig_stage_results ig ON ig.stage_id = s.id
-WHERE day(s.date) = day(now()) AND month(s.date) = month(now()) AND (year(now()) - s.year) % 5 = 0
--- and ig.previous_leader <> ig.leader_id
+WHERE day(s.date) = day(now()) AND month(s.date) = month(now()) AND
+      ((year(now()) - s.year) % 5 = 0 OR (year(now()) - s.year) = 1)
+      AND ig.previous_leader <> ig.leader_id
 ;
+
+
+SELECT
+  s.year,
+  s.stageNb,
+  s.start,
+  s.finish,
+  s.stage_type,
+  ig.stage_winner_s,
+  ig.leader_s
+FROM stages s
+  JOIN ig_stage_results ig ON ig.stage_id = s.id
+WHERE day(s.date) = day(now()) AND month(s.date) = month(now())
+      AND dayofweek(s.date) = 6
+
+-- AND ((year(now()) - s.year) % 5 = 0 or (year(now()) - s.year) = 1)
+--       and ig.previous_leader <> ig.leader_id
+;
+
 
 -- 3 porteurs (ou plus) du maillot jaune dans la meme équipe
 SELECT
@@ -125,3 +145,31 @@ FROM ite_stage_results ite
   JOIN stages s ON s.id = ite.stage_id
 WHERE ite.pos = 5 AND ite.diff_time_sec > 9
       AND (s.stage_type = "plaine" OR s.stage_type = "MM");
+
+SELECT
+  count(1),
+  department
+FROM stage_locations sl
+  JOIN stages s ON s.start_location = sl.id OR s.finish_location = sl.id
+GROUP BY sl.code;
+
+SELECT
+  count(DISTINCT (s.id)),
+  department
+FROM stage_locations sl
+  JOIN stages s ON s.start_location = sl.id OR s.finish_location = sl.id
+GROUP BY sl.code;
+
+
+SELECT
+  s.year,
+  s.stageNb,
+  s.subStageNb,
+  s.start,
+  s.finish,
+  sl.department
+FROM stage_locations sl
+  JOIN stages s ON s.start_location = sl.id OR s.finish_location = sl.id
+WHERE sl.code = 28;
+
+
