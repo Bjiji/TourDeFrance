@@ -201,11 +201,4 @@ class Stage < ActiveRecord::Base
     Stage.find_by_sql(query)
   end
 
-  def averageSpeed
-    if (distance.blank? || time.blank?)
-      nil
-    else
-      (3600 * distance / time)
-    end
-  end
 end
