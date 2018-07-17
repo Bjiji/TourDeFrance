@@ -18,21 +18,21 @@
         sec = time_sec % 60
         min = (time_sec / 60) % 60
         hour = (time_sec / 3600)
-      "#{hour}h#{min}''#{sec}\""
+        "#{hour}h#{min}'#{sec}\""
       end
     end
   end
 
   def display_time
     if (time_sec == nil || time_sec == 0) then
-      str_time_sec  = " \" "
+      str_time_sec = " - "
     else
       str_time_sec = ChronicDuration.output(time_sec, :format => :chrono)
     end
     if (diff_time_sec == nil) then
-      str_diff_time_sec  = " \" "
+      str_diff_time_sec = " - "
     else
-      str_diff_time_sec = (diff_time_sec / 60).to_s + "'" + (diff_time_sec % 60).to_s + "''"
+      str_diff_time_sec = (diff_time_sec / 60).to_s + "'" + (diff_time_sec % 60).to_s + "\""
     end
     # display_time = str_time_sec + ' (' + str_diff_time_sec + ')'
     display_time = IteStageResult.displayTime(diff_time_sec)

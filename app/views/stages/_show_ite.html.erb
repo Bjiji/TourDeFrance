@@ -11,7 +11,6 @@
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
-                {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true}
             ]
         });
@@ -23,49 +22,62 @@
     <th>Pos.</th>
     <th>Temps</th>
     <th>Ecart</th>
-    <th title="Porteur de maillots distinctifs durant l'étape">Maillots</th>
     <th>Coureur</th>
     <th>Equipe</th>
     <th>Nat.</th>
   </tr>
   </thead>
   <tbody>
-  <%  @ite_stage_results.each do |result| %>
+  <% @ite_stage_results.each do |result| %>
       <% time_res = nil
          time_diff = "-"
          if (result.time_sec != nil && result.time_sec > 0) then
-           time_res =  IteStageResult.displayTime(result.time_sec)
+           time_res = IteStageResult.displayTime(result.time_sec)
          end
          if (result.diff_time_sec != nil && result.diff_time_sec > 0) then
-           time_diff =  IteStageResult.displayTime(result.diff_time_sec)
+           time_diff = IteStageResult.displayTime(result.diff_time_sec)
          end
 
       %>
       <tr>
-        <td><%= link_to(if (result.pos.blank?) then "999" else result.pos.to_s end, ite_stage_result_path(result)) %></td>
-        <td><%= if (time_res.blank?) then "#{result.stage_status}" else time_res end%></td>
+        <td><%= link_to(if (result.pos.blank?) then
+                          "×"
+                        else
+                          result.pos.to_s
+                        end, ite_stage_result_path(result)) %></td>
+        <td><%= if (time_res.blank?) then
+                  "#{result.stage_status}"
+                else
+                  time_res
+                end %></td>
         <td><%= time_diff %></td>
-        <td><% if (@stage.ig_stage_result != nil) then
-                 if (@stage.ig_stage_result.previous_leader == result.race_runner) then %> <img src="/assets/maillot_jaune_20.png"/> <%end%>
-              <% if (@stage.ig_stage_result.previous_sprinter == result.race_runner) then %> <img src="/assets/maillot_vert_20.png"/> <%end%>
-              <% if (@stage.ig_stage_result.previous_climber == result.race_runner) then %> <img src="/assets/maillot_pois_20.png"/> <%end %>
-              <% if (@stage.ig_stage_result.previous_young == result.race_runner) then %> <img src="/assets/maillot_blanc_20.png"/> <%end end%></td>
-        <td><%= if (result.race_runner.blank?) then
-                  if (result.race_team.blank?) then
-                    result.runner_s
+        <td>
+          <% if (@stage.ig_stage_result != nil) then %>
+              <%= if (result.race_runner.blank?) then
+                    if (result.race_team.blank?) then
+                      result.runner_s
+                    else
+                      link_to result.race_team.label, team_path(result.race_team.team)
+                    end
                   else
+                    render partial: "race_runners/display", locals: {:race_runner => result.race_runner, :stage => @stage}
+                  end %>
+          <% end %>
+        </td>
+        <td>
+          <% if (@stage.ig_stage_result != nil) then %>
+              <%= if (!result.race_runner.blank?) then
+                    link_to result.race_runner.race_team.label, team_path(result.race_runner.team)
+                  elsif (!result.race_team.blank?) then
                     link_to result.race_team.label, team_path(result.race_team.team)
                   end
-                else link_to result.race_runner.display_fullname, cyclist_path(result.race_runner.cyclist)
-                end %></td>
-        <td><%= if (!result.race_runner.blank?) then
-                   link_to result.race_runner.race_team.label, team_path(result.race_runner.team)
-                elsif (!result.race_team.blank?) then
-                  link_to result.race_team.label, team_path(result.race_team.team)
-                end
-        %></td>
-        <td><%=  if (!result.race_runner.blank?) then result.race_runner.nationality end %></td>
-
+              %>
+          <% end %>
+        </td>
+        <td><%= @stage.ig_stage_result != nil && if (!result.race_runner.blank?) then
+                                                   result.race_runner.nationality
+                                                 end %>
+        </td>
       </tr>
   <% end %>
   </tbody>

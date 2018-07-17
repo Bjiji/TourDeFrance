@@ -25,7 +25,7 @@ class Stage < ActiveRecord::Base
   end
 
   def display_simple_label
-    display_label = (start.blank? ? '?' : start) + ' / ' + (finish.blank? ? '?' : finish)
+    display_label = (start.blank? ? '?' : start) + ' › ' + (finish.blank? ? '?' : finish)
   end
 
   def display_label
@@ -34,32 +34,27 @@ class Stage < ActiveRecord::Base
 
 
   def team_winner
-    winner = nil
     if (ig_stage_result != nil) then
-      winner = ig_stage_result.race_team
+      ig_stage_result.race_team
+    else
+      nil
     end
   end
 
-
   def winner
-    winner = Cyclist.find_by_sql("select c.* from ig_stage_results isr join race_runners rr on rr.id = isr.stage_winner_id join cyclists c on c.id = rr.cyclist_id where isr.stage_id = " + self.id.to_s).first
-  end
-
-  def time
-    sql = 'SELECT distinct time_sec
- FROM ite_stage_results ite
- WHERE ite.stage_id =' + id.to_s + ' AND ite.pos = 1
- limit 1;'
-    #sql = Stage::sanitize_sql_array(sql_array)
-    time_res = Stage.connection.select_all(sql)
-    time = 0
-    if (time_res != nil && time_res.length > 0) then
-      time = time_res[0]['time_sec']
+    if (ig_stage_result != nil) then
+      ig_stage_result.stage_winner
+    else
+      nil
     end
   end
 
   def leader
-    winner = Cyclist.find_by_sql("select c.* from ig_stage_results isr join race_runners rr on rr.id = isr.leader_id join cyclists c on c.id = rr.cyclist_id where isr.stage_id = " + self.id.to_s).first
+    if (ig_stage_result != nil) then
+      ig_stage_result.leader
+    else
+      nil
+    end
   end
 
   def self.missingResults()

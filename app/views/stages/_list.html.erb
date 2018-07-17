@@ -1,36 +1,34 @@
 <script>
-    $(document).ready(function() {
-        $('#stages').dataTable( {
+    $(document).ready(function () {
+        $('#stages').dataTable({
             "dom": "<'toolbar'>flrtp",
             "bJQueryUI": true,
             "iDisplayLength": 50,
             "aaSorting": [[0, "desc"], [1, "asc  "]],
-            "aoColumns" : [
-                {"asSorting": [ "desc", "asc" ], "bSortable": true, "bSearchable": true   },
+            "aoColumns": [
+                {"asSorting": ["desc", "asc"], "bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true }
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true}
             ]
         });
-    } );
+    });
 </script>
 <h3><b>Etapes:</b> (<%= @stages.size() %>)</h3>
 <table class="display" id="stages">
   <thead>
   <tr>
     <th>Année</th>
-    <th>Etape</th>
+    <th title="Numéro d'étape">Eta.</th>
     <th>Date</th>
     <th>Départ</th>
     <th>Arrivée</th>
     <th>Dist.</th>
-    <th>Moy.</th>
     <th>Type</th>
     <th>Vainqueur</th>
     <th>Leader</th>
@@ -45,23 +43,25 @@
         <td><%= link_to stage.start, stage_location_path(stage.start_location) %></td>
         <td><%= link_to stage.finish, stage_location_path(stage.finish_location) %></td>
         <td><%= stage.distance %></td>
-        </td><td>
-        <% st = stage.time %>
-        <%= if(st != nil && st > 0 && stage.distance != nil && stage.distance > 0) then
-              sprintf "%.3f", (3600 * stage.distance / stage.time)
-            end %>
-      </td>
+        </td>
         <td><%= stage.stage_type %></td>
         <td><%= if (stage.winner == nil) then
                   if (stage.team_winner != nil) then
                     link_to stage.team_winner.label, team_path(stage.team_winner.team)
-                  elsif ( stage.ig_stage_result != nil) then
+                  elsif (stage.ig_stage_result != nil) then
                     stage.ig_stage_result.stage_winner_s
                   else
                     "?"
                   end
-                else link_to stage.winner.display_name, cyclist_path(stage.winner.id) end %></td>
-        <td><%= if (stage.leader == nil) then '?' else link_to stage.leader.display_name, cyclist_path(stage.leader.id) end %></td>
+                else
+                  render partial: "race_runners/display", locals: {:race_runner => stage.winner, :stage => stage}
+                end %>
+        </td>
+        <td><%= if (stage.leader == nil) then
+                  '?'
+                else
+                  render partial: "race_runners/display", locals: {:race_runner => stage.leader, :stage => stage}
+                end %></td>
       </tr>
   <% end %>
   </tbody>

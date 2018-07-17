@@ -1,66 +1,77 @@
 <script>
-    $(document).ready(function() {
-        $('#mountains').dataTable( {
+    $(document).ready(function () {
+        $('#mountains').dataTable({
             "sDom": "<'wrapper'i>, <fprtfp>",
             "bJQueryUI": true,
             "iDisplayLength": 50,
-            "aaSorting": [[ 0, "desc" ]],
-            "aoColumns" : [
-                {"bSortable": true, "bSearchable": true, "asSorting": [ "desc", "asc" ]},
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true }
+            "aaSorting": [[0, "desc"]],
+            "aoColumns": [
+                {"bSortable": true, "bSearchable": true, "asSorting": ["desc", "asc"]},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true}
             ]
         });
-    } );
+    });
 </script>
 
 <h1>Passage de cols</h1>
 
 <table>
-  <tr><td>
-    <div id="search">
-    <%= render :partial => 'mountain_stage_results/search' %>
-  </div>
-  </td>
-  </tr>
-  <tr><td>
-  <table class="display" id="mountains">
-    <thead>
-    <tr>
-      <th>Etape</th>
-      <th>Type</th>
-      <th>Col</th>
-      <th>Coureur en tête</th>
-      <th>Vainqueur d'étape</th>
-      <th>Cat.</th>
-      <th>Alt.</th>
-      <th>Pos.</th>
-      <th>Arrivée</th>
-
-    </tr>
-    </thead>
-    <tbody>
-<% @mountain_stage_results.each do |mountain_stage_result| %>
   <tr>
-    <td><%= link_to mountain_stage_result.stage.display_label, stage_path(mountain_stage_result.stage) %></td>
-    <td><%= mountain_stage_result.stage.stage_type %></td>
-    <td><%= mountain_stage_result.name %></td>
-    <td><%= if (!mountain_stage_result.race_runner.blank? && !mountain_stage_result.race_runner.cyclist.blank?) then link_to mountain_stage_result.display_leader, cyclist_path(mountain_stage_result.race_runner.cyclist) end %></td>
-    <td><%= if (!mountain_stage_result.stage.blank? && !mountain_stage_result.stage.winner.blank?) then link_to mountain_stage_result.stage.winner.display_name, cyclist_path(mountain_stage_result.stage.winner) end %></td>
-    <td><%= mountain_stage_result.category_s %></td>
-    <td><%= mountain_stage_result.altitude %></td>
-    <td><%= link_to(mountain_stage_result.order, edit_mountain_stage_result_path(mountain_stage_result)) %></td>
-    <td><%= if (mountain_stage_result.finish == true) then "oui" else "non" end %></td>
+    <td>
+      <div id="search">
+        <%= render :partial => 'mountain_stage_results/search' %>
+      </div>
+    </td>
   </tr>
-<% end %>
-</table>
-</td></tr>
+  <tr>
+    <td>
+      <table class="display" id="mountains">
+        <thead>
+        <tr>
+          <th>Etape</th>
+          <th>Type</th>
+          <th>Col</th>
+          <th>Coureur en tête</th>
+          <th>Vainqueur d'étape</th>
+          <th>Cat.</th>
+          <th>Alt.</th>
+          <th>Pos.</th>
+          <th>Arrivée</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <% @mountain_stage_results.each do |mountain_stage_result| %>
+            <tr>
+              <td><%= link_to mountain_stage_result.stage.display_label, stage_path(mountain_stage_result.stage) %></td>
+              <td><%= mountain_stage_result.stage.stage_type %></td>
+              <td><%= mountain_stage_result.name %></td>
+              <td><%= if (!mountain_stage_result.race_runner.blank? && !mountain_stage_result.race_runner.cyclist.blank?) then
+                        render partial: "race_runners/display", locals: {:race_runner => mountain_stage_result.race_runner, :stage => mountain_stage_result.stage}
+                      end %></td>
+              <td><%= if (!mountain_stage_result.stage.blank? && !mountain_stage_result.stage.winner.blank?) then
+                        render partial: "race_runners/display", locals: {:race_runner => mountain_stage_result.stage.winner, :stage => mountain_stage_result.stage}
+                      end %></td>
+              <td><%= mountain_stage_result.category_s %></td>
+              <td><%= mountain_stage_result.altitude %></td>
+              <td><%= link_to(mountain_stage_result.order, edit_mountain_stage_result_path(mountain_stage_result)) %></td>
+              <td><%= if (mountain_stage_result.finish) then
+                        "oui"
+                      else
+                        "non"
+                      end %></td>
+            </tr>
+        <% end %>
+        </table>
+    </td>
+  </tr>
 </table>
 
 <%= link_to 'New Mountain stage result', new_mountain_stage_result_path %>
