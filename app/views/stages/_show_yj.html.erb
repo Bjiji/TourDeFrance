@@ -28,14 +28,14 @@
   </tr>
   </thead>
   <tbody>
-  <%  @yj_stage_results.each do |result| %>
+  <% @yj_stage_results.each do |result| %>
       <% time_res = nil
          time_diff = "-"
          if (result.time_sec != nil && result.time_sec > 0) then
-           time_res =  IteStageResult.displayTime(result.time_sec)
+           time_res = IteStageResult.displayTime(result.time_sec)
          end
          if (result.diff_time_sec != nil && result.diff_time_sec > 0) then
-           time_diff =  IteStageResult.displayTime(result.diff_time_sec)
+           time_diff = IteStageResult.displayTime(result.diff_time_sec)
          end
 
       %>
@@ -45,16 +45,16 @@
                         else
                           result.pos.to_s
                         end, yj_stage_result_path(result)) %></td>
-        <td><%= if (time_res.blank?) then "?" else time_res end%></td>
+        <td><%= if (time_res.blank?) then
+                  "?"
+                else
+                  time_res
+                end %></td>
         <td><%= time_diff %></td>
         <td>
           <% if (@stage.ig_stage_result != nil) then %>
               <%= if (result.race_runner.blank?) then
-                    if (result.race_team.blank?) then
-                      result.runner_s
-                    else
-                      link_to result.race_team.label, team_path(result.race_team.team)
-                    end
+                    result.runner_s
                   else
                     render partial: "race_runners/display", locals: {:race_runner => result.race_runner, :stage => @stage}
                   end %>
