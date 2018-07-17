@@ -64,8 +64,6 @@
           <% if (@stage.ig_stage_result != nil) then %>
               <%= if (!result.race_runner.blank?) then
                     link_to result.race_runner.race_team.label, team_path(result.race_runner.team)
-                  elsif (!result.race_team.blank?) then
-                    link_to result.race_team.label, team_path(result.race_team.team)
                   end
               %>
           <% end %>
