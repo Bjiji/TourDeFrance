@@ -96,20 +96,26 @@ class MountainStageResult < ActiveRecord::Base
        if (!search[:lastname].blank?) then query = query + " AND cyclist.lastname LIKE '" + lastname_condition + "'"  end
     if (!search[:firstname].blank?) then query = query + " AND cyclist.firstname LIKE '" + firstname_condition + "'" end
     if (!search[:nationality].blank?) then query = query + " AND cyclist.nationality LIKE '" + nationality_condition + "'" end
-    if search[:c_finish_leader] == "yes" then query = query + " AND ig_stage_results.leader=runner.id "
-    elsif search[:c_finish_leader] == "no" then query = query + " AND ig_stage_results.leader!=runner.id "
+    if search[:c_finish_leader] == "yes" then
+      query = query + " AND ig_stage_results.leader_id=runner.id "
+    elsif search[:c_finish_leader] == "no" then
+      query = query + " AND ig_stage_results.leader_id!=runner.id "
     end
     if search[:c_start_leader] == "yes" then query = query + " AND ig_stage_results.previous_leader=runner.id "
     elsif search[:c_start_leader] == "no" then query = query + " AND ig_stage_results.previous_leader!=runner.id "
     end
-    if search[:c_finish_climber] == "yes" then query = query + " AND ig_stage_results.climber=runner.id "
-    elsif search[:c_finish_climber] == "no" then query = query + " AND ig_stage_results.climber!=runner.id "
+    if search[:c_finish_climber] == "yes" then
+      query = query + " AND ig_stage_results.climber_id=runner.id "
+    elsif search[:c_finish_climber] == "no" then
+      query = query + " AND ig_stage_results.climber_id!=runner.id "
     end
     if search[:c_start_climber] == "yes" then query = query + " AND ig_stage_results.previous_climber=runner.id "
     elsif search[:c_start_climber] == "no" then query = query + " AND ig_stage_results.previous_climber!=runner.id "
     end
-    if search[:c_finish_sprinter] == "yes" then query = query + " AND ig_stage_results.sprinter=runner.id "
-    elsif search[:c_finish_sprinter] == "no" then query = query + " AND ig_stage_results.sprinter!=runner.id "
+    if search[:c_finish_sprinter] == "yes" then
+      query = query + " AND ig_stage_results.sprinter_id=runner.id "
+    elsif search[:c_finish_sprinter] == "no" then
+      query = query + " AND ig_stage_results.sprinter_id!=runner.id "
     end
     if search[:c_start_sprinter] == "yes" then query = query + " AND ig_stage_results.previous_sprinter=runner.id "
     elsif search[:c_start_sprinter] == "no" then query = query + " AND ig_stage_results.previous_sprinter!=runner.id "
