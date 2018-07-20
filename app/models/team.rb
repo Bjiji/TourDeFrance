@@ -31,7 +31,7 @@ where rt2.team_id = #{self.id} or rt.team_id = #{self.id} order by s.year desc, 
     @c_jersey = IgStageResult.joins(climber: :race_team).joins(:stage).where(:race_teams => {:team => self.id}).order("year DESC, stages.ordinal DESC")
   end
 
-  def stage_climber_jersey
+  def stage_young_jersey
     @c_jersey = IgStageResult.joins(young: :race_team).joins(:stage).where(:race_teams => {:team => self.id}).order("year DESC, stages.ordinal DESC")
   end
 end

@@ -258,7 +258,7 @@
         <div>
           <% @c_jersey.each do |r| %>
               <%= link_to r.stage.display_label, stage_path(r.stage) %>
-              - <i><%= link_to r.young.display_name, cyclist_path(r.young.cyclist) %></i><br>
+              - <i><%= link_to r.climber.display_name, cyclist_path(r.climber.cyclist) %></i><br>
 
           <% end %>
         </div>
