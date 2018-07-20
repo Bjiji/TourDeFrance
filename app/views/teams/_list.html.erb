@@ -46,6 +46,7 @@
         <td><%= team.stage_yellow_jersey.size() %></td>
         <td><%= team.stage_sprinter_jersey.size() %></td>
         <td><%= team.stage_climber_jersey.size() %></td>
+        <td><%= team.stage_young_jersey.size() %></td>
         <td><%= min = team.races.order(year: :asc).first; if (min != nil) then link_to min.year, race_path(min) end %></td>
         <td><%= max = team.races.order(year: :desc).first; if (max != nil) then link_to max.year, race_path(max) end %></td>
       </tr>
