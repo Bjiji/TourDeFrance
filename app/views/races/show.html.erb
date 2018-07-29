@@ -31,6 +31,13 @@
     </tr>
   </table>
 <%= link_to 'Edit Infos', edit_race_path(@race) %> |
+
+<%= if (@stage.ig_stage_result != nil) then
+      link_to 'Edit Results', edit_ig_race_result_path(@race.ig_race_result)
+    else
+      link_to 'Edit Results', new_ig_race_result_path(:ig_race_result => {:race_id => @race.id, :year => @race.year})
+    end %> |
+
 <%= if (@race.ig_race_result != nil) then
       link_to 'Edit Results', edit_ig_race_result_path(@race.ig_race_result)
     end %> |
