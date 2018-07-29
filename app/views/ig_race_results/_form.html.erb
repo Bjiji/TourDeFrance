@@ -1,35 +1,41 @@
 <%= form_for(@ig_race_result) do |f| %>
-  <% if @ig_race_result.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@ig_race_result.errors.count, "error") %> prohibited this ig_race_result from being saved:</h2>
+    <% if @ig_race_result.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@ig_race_result.errors.count, "error") %> prohibited this ig_race_result from being
+            saved:</h2>
 
-      <ul>
-      <% @ig_race_result.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% @ig_race_result.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
     <div class="field">
-      <%= f.label :leader %><br />
-      <% c_array = RaceRunner.where(:year => @ig_race_result.race.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+      <%= f.label :race %><br/>
+      <% s_array = Race.order('year').all.map {|c| [c.name, c.id]} %>
+      <%= f.select :race_id, s_array, {:include_blank => true} %>
+    </div>
+    <div class="field">
+      <%= f.label :leader %><br/>
+      <% c_array = RaceRunner.where(:year => @ig_race_result.race.year).order('lastname').all.map {|c| [c.display_fullname, c.id]} %>
       <%= f.select :leader_id, c_array, {:include_blank => true} %>
     </div>
     <div class="field">
-      <%= f.label :sprinter %><br />
-      <% c_array = RaceRunner.where(:year => @ig_race_result.race.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+      <%= f.label :sprinter %><br/>
+      <% c_array = RaceRunner.where(:year => @ig_race_result.race.year).order('lastname').all.map {|c| [c.display_fullname, c.id]} %>
       <%= f.select :sprinter_id, c_array, {:include_blank => true} %>
     </div>
     <div class="field">
-      <%= f.label :climber %><br />
-      <% c_array = RaceRunner.where(:year => @ig_race_result.race.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+      <%= f.label :climber %><br/>
+      <% c_array = RaceRunner.where(:year => @ig_race_result.race.year).order('lastname').all.map {|c| [c.display_fullname, c.id]} %>
       <%= f.select :climber_id, c_array, {:include_blank => true} %>
     </div>
 
     <div class="field">
-      <%= f.label :young %><br />
-      <% c_array = RaceRunner.where(:year => @ig_race_result.race.year).order('lastname').all.map { |c| [c.display_fullname, c.id] } %>
+      <%= f.label :young %><br/>
+      <% c_array = RaceRunner.where(:year => @ig_race_result.race.year).order('lastname').all.map {|c| [c.display_fullname, c.id]} %>
       <%= f.select :young_id, c_array, {:include_blank => true} %>
     </div>
 
@@ -46,6 +52,6 @@
     </div>
 
     <div class="actions">
-    <%= f.submit %>
-  </div>
+      <%= f.submit %>
+    </div>
 <% end %>
