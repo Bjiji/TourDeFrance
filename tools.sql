@@ -1,7 +1,5 @@
 -- il y a 10 ans, 20 ans ...
-SELECT
-  count(1),
-  rr.nationality
+SELECT *
 FROM stages s
   JOIN ig_stage_results ig ON ig.stage_id = s.id
   JOIN race_runners rr ON rr.id = ig.stage_winner_id

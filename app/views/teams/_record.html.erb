@@ -84,7 +84,7 @@
         </a>
         <div>
           <% @rt_victories.each do |r| %>
-              <%= link_to @rt_victories[0].race.display_name, race_path(@rt_victories[0].race) %>
+              <%= link_to r.race.display_name, race_path(r.race) %>
               - <i><%= link_to r.race_team.label, team_path(r.race_team.team) %></i><br>
           <% end %>
         </div>
