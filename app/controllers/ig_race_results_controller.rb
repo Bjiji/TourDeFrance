@@ -24,7 +24,7 @@ class IgRaceResultsController < ApplicationController
   # GET /ig_race_results/new
   # GET /ig_race_results/new.json
   def new
-    @ig_race_result = IgRaceResult.new
+    @ig_race_result = IgRaceResult.new(params.required(:ig_race_result).permit!)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +40,7 @@ class IgRaceResultsController < ApplicationController
   # POST /ig_race_results
   # POST /ig_race_results.json
   def create
-    @ig_race_result = IgRaceResult.new(params[:ig_race_result])
+    @ig_race_result = IgRaceResult.new(params.required(:ig_race_result).permit!)
 
     respond_to do |format|
       if @ig_race_result.save
