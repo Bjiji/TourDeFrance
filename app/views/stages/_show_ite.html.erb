@@ -41,9 +41,9 @@
       %>
       <tr>
         <td><%= link_to(if (result.pos.blank?) then
-                          "×"
+                          999
                         else
-                          result.pos.to_s
+                          result.pos
                         end, ite_stage_result_path(result)) %></td>
         <td><%= if (time_res.blank?) then
                   "#{result.stage_status}"
