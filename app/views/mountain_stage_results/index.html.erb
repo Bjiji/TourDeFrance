@@ -52,7 +52,7 @@
             <tr>
               <td><%= link_to mountain_stage_result.stage.display_label, stage_path(mountain_stage_result.stage) %></td>
               <td><%= mountain_stage_result.stage.stage_type %></td>
-              <td><%= mountain_stage_result.name %></td>
+              <td><%= link_to(mountain_stage_result.name, edit_mountain_stage_result_path(mountain_stage_result)) %></td>
               <td><%= if (!mountain_stage_result.race_runner.blank? && !mountain_stage_result.race_runner.cyclist.blank?) then
                         render partial: "race_runners/display", locals: {:race_runner => mountain_stage_result.race_runner, :stage => mountain_stage_result.stage}
                         else
