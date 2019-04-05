@@ -8,7 +8,7 @@
         <td><%= if (mountain.race_runner != nil) then
                   render partial: "race_runners/display", locals: {:race_runner => mountain.race_runner, :stage => mountain.stage}
                 else
-                  "?"
+                  mountain.display_leader
                 end %></td>
       </tr>
   <% end %>
