@@ -34,6 +34,9 @@
 
 </p>
 
-
+<%= link_to '-',
+            mountain_stage_result_path(@mountain_stage_result),
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Edit', edit_mountain_stage_result_path(@mountain_stage_result) %> |
 <%= link_to 'Back', mountain_stage_results_path %>
