@@ -55,6 +55,8 @@
               <td><%= mountain_stage_result.name %></td>
               <td><%= if (!mountain_stage_result.race_runner.blank? && !mountain_stage_result.race_runner.cyclist.blank?) then
                         render partial: "race_runners/display", locals: {:race_runner => mountain_stage_result.race_runner, :stage => mountain_stage_result.stage}
+                        else
+                          mountain_stage_result.display_leader
                       end %></td>
               <td><%= if (!mountain_stage_result.stage.blank? && !mountain_stage_result.stage.winner.blank?) then
                         render partial: "race_runners/display", locals: {:race_runner => mountain_stage_result.stage.winner, :stage => mountain_stage_result.stage}

@@ -5,7 +5,7 @@ class MountainStageResult < ActiveRecord::Base
 
   def display_leader
     if (race_runner == nil || race_runner.cyclist ==  nil)
-      then display_leader = '?'
+      then display_leader = leader_s
     else
       display_leader = race_runner.display_name
     end

@@ -19,7 +19,11 @@
   </tr>
   <tr>
     <td><b>Passage en tête:</b></td>
-    <td><%= if (!@mountain_stage_result.race_runner.blank?) then link_to @mountain_stage_result.race_runner.display_name, cyclist_path(@mountain_stage_result.race_runner.cyclist) end%></td>
+    <td><%= if (!@mountain_stage_result.race_runner.blank?) then
+              link_to @mountain_stage_result.race_runner.display_name, cyclist_path(@mountain_stage_result.race_runner.cyclist)
+            else
+              @mountain_stage_result.display_leader
+            end%></td>
   </tr>
   <tr>
     <td><b>Difficulté numéro</b></td>
