@@ -20,7 +20,7 @@
 
 <div class="field">
   <%= f.label :team_id %><br />
-  <% c_array = Team.order('uci').all.map { |c| ["#{c.uci} (#{c.name})", c.id] } %>
+  <% c_array = RaceTeam.joins(:team).where("year >= :year - 3 AND year < :year",  {year: race_team.year}).group(:team_id).order('uci').map { |c| ["#{c.team.uci} (#{c.team.name})", c.team.id] } %>
   <%= f.select :team_id, c_array, {:include_blank => true} %>
 </div>
 

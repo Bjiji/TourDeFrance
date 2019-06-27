@@ -25,7 +25,7 @@ class TeamsController < ApplicationController
     @race_teams = @team.race_teams.order(year: :desc)
     @cyclists = @team.cyclists
     @ite_stage_results = IteStageResult.joins(race_runner: :race_team).where(:race_teams => {:team_id => params[:id]})
-    @r_victories = IgRaceResult.joins(leader: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
+    @r_victories = @team.race_victories
     @rc_victories = IgRaceResult.joins(climber: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
     @rs_victories =IgRaceResult.joins(sprinter: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)
     @ry_victories = IgRaceResult.joins(young: :race_team).where(:race_teams => {:team_id => params[:id]}).order(year: :DESC)

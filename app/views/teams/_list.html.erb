@@ -15,6 +15,7 @@
                 {"bSortable": true , "bSearchable": true},
                 {"bSortable": true , "bSearchable": true},
                 {"bSortable": true , "bSearchable": true},
+                {"bSortable": true , "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true} ]
         });
@@ -25,8 +26,9 @@
   <tr>
     <th>UCI</th>
     <th>Nom</th>
-    <th>Coureurs</th>
+    <th>Cour.</th>
     <th>Part.</th>
+    <th>Vict.</th>
     <th>Vict. d'étape</th>
     <th><img src="/assets/maillot_jaune_20.png"/><small>(jours)</small></th>
     <th><img src="/assets/maillot_vert_20.png"/><small>(jours)</small></th>
@@ -46,6 +48,7 @@
         <td><%= link_to team.name, team %></td>
         <td><%= link_to team.cyclists.count('distinct cyclists.id'), cyclists_path(:team => team.name)%></td>
         <td><%= team.races.size() %></td>
+        <td><%= team.race_victories.size() %> </td>
         <td><%= team.stage_victories.size() %></td>
         <td><%= team.stage_yellow_jersey.size() %></td>
         <td><%= team.stage_sprinter_jersey.size() %></td>

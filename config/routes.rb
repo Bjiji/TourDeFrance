@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :other_races
   resources :stage_locations
   resources :races
   resources :cyclists

@@ -1,6 +1,7 @@
 class Cyclist < ActiveRecord::Base
- # attr_accessor :description, :dob, :firstname, :lastname, :nationality, :pob, :tag, :races
+  # attr_accessor :description, :dob, :firstname, :lastname, :nationality, :pob, :tag, :races
   has_many :race_runners
+  has_many :other_races
   has_many :race_teams, :through => :race_runners
   has_many :races, :through => :race_runners
   has_many :ite_stage_results, :through => :race_runners
@@ -29,9 +30,16 @@ class Cyclist < ActiveRecord::Base
     "#{lastname_c.upcase} #{firstname_c} "
   end
 
+  def other_races_on_year(year)
+    other_races.select do |otr|
+      otr[:year] == year
+    end
+  end
+
+
   def race_starts
     if (races == nil) then
-     0
+      0
     else
       races.count
     end
@@ -48,7 +56,7 @@ class Cyclist < ActiveRecord::Base
   def self.normalize
     @cyclists = Cyclist.all
     @cyclists.each do |cyclist|
-      cyclist.lastname = cyclist.lastname.split(' ').each { |word| word.capitalize! }.join(' ')
+      cyclist.lastname = cyclist.lastname.split(' ').each {|word| word.capitalize!}.join(' ')
       cyclist.save
     end
   end

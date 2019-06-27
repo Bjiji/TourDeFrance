@@ -34,6 +34,8 @@ class CyclistsController < ApplicationController
 
     @r_podium = YjStageResults.joins(:race_runner).joins(:stage).where("stages.is_last = true AND race_runners.cyclist_id = ? AND pos <= 3", params[:id]).order("stages.year DESC")
 
+    @other_races = OtherRace.where(:cyclist_id => params[:id]).order("other_races.year DESC")
+
 #    @race = Race.where(:cyclist)
     respond_to do |format|
       format.html # show.html.erb

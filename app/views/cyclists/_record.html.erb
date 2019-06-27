@@ -151,6 +151,19 @@
     </ul>
   </div>
 </div>
+<div class=<%= @other_races.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+  <h3><a href="#">
+    <b>Vainqueur d'autres épreuves marquantes: </b>
+    (<%= @other_races.size() %>)</a>
+  </h3>
+  <div>
+    <ul>
+      <% @other_races.each do |r| %>
+        <li><%= link_to r.race_display, other_race_path(r) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 <script type="text/javascript">
     $(".accordionOpen").accordion({collapsible: true});
 </script>

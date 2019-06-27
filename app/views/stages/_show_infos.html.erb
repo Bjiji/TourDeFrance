@@ -42,7 +42,7 @@
                 <td align=center><img src="/assets/maillot_jaune_40.png"/></td>
                 <td>
                   <strike><%= if (@stage.ig_stage_result != nil && @stage.ig_stage_result.previous_leader != nil && @stage.ig_stage_result.previous_leader != @stage.ig_stage_result.leader) then
-                                link_to @stage.ig_stage_result.previous_leader.display_fullname, cyclist_path(@stage.ig_stage_result.previous_leader)
+                                link_to @stage.ig_stage_result.previous_leader.display_fullname, cyclist_path(@stage.ig_stage_result.previous_leader.cyclist)
                               end %></strike><br>
                   <%= if (@stage.ig_stage_result != nil && @stage.ig_stage_result.leader != nil) then
                         link_to @stage.ig_stage_result.leader.display_fullname, cyclist_path(@stage.ig_stage_result.leader.cyclist)

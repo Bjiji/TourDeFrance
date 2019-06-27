@@ -26,7 +26,7 @@
   <tr>
     <td><%= link_to rteam.year, race_path(rteam.race) %></td>
     <td><%= link_to rteam.label, race_team_path(rteam) %></td>
-    <td><%= link_to rteam.team.uci, team_path(rteam.team) %></td>
+    <td><%= if rteam.team != nil then link_to rteam.team.uci, team_path(rteam.team) end %></td>
   </tr>
 <% end %>
 </tbody>

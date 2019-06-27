@@ -15,7 +15,11 @@ join stages s on s.id = ig.stage_id
 left join race_runners rr on rr.id = ig.stage_winner_id
 left join race_teams rt on rt.id = rr.race_team_id
 left join race_teams rt2 on rt2.id = ig.race_team_id
-where rt2.team_id = #{self.id} or rt.team_id = #{self.id} order by s.year desc, s.ordinal desc")
+where (rt2.team_id = #{self.id} and s.stage_type like '%TTT%') or rt.team_id = #{self.id} order by s.year desc, s.ordinal desc")
+  end
+
+  def race_victories
+    IgRaceResult.joins(leader: :race_team).where(:race_teams => {:team_id => self.id}).order(year: :DESC)
   end
 
   def stage_yellow_jersey

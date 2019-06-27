@@ -18,8 +18,21 @@ end
     if (cyclist == nil)
     then
       display_fullname = "? (#{name})"
-    else display_fullname = cyclist.display_fullname
+    else display_fullname = "#{cyclist.display_fullname}"
     end
+  end
+
+  def other_races
+    cyclist.other_races_on_year(year)
+  end
+
+  def has_other_races
+    !(cyclist.other_races_on_year(year).blank?)
+  end
+
+  def display_other_races
+    res = other_races.map { |otr| "#{otr.race_label} (#{otr.year})" }.join("\n")
+    res
   end
 
 end
