@@ -114,13 +114,22 @@ class Stage < ActiveRecord::Base
     query = "SELECT distinct stages.*
       FROM stages
       #{join_location}
-      LEFT JOIN ig_stage_results ON ig_stage_results.stage_id = stages.id
-      LEFT JOIN ite_stage_results isr ON isr.stage_id = stages.id
-      LEFT JOIN race_runners runner ON isr.race_runner_id = runner.id and runner.year = stages.year
-      LEFT JOIN race_teams rteam on rteam.id = runner.race_team_id
-      LEFT JOIN teams team on team.id = rteam.team_id
-      LEFT JOIN cyclists cyclist ON cyclist.id = runner.cyclist_id
-      WHERE stages.year " + y_operator + " '" + year_condition + "'
+    LEFT JOIN ig_stage_results ON ig_stage_results.stage_id = stages.id
+    LEFT JOIN ite_stage_results isr ON isr.stage_id = stages.id
+    LEFT JOIN race_runners runner ON isr.race_runner_id = runner.id and runner.year = stages.year
+    LEFT JOIN race_teams rteam on rteam.id = runner.race_team_id
+    LEFT JOIN teams team on team.id = rteam.team_id
+    LEFT JOIN cyclists cyclist ON cyclist.id = runner.cyclist_id
+    "
+    if (!search[:other_race].blank?) then
+      query = query + " \njoin other_races otr on otr.cyclist_id = cyclist.id and otr.race_name = '#{search[:other_race]}'"
+      if (!search[:other_race_same_year].blank?) then
+        query += "AND otr.year = runner.year "
+      end
+    end
+    query +=
+
+      "WHERE stages.year " + y_operator + " '" + year_condition + "'
       AND (sl.id is NULL OR sl.department LIKE '#{department}' OR sl.code LIKE '#{department}')
       AND (sl.id is NULL or sl.country LIKE '#{country}')
       AND stages.stage_type LIKE '" + type_condition + "%'

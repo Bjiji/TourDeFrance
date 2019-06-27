@@ -3,6 +3,7 @@
 <tr><td><table border=0 width="100%">
   <tr>
     <td>Nom</td><td><%= text_field_tag :lastname, params[:lastname], :id => 'lasttname_field' %></td><td>Prénom</td><td><%= text_field_tag :firstname, params[:firstname], :id => 'firstname_field' %></td>
+
   </tr>
   <tr>
     <td>Equipe</td><td><%= text_field_tag :team, params[:team] %></td>
@@ -35,6 +36,14 @@
             </tr>
           </table>
         </td>
+      <td>
+        <table>
+        <tr>
+          <td>vainqueur</td><td><%= select_tag :other_race, options_for_select(OtherRace.pluck(:race_label, :race_name).uniq, params[:other_race]), {:include_blank => true} %></td>
+        </tr>
+          <tr><td>en titre</td><td><%= check_box_tag(:other_race_same_year, params[:other_race_same_year],  params[:other_race_same_year]) %></td></tr>
+      </table>
+      </td>
       </tr>
       <tr>
         <td><img src="/assets/maillot_pois_40.png"/></td>
@@ -59,7 +68,7 @@
             </tr>
           </table>
         </td>
-        <td>Lors de sa première participation</td><td><%= check_box_tag(:first_time, params[:first_time],  params[:first_time]) %></td>
+        <td>Lors de sa première participation<%= check_box_tag(:first_time, params[:first_time],  params[:first_time]) %></td>
   </tr>
   <tr>
 

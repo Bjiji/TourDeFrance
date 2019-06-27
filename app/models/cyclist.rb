@@ -139,6 +139,12 @@ class Cyclist < ActiveRecord::Base
     if (!search[:wstage_cnt].blank? && search[:wstage_cnt].to_i > 0)
       query = query + " \nleft join ig_stage_results is_stage on is_stage.stage_winner_id = r.id "
     end
+    if (!search[:other_race].blank?) then
+      query = query + " \njoin other_races otr on otr.cyclist_id = c.id and otr.race_name = '#{search[:other_race]}'"
+      if (!search[:other_race_same_year].blank?) then
+        query += "AND otr.year = r.year"
+      end
+    end
     query = query + " WHERE (
     teams.name LIKE '" + team_condition + "' AND "
     if (!search[:nationality].blank?) then

@@ -31,7 +31,7 @@
               <td>
                 <FIELDSET>
                   <LEGEND align=top>Coureur</LEGEND>
-                  <table border=0 width="100%">
+                  <table border=1 width="100%">
                     <tr>
                       <td>Nom</td>
                       <td><%= text_field_tag :lastname, params[:lastname] %></td>
@@ -40,9 +40,9 @@
                       <td>Nat.</td>
                       <td><%= select_tag :nationality, options_for_select(RaceRunner.connection.select_values('select sub.n from (select count(1) cnt, nationality n from race_runners group by nationality order by count(1) desc) sub'), params[:nationality]), {:include_blank => true} %></td>
                       <td>Equipe</td>
-                      <td><%= text_field_tag :race_team, params[:race_team] %></td>
-                      <td>Code UCI</td>
-                      <td><%= text_field_tag :uci, params[:uci] %></td>
+                      <td colspan="2"><%= text_field_tag :race_team, params[:race_team] %></td>
+                      <!--td>Code UCI</td>
+                      <td><%= text_field_tag :uci, params[:uci] %></td-->
                     </tr>
                     <tr>
                       <td>Etape</td>
@@ -79,8 +79,6 @@
                           </tr>
                         </table>
                       </td>
-                    </tr>
-                    <tr>
                       <td><img src="/assets/maillot_pois_40.png"/></td>
                       <td>
                         <table>
@@ -107,7 +105,12 @@
                           </tr>
                         </table>
                       </td>
-
+                    </tr>
+                    <tr>
+                      <td>vainqueur</td>
+                      <td><%= select_tag :other_race, options_for_select(OtherRace.pluck(:race_label, :race_name).uniq, params[:other_race]), {:include_blank => true} %></td>
+                      <td>&nbsp;</td><td>en titre<%= check_box_tag(:other_race_same_year, params[:other_race_same_year],  params[:other_race_same_year]) %></td>
+                      <td>&nbsp;</td>
                       <td>pour son premier tour</td>
                       <td><%= check_box_tag(:first_time, params[:first_time], params[:first_time]) %></td>
                     </tr>
