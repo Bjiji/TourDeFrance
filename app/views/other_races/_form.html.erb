@@ -1,0 +1,41 @@
+<%= form_for(other_race) do |f| %>
+  <% if other_race.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(other_race.errors.count, "error") %> prohibited this other_race from being saved:</h2>
+
+      <ul>
+      <% other_race.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cyclist %><br />
+    <% c_array =
+           Cyclist.order('lastname').all.map {|c| ["#{c.lastname} #{c.firstname}", c.id]} %>
+    <%= f.select :cyclist_id, c_array, {:include_blank => true} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :year %>
+    <%= f.text_field :year %>
+  </div>
+
+  <div class="field">
+    <% s_array = OtherRace.distinct.pluck(:race_label, :race_name) %>
+    <%= f.label :race_name %>
+    <%= f.select :race_name, s_array, {:include_blank => true} %>
+  </div>
+
+  <div class="field">
+    <% s_array = OtherRace.distinct.pluck(:race_label, :race_label) %>
+    <%= f.label :race_label %>
+    <%= f.select :race_label, s_array, {:include_blank => true} %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

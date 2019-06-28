@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cyclist_id: 1
+  year: 
+  race_name: 
+  race_label: MyString
+
+two:
+  cyclist_id: 1
+  year: 
+  race_name: 
+  race_label: MyString

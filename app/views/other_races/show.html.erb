@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cyclist:</strong>
+  <%= @other_race.cyclist.display_fullname %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @other_race.year %>
+</p>
+
+<p>
+  <strong>Race name:</strong>
+  <%= @other_race.race_name %>
+</p>
+
+<p>
+  <strong>Race label:</strong>
+  <%= @other_race.race_label %>
+</p>
+
+<%= link_to 'Edit', edit_other_race_path(@other_race) %> |
+<%= link_to 'Back', other_races_path %>
