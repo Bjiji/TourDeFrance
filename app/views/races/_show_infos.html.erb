@@ -2,72 +2,108 @@
 <table border=0 width="100%">
   <tr>
     <td>
-      <table>
+      <table width="100%">
         <tr>
-          <td><h2><%= "Infos" %></h2></td>
-          <td><h2>Palmarès</h2></td>
+          <th><h2>Palmarès</h2></th>
+          <th><h2>Infos</h2></th>
         </tr>
         <tr>
           <td>
-<table border=0>
-  <tr>
-    <td><b>Distance</b></td>
-    <td><%= @race.distance %></td>
-  </tr>
-  <tr>
-    <td><b>Moyenne</b></td>
-    <td><%= @race.averageSpeed %></td>
-  </tr>
-  <tr>
-    <td><b>Prime au vainqueur</b></td>
-    <td><%= @race.winnerPrize %></td>
-  </tr>
-  <tr>
-    <td><b>Prime totale</b></td>
-    <td><%= @race.poolPrize %></td>
-  </tr>
-</table>
+            <table border=0>
+              <tr>
+                <td align=center><img src="/assets/maillot_jaune_40.png"/></td>
+                <td>
+                  <%= if (@race.ig_race_result != nil && @race.ig_race_result.leader != nil) then
+                        link_to @race.ig_race_result.leader.display_fullname, cyclist_path(@race.ig_race_result.leader.cyclist)
+                      else
+                        "-"
+                      end %>
+                </td>
+                <td align=center><img src="/assets/maillot_blanc_40.png"/></td>
+                <td>
+                  <%= if (@race.young != nil) then
+                        link_to @race.young.display_fullname, cyclist_path(@race.young)
+                      else
+                        "-"
+                      end %>
+                </td>
+              </tr>
+              <tr>
+                <td align=center><img src="/assets/maillot_vert_40.png"/></td>
+                <td>
+                  <%= if (@race.ig_race_result != nil && @race.ig_race_result.sprinter != nil) then
+                        link_to @race.ig_race_result.sprinter.display_fullname, cyclist_path(@race.ig_race_result.sprinter.cyclist)
+                      else
+                        "-"
+                      end %>
+                </td>
+                <td align=center><img src="/assets/maillot_combat_40.png"/></td>
+                <td>
+                  <%= if (@race.overall_combat != nil) then
+                        link_to @race.overall_combat.display_fullname, cyclist_path(@race.overall_combat)
+                      else
+                        "-"
+                      end %>
+                </td>
+              </tr>
+              <tr>
+                <td align=center><img src="/assets/maillot_pois_40.png"/></td>
+                <td>
+                  <%= if (@race.ig_race_result != nil && @race.ig_race_result.climber != nil) then
+                        link_to @race.ig_race_result.climber.display_fullname, cyclist_path(@race.ig_race_result.climber.cyclist)
+                      else
+                        "-"
+                      end %>
+                </td>
+                <td align=center><h1>T</h1></td>
+                <td>
+                  <%= if (@race.race_team != nil) then
+                        link_to @race.race_team.label, team_path(@race.race_team.team)
+                      else
+                        "-"
+                      end %>
+                </td>
+              </tr>
+              <tr>
+
+              </tr>
+              <tr>
+
+              </tr>
+              <tr>
+
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+            </div>
           </td>
           <td>
-      <table border=0>
-        <tr>
-          <td align=center><img src="/assets/maillot_jaune_40.png"/></td>
-          <td>
-            <%= if (@race.ig_race_result != nil && @race.ig_race_result.leader != nil) then
-                  link_to @race.ig_race_result.leader.display_fullname, cyclist_path(@race.ig_race_result.leader.cyclist)
-                end %>
+            <table border=0>
+              <tr>
+                <td><b>Distance</b></td>
+                <td><%= @race.distance %> km</td>
+              </tr>
+              <tr>
+                <td><b>Moyenne</b></td>
+                <td><%= @race.averageSpeed %> km/h</td>
+              </tr>
+              <tr>
+                <td><b>Etapes</b></td>
+                <td><%= @stages.size() %></td>
+              </tr>
+
+              <tr>
+                <td><b>Participants</b></td>
+                <td><%= @race_runners.size() %></td>
+              </tr>
+
+            </table>
           </td>
-        </tr><tr>
-        <td align=center><img src="/assets/maillot_vert_40.png"/></td>
-        <td>
-          <%= if (@race.ig_race_result != nil && @race.ig_race_result.sprinter != nil) then
-                link_to @race.ig_race_result.sprinter.display_fullname, cyclist_path(@race.ig_race_result.sprinter.cyclist)
-              end %>
-        </td>
-      </tr><tr>
-        <td align=center><img src="/assets/maillot_pois_40.png"/></td>
-        <td>
-          <%= if (@race.ig_race_result != nil && @race.ig_race_result.climber != nil) then
-                link_to @race.ig_race_result.climber.display_fullname, cyclist_path(@race.ig_race_result.climber.cyclist)
-              end %>
-        </td>
-      </tr>
-        <tr>
-          <td align=center><img src="/assets/maillot_blanc_40.png"/></td>
-          <td>
-            <%= if (@race.young != nil) then
-                  link_to @race.young.display_fullname, cyclist_path(@race.young)
-                end %>
-          </td>
-        </tr>
-        <tr>
-          <td></td><td></td>
         </tr>
       </table>
-      </div>
-    </td>
-  </tr>
-</table>
     </td>
   </tr>
   <tr>

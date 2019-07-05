@@ -13,6 +13,7 @@ class RacesController < ApplicationController
   # GET /races/1.json
   def show
     @race = Race.find(params[:id])
+    @race_runners = @race.race_runners
     @stages = Stage.where(:race_id => @race['id'])
     @stage = Stage.where(:race_id => @race['id'], :is_last => 1).first
     if (@stage != nil) then

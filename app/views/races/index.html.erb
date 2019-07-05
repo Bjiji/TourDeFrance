@@ -14,8 +14,7 @@ $(document).ready(function() {
          {"bSortable": true, "bSearchable": true },
          {"bSortable": true, "bSearchable": true },
          {"bSortable": true, "bSearchable": true },
-         {"bSortable": true, "bSearchable": false },
-         {"bSortable": false, "bSearchable": false }
+         {"bSortable": true, "bSearchable": true },
      ]
  });
 } );
@@ -25,15 +24,14 @@ $(document).ready(function() {
   <thead>
   <tr>
     <th>Année</th>
-    <th>Distance</th>
-    <th>Vitesse</th>
-    <th>Maillot Jaune</th>
-    <th>Maillot à pois</th>
-    <th>Maillot vert</th>
-    <th>Maillot Blanc</th>
-    <th>Partants</th>
-    <th>Nat.</th>
-    <th></th>
+    <th>Dist.</th>
+    <th>Vit.</th>
+    <th>Général</th>
+    <th>Montagne</th>
+    <th>Point</th>
+    <th>Jeune</th>
+    <th>Equipe</th>
+    <th>Part.</th>
   </tr>
   </thead>
 
@@ -47,11 +45,8 @@ $(document).ready(function() {
     <td><%= if (race.climber != nil) then link_to race.climber.display_name, cyclist_path(race.climber) end  %></td>
     <td><%= if (race.sprinter != nil) then link_to race.sprinter.display_name, cyclist_path(race.sprinter) end  %></td>
     <td><%= if (race.young != nil) then link_to race.young.display_name, cyclist_path(race.young) end  %></td>
+    <td><%= if (race.race_team != nil) then link_to truncate(race.race_team.label, length: 24), team_path(race.race_team.team) end  %></td>
     <td><%= link_to race.race_runners.count, cyclists_path(:year => race.year) %></td>
-    <td><%= if (false) then
-              race.nationalities.length
-            end %></td>
-    <td><%= link_to 'Voir', race %></td>
   </tr>
 <% end %>
 </tbody>

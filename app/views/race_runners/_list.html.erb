@@ -1,16 +1,17 @@
 <script>
     $(document).ready(function() {
         $('#runners').dataTable( {
-            "sDom": "<'wrapper'i>, <fprtfp>",
+            "sDom": "iprtfp",
             "bJQueryUI": true,
             "iDisplayLength": 50,
             "aaSorting": [[1, "asc"]],
             "aoColumns" : [
                 {"bSortable": true, "bSearchable": true},
-                {"bSortable": true , "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true}
             ]
         });
     } );
@@ -20,6 +21,7 @@
   <tr>
     <th>Année</th>
     <th>Doss.</th>
+    <th>Palm.</th>
     <th>Coureur</th>
     <th>Equipe</th>
     <th>Nat.</th>
@@ -30,6 +32,7 @@
   <tr>
     <td><%= link_to race_runner.race.year, race_runner.race %></td>
     <td><%= link_to race_runner.number, race_runner_path(race_runner) %></td>
+    <td><%= render partial: "race_runners/display_jersey", locals: { race_runner: race_runner, race: race_runner.race} %></td>
     <td><%= link_to race_runner.display_fullname, race_runner.cyclist %></td>
     <td><%= link_to race_runner.race_team.label, race_runner.race_team.team %></td>
     <td><%= race_runner.nationality %></td>

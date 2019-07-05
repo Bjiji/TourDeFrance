@@ -1,30 +1,35 @@
-<div class=<%= @runs.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+<div class=<%= @race_runners.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
   <h3><a href="#"><b>Participations: </b>
-    (<%= @runs.size() %>)
+    (<%= @race_runners.size() %>)
   </a></h3>
   <div>
     <ul>
-      <% @runs.each do |run| %>
-          <li><%= if (!run.race.blank?) then
-                    link_to run.race.year, race_path(run.race)
-                  end %>:   <%= if (!run.number.blank?) then
-                                  link_to 'dossard ' + run.number.to_s, race_runner_path(run)
-                                end %>, <%= if (!run.team.blank?) then
-                                              link_to run.race_team.label, run.team
-                                            end %> (<%= run.nationality %>)
+        <% @race_runners.each do |run| %>
+          <li>
+          <%= if (!run.race.blank?) then
+                      link_to run.race.year, race_path(run.race)
+                    end %>
+
+            <%= if (!run.number.blank?) then
+                      link_to 'dossard ' + run.number.to_s, race_runner_path(run)
+                    end %>
+           <%= if (!run.team.blank?) then
+                      link_to run.race_team.label, run.team
+                    end %>
+           <%= run.nationality %>
           </li>
-      <% end %>
+        <% end %>
     </ul>
   </div>
 </div>
-<div class=<%= @r_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+<div class=<%= @r_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
   <h3><a href="#"><b>Vainqueur du classement général: </b>
     (<%= @r_victories.size() %>)
   </a></h3>
   <div>
     <ul>
       <% @r_victories.each do |r| %>
-          <li><%= link_to r.race.name, race_path(r.race) %></li>
+        <li><%= link_to r.race.name, race_path(r.race) %></li>
       <% end %>
     </ul>
   </div>
@@ -37,9 +42,9 @@
   <div>
     <ul>
       <% @r_podium.each do |r| %>
-          <%= link_to r.stage.race.display_name, race_path(r.stage.race) %> -
-          <i><%= link_to r.race_runner.display_name, cyclist_path(r.race_runner.cyclist) %></i> - <%= r.pos %>
-          <br>
+        <%= link_to r.stage.race.display_name, race_path(r.stage.race) %> -
+        <i><%= link_to r.race_runner.display_name, cyclist_path(r.race_runner.cyclist) %></i> - <%= r.pos %>
+        <br>
       <% end %>
     </ul>
   </div>
@@ -47,7 +52,7 @@
 
 
 
-<div class=<%= @rs_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+<div class=<%= @rs_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
   <h3><a href="#">
     <b>Vainqueur du classement à points: </b>
     (<%= @rs_victories.size() %>)
@@ -55,12 +60,12 @@
   <div>
     <ul>
       <% @rs_victories.each do |r| %>
-          <li><%= link_to r.race.name, race_path(r.race) %></li>
+        <li><%= link_to r.race.name, race_path(r.race) %></li>
       <% end %>
     </ul>
   </div>
 </div>
-<div class=<%= @rc_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+<div class=<%= @rc_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
   <h3><a href="#">
 
     <b>Vainqueur du classement de la montagne: </b>
@@ -69,12 +74,12 @@
   <div>
     <ul>
       <% @rc_victories.each do |r| %>
-          <li><%= link_to r.race.name, race_path(r.race) %></li>
+        <li><%= link_to r.race.name, race_path(r.race) %></li>
       <% end %>
     </ul>
   </div>
 </div>
-<div class=<%= @ry_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+<div class=<%= @ry_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
   <h3><a href="#">
     <b>Vainqueur du classement des jeunes: </b>
     (<%= @ry_victories.size() %>)
@@ -82,24 +87,24 @@
   <div>
     <ul>
       <% @ry_victories.each do |r| %>
-          <li><%= link_to r.race.name, race_path(r.race) %></li>
+        <li><%= link_to r.race.name, race_path(r.race) %></li>
       <% end %>
     </ul>
   </div>
 </div>
-<div class=<%= @s_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+<div class=<%= @s_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
   <h3><a href="#"><b>Victoire d'étapes: </b>
     (<%= @s_victories.size() %>)
   </a></h3>
   <div>
     <ul>
       <% @s_victories.each do |ig_stage_result| %>
-          <li><%= link_to ig_stage_result.stage.display_label, stage_path(ig_stage_result.stage) %></li>
+        <li><%= link_to ig_stage_result.stage.display_label, stage_path(ig_stage_result.stage) %></li>
       <% end %>
     </ul>
   </div>
 </div>
-<div class=<%= @y_jersey.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+<div class=<%= @y_jersey.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
   <h3><a href="#">
     <b>Leader du classement général: </b>
     (<%= @y_jersey.size() %>)
@@ -107,12 +112,12 @@
   <div>
     <ul>
       <% @y_jersey.each do |r| %>
-          <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
+        <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
       <% end %>
     </ul>
   </div>
 </div>
-<div class=<%= @s_jersey.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+<div class=<%= @s_jersey.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
   <h3><a href="#">
     <b>Leader du classement à points: </b>
     (<%= @s_jersey.size() %>)
@@ -120,12 +125,12 @@
   <div>
     <ul>
       <% @s_jersey.each do |r| %>
-          <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
+        <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
       <% end %>
     </ul>
   </div>
 </div>
-<div class=<%= @c_jersey.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+<div class=<%= @c_jersey.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
   <h3><a href="#">
     <b>Leader du classement de la montagne: </b>
     (<%= @c_jersey.size() %>)
@@ -133,12 +138,12 @@
   <div>
     <ul>
       <% @c_jersey.each do |r| %>
-          <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
+        <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
       <% end %>
     </ul>
   </div>
 </div>
-<div class=<%= @yg_jersey.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+<div class=<%= @yg_jersey.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
   <h3><a href="#">
     <b>Leader du classement des jeunes: </b>
     (<%= @yg_jersey.size() %>)</a>
@@ -146,12 +151,12 @@
   <div>
     <ul>
       <% @yg_jersey.each do |r| %>
-          <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
+        <li><%= link_to r.stage.display_label, stage_path(r.stage) %></li>
       <% end %>
     </ul>
   </div>
 </div>
-<div class=<%= @other_races.size() > 0 ? "accordionOpen" : "accordionClosed" %> >
+<div class=<%= @other_races.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
   <h3><a href="#">
     <b>Vainqueur d'autres épreuves marquantes: </b>
     (<%= @other_races.size() %>)</a>
@@ -168,6 +173,6 @@
     $(".accordionOpen").accordion({collapsible: true});
 </script>
 <script type="text/javascript">
-    $(".accordionClosed").accordion({collapsible: true, active : false});
+    $(".accordionClosed").accordion({collapsible: true, active: false});
 </script>
 

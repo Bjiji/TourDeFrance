@@ -1,0 +1,33 @@
+<%
+  race = nil if local_assigns[:race].nil?
+  stage = nil if local_assigns[:stage].nil?
+%>
+<div>
+<% if (race != nil && race.ig_race_result != nil && race.ig_race_result.leader == race_runner) then %>
+  <img src="/assets/maillot_jaune_20.png"/>
+<% end %>
+<% if (race != nil && race.ig_race_result != nil && race.ig_race_result.sprinter == race_runner) then %>
+  <img src="/assets/maillot_vert_20.png"/>
+<% end %>
+<% if (race != nil && race.ig_race_result != nil && race.ig_race_result.climber == race_runner) then %>
+  <img src="/assets/maillot_pois_20.png"/>
+<% end %>
+<% if (race != nil && race.ig_race_result != nil && race.ig_race_result.young == race_runner) then %>
+  <img src="/assets/maillot_blanc_20.png"/>
+<% end %>
+<% if (stage != nil && stage.ig_stage_result != nil && stage.ig_stage_result.previous_leader == race_runner) then %>
+  <img src="/assets/maillot_jaune_20.png"/>
+<% end %>
+<% if (stage != nil && stage.ig_stage_result != nil && stage.ig_stage_result.previous_sprinter == race_runner) then %>
+  <img src="/assets/maillot_vert_20.png"/>
+<% end %>
+<% if (stage != nil && stage.ig_stage_result != nil && stage.ig_stage_result.previous_climber == race_runner) then %>
+  <img src="/assets/maillot_pois_20.png"/>
+<% end %>
+<% if (stage != nil && stage.ig_stage_result != nil && stage.ig_stage_result.previous_young == race_runner) then %>
+  <img src="/assets/maillot_blanc_20.png"/>
+<% end %>
+<% if (race_runner.has_other_races) then %>
+  <%= image_tag("/assets/other_races_color_20.png", :title => race_runner.display_other_races) %>
+  <% end %>
+</div>

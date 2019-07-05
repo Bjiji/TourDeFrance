@@ -11,8 +11,7 @@
                 {"bSortable": true, "bSearchable": true },
                 {"bSortable": true, "bSearchable": true },
                 {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
-                {"bSortable": true, "bSearchable": true },
+                {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true }
             ]
@@ -31,8 +30,7 @@
       <th>Arrivée</th>
       <th>Pos</th>
       <th>Temps</th>
-      <th>Général</th>
-      <th>Cumulé</th>
+      <th>Palm.</th>
       <th>Rem</th>
     </tr>
     </thead>
@@ -46,8 +44,7 @@
           <td><%= ite_stage_result.stage.finish %></td>
           <td><%= link_to(ite_stage_result.pos.to_s, ite_stage_result_path(ite_stage_result)) %></td>
           <td><%= ite_stage_result.display_time %></td>
-          <td><%= " " %></td>
-          <td><%= " " %></td>
+          <td><%= render partial: "race_runners/display_jersey", locals: { race_runner: ite_stage_result.race_runner }%></td>
           <td><%= ite_stage_result.display_tag %></td>
         </tr>
     <% end %>

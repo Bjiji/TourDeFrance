@@ -3,6 +3,7 @@ class Race < ActiveRecord::Base
   has_many :race_runners
   has_many :stages
   has_one :ig_race_result
+  has_one :race_team, :through => :ig_race_result
 
   def display_name
     "Édition #{year}"
@@ -14,6 +15,15 @@ class Race < ActiveRecord::Base
       ig_race_result.leader.cyclist
     end
   end
+
+  def overall_combat
+    if (ig_race_result == nil || ig_race_result.combat == nil) then
+      nil
+    else
+      ig_race_result.combat.cyclist
+    end
+  end
+
 
   def sprinter
     if (ig_race_result == nil || ig_race_result.sprinter == nil) then

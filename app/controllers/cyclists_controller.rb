@@ -19,7 +19,7 @@ class CyclistsController < ApplicationController
   # GET /cyclists/1.json
   def show
     @cyclist = Cyclist.find(params[:id])
-    @runs = RaceRunner.joins(:cyclist).where(:cyclists => {:id => params[:id]}).order(year: :DESC)
+    @race_runners = RaceRunner.joins(:cyclist).where(:cyclists => {:id => params[:id]}).order(year: :DESC)
     @r_victories = IgRaceResult.joins(:leader).where(:race_runners => {:cyclist_id => params[:id]}).order(year: :DESC)
     @rc_victories = IgRaceResult.joins(:climber).where(:race_runners => {:cyclist_id => params[:id]}).order(year: :DESC)
     @rs_victories =IgRaceResult.joins(:sprinter).where(:race_runners => {:cyclist_id => params[:id]}).order(year: :DESC)
