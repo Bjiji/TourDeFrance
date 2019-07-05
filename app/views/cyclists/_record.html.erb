@@ -8,15 +8,13 @@
           <li>
           <%= if (!run.race.blank?) then
                       link_to run.race.year, race_path(run.race)
-                    end %>
-
+                    end %>:
             <%= if (!run.number.blank?) then
                       link_to 'dossard ' + run.number.to_s, race_runner_path(run)
-                    end %>
+                    end %> -
            <%= if (!run.team.blank?) then
                       link_to run.race_team.label, run.team
-                    end %>
-           <%= run.nationality %>
+                    end %> (<%= run.nationality %>)
           </li>
         <% end %>
     </ul>
