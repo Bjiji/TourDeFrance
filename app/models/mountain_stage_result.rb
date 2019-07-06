@@ -82,8 +82,14 @@ class MountainStageResult < ActiveRecord::Base
       LEFT JOIN stages ON msr.stage_id = stages.id
       #{join_location}
       LEFT JOIN ig_stage_results ON ig_stage_results.stage_id = stages.id
-      LEFT JOIN ite_stage_results isr ON isr.stage_id = stages.id AND runner.id = isr.race_runner_id
-      WHERE stages.year " +  y_operator + " '" + year_condition + "' "
+      LEFT JOIN ite_stage_results isr ON isr.stage_id = stages.id AND runner.id = isr.race_runner_id "
+    if (!search[:other_race].blank?) then
+      query = query + " \njoin other_races otr on otr.cyclist_id = cyclist.id and otr.race_name = '#{search[:other_race]}'"
+      if (!search[:other_race_same_year].blank?) then
+        query += "AND otr.year = runner.year "
+      end
+    end
+    query += " WHERE stages.year " +  y_operator + " '" + year_condition + "' "
     if (!mountain_name.blank?) then query = query + "AND msr.name LIKE \"" + mountain_name + "\" " end
     if (!mountain_category.blank?) then query = query + "AND msr.category_s LIKE '" + mountain_category + "' " end
     if (!mountain_finish.blank?)   then query = query + "AND msr.finish = '" + mountain_finish + "' " end
@@ -100,6 +106,9 @@ class MountainStageResult < ActiveRecord::Base
       query = query + " AND ig_stage_results.leader_id=runner.id "
     elsif search[:c_finish_leader] == "no" then
       query = query + " AND ig_stage_results.leader_id!=runner.id "
+    end
+    if (search[:first_time]) then
+      query = query + " AND not exists(select 1 from race_runners r2 where r2.cyclist_id = runner.cyclist_id and r2.year < runner.year)"
     end
     if search[:c_start_leader] == "yes" then query = query + " AND ig_stage_results.previous_leader=runner.id "
     elsif search[:c_start_leader] == "no" then query = query + " AND ig_stage_results.previous_leader!=runner.id "

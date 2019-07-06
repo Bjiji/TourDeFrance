@@ -91,6 +91,14 @@
                   </table>
                 </td>
               </tr>
+              <tr>
+                <td>vainqueur</td>
+                <td><%= select_tag :other_race, options_for_select(OtherRace.pluck(:race_label, :race_name).uniq, params[:other_race]), {:include_blank => true} %></td>
+                <td>&nbsp;</td><td>en titre<%= check_box_tag(:other_race_same_year, params[:other_race_same_year],  params[:other_race_same_year]) %></td>
+                <td>&nbsp;</td>
+                <td>pour son premier tour</td>
+                <td><%= check_box_tag(:first_time, params[:first_time], params[:first_time]) %></td>
+              </tr>
             </table>
           </FIELDSET>
         <tr>

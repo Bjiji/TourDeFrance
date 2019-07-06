@@ -1,0 +1,40 @@
+<script>
+    $(document).ready(function() {
+        $('#other_races').dataTable( {
+            "sDom": "<'wrapper'i>, <fprtfp>",
+            "bJQueryUI": true,
+            "iDisplayLength": 50,
+            "aaSorting": [[ 0, "desc" ]],
+            "aoColumns" : [
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+            ]
+        });
+    } );
+</script>
+<table class="display" id="other_races">
+<thead>
+  <tr>
+    <th>Année</th>
+    <th>Epreuve</th>
+    <th>Cycliste</th>
+    <th>Nationalité</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+<% @other_races.each do |otr| %>
+
+  <tr>
+    <td><%= otr.year %></td>
+    <td><%= otr.race_label %></td>
+    <td><%= link_to otr.cyclist.display_fullname, cyclist_path(otr.cyclist) %></td>
+    <td><%= otr.cyclist.nationality %></td>
+    <td><%= link_to 'Edit', edit_other_race_path(otr) %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>

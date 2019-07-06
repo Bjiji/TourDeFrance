@@ -2,32 +2,7 @@
 
 <h1>Other Races</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Cyclist</th>
-      <th>Year</th>
-      <th>Race name</th>
-      <th>Race label</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @other_races.each do |other_race| %>
-      <tr>
-        <td><%= other_race.cyclist_id %></td>
-        <td><%= other_race.year %></td>
-        <td><%= other_race.race_name %></td>
-        <td><%= other_race.race_label %></td>
-        <td><%= link_to 'Show', other_race %></td>
-        <td><%= link_to 'Edit', edit_other_race_path(other_race) %></td>
-        <td><%= link_to 'Destroy', other_race, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<%= render :partial => 'other_races/list' %>
+<p>
 
 <%= link_to 'New Other Race', new_other_race_path %>

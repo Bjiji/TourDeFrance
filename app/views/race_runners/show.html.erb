@@ -23,6 +23,9 @@
   <b>Equipe:</b>
   <%= if (!@race_runner.race.blank?) then link_to @race_runner.race_team.label, team_path(@race_runner.team) end %>
 </p>
+<p>
+  <%= render :partial => "race_runners/display_jersey", locals: { race_runner: @race_runner, race: @race_runner.race } %>
+</p>
 
 
 <%= link_to 'Edit', edit_race_runner_path(@race_runner) %> |

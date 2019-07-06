@@ -3,21 +3,24 @@
     (<%= @race_runners.size() %>)
   </a></h3>
   <div>
-    <ul>
+    <table>
+
         <% @race_runners.each do |run| %>
-          <li>
-          <%= if (!run.race.blank?) then
-                      link_to run.race.year, race_path(run.race)
-                    end %>:
-            <%= if (!run.number.blank?) then
+          <tr>
+            <td><%= if (!run.race.blank?) then link_to run.race.year, race_path(run.race) end %></td>
+            <td><%= if (!run.number.blank?) then
                       link_to 'dossard ' + run.number.to_s, race_runner_path(run)
-                    end %> -
-           <%= if (!run.team.blank?) then
+                    end %>
+            </td>
+            <td><%= render partial: "race_runners/display_jersey", locals: { race_runner: run, race: run.race }%></td>
+           <td><%= if (!run.team.blank?) then
                       link_to run.race_team.label, run.team
                     end %> (<%= run.nationality %>)
-          </li>
+
+           </td>
+          </tr>
         <% end %>
-    </ul>
+    </table>
   </div>
 </div>
 <div class=<%= @r_victories.size() > 0 ? "accordionOpen" : "accordionClosed" %>>
