@@ -9,7 +9,7 @@
                  render partial: "race_runners/display", locals: {:race_runner => @stage.winner, :stage => @stage}
                else
                  if (@stage.team_winner != nil) then
-                   link_to @stage.team_winner.team.name, team_path(@stage.team_winner.team)
+                   link_to @stage.team_winner.label, team_path(@stage.team_winner.team)
                  elsif (@stage.ig_stage_result != nil) then
                    @stage.ig_stage_result.stage_winner_s
                  else
