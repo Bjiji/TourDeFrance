@@ -18,7 +18,7 @@
 
     <div class="field">
       <%= f.label :stage %><br />
-      <% s_array = Stage.order('year', 'ordinal').pluck(:stage_name, :id).map { |c| [c.stage_name, c.id] } %>
+      <% s_array = Stage.order('year', 'ordinal').map { |c| [c.stage_name, c.id] } %>
       <%= f.select :stage_id, s_array, {:include_blank => true} %>
     </div>
 

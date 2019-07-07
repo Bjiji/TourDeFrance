@@ -57,6 +57,30 @@ class Stage < ActiveRecord::Base
     end
   end
 
+  def sprinter
+    if (ig_stage_result != nil) then
+      ig_stage_result.sprinter
+    else
+      nil
+    end
+  end
+
+  def climber
+    if (ig_stage_result != nil) then
+      ig_stage_result.climber
+    else
+      nil
+    end
+  end
+
+  def young
+    if (ig_stage_result != nil) then
+      ig_stage_result.young
+    else
+      nil
+    end
+  end
+
   def self.missingResults()
     query = "SELECT distinct stages.*
       FROM stages

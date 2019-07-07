@@ -14,13 +14,16 @@
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
+                {"bSortable": true, "bSearchable": true},
                 {"bSortable": true, "bSearchable": true}
             ]
         });
     });
 </script>
 <h3><b>Etapes:</b> (<%= @stages.size() %>)</h3>
-<table class="display" id="stages">
+<table border="1" width="100%" class="display" id="stages">
   <thead>
   <tr>
     <th>Année</th>
@@ -30,8 +33,11 @@
     <th>Arrivée</th>
     <th>Dist.</th>
     <th>Type</th>
-    <th>Vainqueur</th>
-    <th>Leader</th>
+    <th>Vict.</th>
+    <th>Gén.</th>
+    <th>Pts</th>
+    <th>Mtgn</th>
+    <th>J</th>
   </tr>
   </thead>
   <tbody>
@@ -61,6 +67,21 @@
                   '?'
                 else
                   render partial: "race_runners/display", locals: {:race_runner => stage.leader, :stage => stage}
+                end %></td>
+        <td><%= if (stage.sprinter == nil) then
+                  '?'
+                else
+                  render partial: "race_runners/display", locals: {:race_runner => stage.sprinter, :stage => stage}
+                end %></td>
+        <td><%= if (stage.climber == nil) then
+                  '?'
+                else
+                  render partial: "race_runners/display", locals: {:race_runner => stage.climber, :stage => stage}
+                end %></td>
+        <td><%= if (stage.young == nil) then
+                  '?'
+                else
+                  render partial: "race_runners/display", locals: {:race_runner => stage.young, :stage => stage}
                 end %></td>
       </tr>
   <% end %>

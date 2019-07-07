@@ -29,56 +29,52 @@
   </thead>
   <tbody>
   <% @ite_stage_results.each do |result| %>
-      <% time_res = nil
-         time_diff = "-"
-         if (result.time_sec != nil && result.time_sec > 0) then
-           time_res = IteStageResult.displayTime(result.time_sec)
-         end
-         if (result.diff_time_sec != nil && result.diff_time_sec > 0) then
-           time_diff = IteStageResult.displayTime(result.diff_time_sec)
-         end
+    <% time_res = nil
+       time_diff = "-"
+       if (result.time_sec != nil && result.time_sec > 0) then
+         time_res = IteStageResult.displayTime(result.time_sec)
+       end
+       if (result.diff_time_sec != nil && result.diff_time_sec > 0) then
+         time_diff = IteStageResult.displayTime(result.diff_time_sec)
+       end
 
-      %>
-      <tr>
-        <td><%= link_to(if (result.pos.blank?) then
-                          999
-                        else
-                          result.pos
-                        end, ite_stage_result_path(result)) %></td>
-        <td><%= if (time_res.blank?) then
-                  "#{result.stage_status}"
-                else
-                  time_res
-                end %></td>
-        <td><%= time_diff %></td>
-        <td>
-          <% if (@stage.ig_stage_result != nil) then %>
-              <%= if (result.race_runner.blank?) then
-                    if (result.race_team.blank?) then
-                      result.runner_s
-                    else
-                      link_to result.race_team.label, team_path(result.race_team.team)
-                    end
-                  else
-                    render partial: "race_runners/display", locals: {:race_runner => result.race_runner, :stage => @stage}
-                  end %>
-          <% end %>
-        </td>
-        <td>
-          <% if (@stage.ig_stage_result != nil) then %>
-              <%= if (!result.race_runner.blank?) then
-                    link_to result.race_runner.race_team.label, team_path(result.race_runner.team)
-                  elsif (!result.race_team.blank?) then
-                    link_to result.race_team.label, team_path(result.race_team.team)
-                  end
-              %>
-          <% end %>
-        </td>
-        <td><%= @stage.ig_stage_result != nil && if (!result.race_runner.blank?) then
-                                                   result.race_runner.nationality
-                                                 end %>
-        </td>
-      </tr>
+    %>
+    <tr>
+      <td><%= link_to(if (result.pos.blank?) then
+                        999
+                      else
+                        result.pos
+                      end, ite_stage_result_path(result)) %></td>
+      <td><%= if (time_res.blank?) then
+                "#{result.stage_status}"
+              else
+                time_res
+              end %></td>
+      <td><%= time_diff %></td>
+      <td>
+        <%= if (result.race_runner.blank?) then
+              if (result.race_team.blank?) then
+                result.runner_s
+              else
+                link_to result.race_team.label, race_team_path(result.race_team)
+              end
+            else
+              render partial: "race_runners/display", locals: {:race_runner => result.race_runner, :stage => @stage}
+            end %>
+      </td>
+      <td>
+        <%= if (!result.race_runner.blank? && !result.race_runner.team.blank?) then
+              link_to result.race_runner.race_team.label, race_team_path(result.race_runner.team)
+            elsif (!result.race_team.blank?) then
+              link_to result.race_team.label, race_team_path(result.race_team)
+            end
+        %>
+      </td>
+      <td><%= if (!result.race_runner.blank?) then
+                result.race_runner.nationality
+              end %>
+      </td>
+    </tr>
   <% end %>
   </tbody>
 </table>

@@ -59,15 +59,15 @@
                   if (ite_stage_result.race_team.blank?) then
                     ite_stage_result.runner_s
                   else
-                    link_to ite_stage_result.race_team.label, team_path(ite_stage_result.race_team.team)
+                    link_to ite_stage_result.race_team.label, race_team_path(ite_stage_result.race_team)
                   end
                 else
                   render partial: "race_runners/display", locals: {:race_runner => ite_stage_result.race_runner, :stage => ite_stage_result.stage}
                 end %></td>
         <td><%= if (!ite_stage_result.race_runner.blank?) then
-                    link_to ite_stage_result.race_runner.race_team.label, team_path(ite_stage_result.race_runner.race_team.team)
+                    link_to ite_stage_result.race_runner.race_team.label, race_team_path(ite_stage_result.race_runner.race_team)
                 elsif (!ite_stage_result.race_team.blank?) then
-                    link_to ite_stage_result.race_team.label, team_path(ite_stage_result.race_team.team)
+                    link_to ite_stage_result.race_team.label, race_team_path(ite_stage_result.race_team)
                 end %></td>
         <td><%= if (!ite_stage_result.race_runner.blank?) then ite_stage_result.race_runner.nationality end %></td>
         <td><%= ite_stage_result.stage_status %></td>
